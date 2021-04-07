@@ -1,0 +1,110 @@
+<div class="row" [nbSpinner]="isLoad" nbSpinnerSize="giant" nbSpinnerStatus="primary">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-header class="d-flex">
+        <label>Khách hàng mua nhiều</label>
+      </nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="inputForm">
+          <div class="mb-4">
+            <div class="row">
+              <div class="col-lg-4 form-group">
+                <label class="label">
+                  Từ ngày <span class="text-danger ml-2">*</span>
+                </label>
+                <input nbInput fullWidth
+                       formControlName="fromTime"
+                       [nbDatepicker]="fromDate"
+                       [defaultValue]="lastYear"
+                       (keyup)="changeValueStartDate($event)"
+                >
+                <nb-datepicker #fromDate format="{{'common.format_date'|translate}}">
+                </nb-datepicker>
+                <!--                <ngx-inline-message [message]="'statistic.from_date'|translate"-->
+                <!--                                    [formName]="inputForm.get('startDate')"></ngx-inline-message>-->
+              </div>
+              <div class="col-lg-4 form-group">
+                <label class="label">
+                  Đến ngày<span class="text-danger ml-2">*</span>
+                </label>
+                <input nbInput fullWidth
+                       formControlName="toTime"
+                       [nbDatepicker]="fromDate1"
+                       [defaultValue]="nowYear"
+                       (keyup)="changeValueStartDate($event)"
+                >
+                <nb-datepicker #fromDate1 format="{{'common.format_date'|translate}}">
+                </nb-datepicker>
+                <!--                <ngx-inline-message [message]="'statistic.from_date'|translate"-->
+                <!--                                    [formName]="inputForm.get('startDate')"></ngx-inline-message>-->
+              </div>
+              <div class="col-lg-4 form-group">
+                <label class="label">
+                  Top các sản phẩm:
+                </label>
+                <input (keyup.enter)="search(0)" nbInput fullWidth formControlName="soLuong">
+              </div>
+            </div>
+            <div class="col-12 text-center">
+              <button nbButton status="primary" type="submit" (click)="search(0)">{{ 'common.search' | translate }}
+                <nb-icon icon="search-outline"></nb-icon>
+              </button>
+              <button style="margin-left: 15px" nbButton status="primary" type="submit" (click)="exportAsCSV()">Xuất File
+              </button>
+            </div>
+          </div>
+        </form>
+        <ngx-datatable #dataTable ngxResizeWatcher class="material"
+                       [columnMode]="'flex'"
+                       [rows]="rows"
+                       [columns]="columns"
+                       rowHeight="auto"
+                       [externalPaging]="true"
+                       [count]="page.count"
+                       [offset]="page.offset"
+                       [limit]="page.limit"
+                       [footerHeight]="50"
+                       [headerHeight]="50"
+                       (page)="pageCallback($event)"
+                       [messages]="{ emptyMessage: 'common.notFoundText' | translate, totalMessage: 'common.totalMessage' | translate }">
+          <ng-container *ngFor="let col of columns">
+            <ngx-datatable-column prop="{{col.prop}}" name="{{col.name}}" [flexGrow]="col.flexGrow">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                {{ column.name | translate }}
+              </ng-template>
+              <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-rowIndex='rowIndex'>
+                <ng-container *ngIf="col.prop ==='index'" class="index-col">
+                  {{ page.offset * page.limit + rowIndex + 1 }}
+                </ng-container>
+                <ng-container
+                  *ngIf="col.prop ==='fullName' || col.prop ==='mail' || col.prop ==='totalPrice'"
+                  class="text-right">
+                  <span class="row-data-show"
+                        title="{{value}}">{{value.length > 50 ? value.substring(0, 50).concat('...') : value}}</span>
+                </ng-container>
+                <ng-container *ngIf="col.prop ==='updateTime'">
+                  {{ value | date:'dd/MM/yyyy HH:mm:ss'}}
+                </ng-container>
+                <ng-container *ngIf="col.prop ==='totalOrder'">
+                  {{ value  }}
+                </ng-container>
+                <ng-container *ngIf="col.prop ==='action_btn'" class="text-right">
+                  <div>
+                    <button class="p-1" nbButton status="info" ghost title="{{ 'common.edit' | translate}}"
+                            (click)="editUsers(row)">
+                      <nb-icon icon="edit-outline" pack="eva" size="tiny"></nb-icon>
+                    </button>
+                    <button class="p-1" nbButton status="danger" ghost title="{{ 'common.delete' | translate }}"
+                            (click)="deleteUsers(row)">
+                      <nb-icon icon="trash-2-outline" pack="eva" size="tiny"></nb-icon>
+                    </button>
+                  </div>
+                </ng-container>
+              </ng-template>
+            </ngx-datatable-column>
+          </ng-container>
+        </ngx-datatable>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

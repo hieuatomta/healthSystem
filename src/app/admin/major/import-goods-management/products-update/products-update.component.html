@@ -1,0 +1,71 @@
+<nb-card style="position: relative" nbSpinnerSize="giant" nbSpinnerStatus="primary" [nbSpinner]="loading" fullWidth>
+  <nb-card-header class="card-header-title">{{ title }}
+    <div class="bt-action">
+        <span>
+          <button ghost size="tiny" nbButton class="objLink float-right" (click)="ref.close()">
+            <nb-icon icon="close-outline"></nb-icon>
+          </button>
+        </span>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+
+      <form [formGroup]="inputProduct">
+        <div class="mb-4">
+          <div class="row">
+<!--            <div class="col-lg-4 form-group">-->
+<!--              <label class="label">-->
+<!--                Mã phiếu <span style="color: red">(*)</span>-->
+<!--              </label>-->
+<!--              <input class="custom-border" type="text" formControlName="code" nbInput fullWidth trim="blur"-->
+<!--                     [ngClass]="{'status-danger': this.inputProduct.get('code').touched && this.inputProduct.get('code').errors}">-->
+<!--              <ngx-inline-message [message]="'common.table.item_product_code'|translate"-->
+<!--                                  [formName]="inputProduct.get('code')"></ngx-inline-message>-->
+<!--            </div>-->
+            <div class="col-lg-4 form-group">
+              <label class="label">
+                Tên nhà cung cấp <span style="color: red">(*)</span>
+              </label>
+              <ng-select [clearAllText]="'common.clearAllText'"
+                         placeholder="{{'common.placeHolder' |translate}}"
+                         notFoundText="{{'common.notFoundText' |translate}}"
+                         fullWidth formControlName="supplierId">
+                <ng-option *ngFor="let item of lstRole1" [value]="item.id">
+                  <span title="{{item.name | translate }}" class="cut-text"> {{ item.name | translate }}</span>
+                </ng-option>
+              </ng-select>
+              <ngx-inline-message [message]="'common.table.item_name'|translate"
+                                  [formName]="inputProduct.get('supplierId')"></ngx-inline-message>
+            </div>
+            <div class="col-lg-4 form-group">
+              <label class="label">
+                {{ 'common.table.item_description' | translate }}
+              </label>
+              <textarea rows="3" type="text" formControlName="description" nbInput fullWidth trim="blur"
+                        [ngClass]="{'status-danger': this.inputProduct.get('description').touched && this.inputProduct.get('description').errors}">
+            </textarea>
+            </div>
+          </div>
+        </div>
+        <label class="card-header-title">Chi tiết nhập hàng </label>
+        <div class="mb-4">
+        <div class="row">
+          <div class="col-lg-12 form-group">
+          </div>
+
+          <div class="text-center mt-2">
+            <ngx-column-grid-import  [editing]="editing" (onAddRow)="onAddRow()"  #columnGridImportComponent
+                                     [columns]="columns" [(rows)]="rows" [mapRef] = "mapRef" [page]="page"
+                                     (onValues)="onValue($event)" (onSetPage)="actionSetPage($event)"></ngx-column-grid-import>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="text-right">
+    <button nbButton type="button" status="primary" (click)="submit()" [disabled]="inputProduct.invalid"
+            id="dialogCancelBtn">{{ 'common.save' | translate }}</button>
+    <button nbButton type="button" nbButton (click)="cancel()" class="ml-2"> {{ 'common.cancel' | translate }} </button>
+  </nb-card-footer>
+</nb-card>

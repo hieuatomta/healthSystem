@@ -1,0 +1,34 @@
+
+.bt-action {
+  position: absolute;
+  font-size: 1.7rem;
+  right: 1.2rem;
+  top: 0.7rem;
+}
+::ng-deep .nb-theme-dark .full_screen {
+  height: 100vh;
+  width: 100vw;
+  background: #151a30;
+}
+::ng-deep .nb-theme-cosmic .full_screen {
+  height: 100vh;
+  width: 100vw;
+  background: #1b1b38;
+}
+::ng-deep .nb-theme-default .full_screen {
+  height: 100vh;
+  width: 100vw;
+  background: #e9edf3;
+}
+:host ::ng-deep {
+  .ngx-datatable.dark .datatable-body .datatable-body-row .datatable-body-cell {
+    padding: 0.5rem 0.5rem 0.4rem 0!important;
+  }
+}
+
+datatable-header.datatable-header.ng-star-inserted {
+  width: 100% !important;
+}
+datatable-body.datatable-body {
+  width: 100% !important;
+}

@@ -1,0 +1,134 @@
+<ngx-datatable class="fullscreen"
+               [ngClass]="{'dark' : currentTheme !== 'default', 'bootstrap': currentTheme === 'default'}"
+               #table
+               id="column-grid-import"
+               [columnMode]="'force'"
+               [scrollbarH]="true"
+               [rows]="rows"
+               [columns]="columns"
+               rowHeight="auto"
+               [headerHeight]="'auto'"
+               [footerHeight]="50"
+               [messages]="{totalMessage:'common.record'| translate}"
+>
+  <ngx-datatable-column [width]="80" [resizeable]="false">
+    <ng-template ngx-datatable-header-template>
+      <button class="p-1" nbButton size="small" title="{{'nhapLieu.label.addRow'|translate}}" (click)="addRow()"
+              *ngIf="columns.length>0">
+        <nb-icon icon="plus"></nb-icon>
+      </button>
+    </ng-template>
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+<!--      <button class="p-0" nbButton size="small" *ngIf="!editing[rowIndex]" (click)="edit(rowIndex)" title="Sửa">-->
+<!--        <nb-icon icon="edit"></nb-icon>-->
+<!--      </button>-->
+      <button class="p-0" nbButton size="small" *ngIf="editing[rowIndex]" (click)="saveRow(row, rowIndex)"
+              title="Lưu">
+        <nb-icon icon="save"></nb-icon>
+      </button>
+      <button nbButton size="small" class="ml-1 p-0" status="danger" *ngIf="!editing[rowIndex]"
+              (click)="confirmRemoveRow(row, rowIndex)" title="Xóa">
+        <nb-icon icon="trash-2-outline"></nb-icon>
+      </button>
+      <button nbButton size="small" class="ml-1 p-0" status="danger" *ngIf="editing[rowIndex]"
+              (click)="cancel(rowIndex)" title="Hủy">
+        <nb-icon icon="close-outline"></nb-icon>
+      </button>
+    </ng-template>
+  </ngx-datatable-column>
+  <ng-container *ngFor="let column of columns; index as i;">
+    <ngx-datatable-column name="{{column.title}}" prop="{{column.columnName}}" *ngIf="column.columnName !== 'id'"
+                          [width]="150" [resizeable]="false">
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+        <ng-container >
+          <div [ngSwitch]="column.controlType">
+            <div *ngSwitchCase="'COMBOBOX'">
+              <ng-select size="small" [clearAllText]="'Xóa'" appendTo="body" bindLabel="label" bindValue="value"
+                         [(ngModel)]="row[column.columnName]" [items]="mapRef[column.columnName]">
+              </ng-select>
+            </div>
+            <div *ngSwitchDefault>
+              <div [ngSwitch]="column.dataType">
+                <div *ngSwitchCase="'STRING'">
+                  <input
+                    nbInput
+                    size="small"
+                    fullWidth
+                    type="text"
+                    class="p-0"
+                    [(ngModel)]="row[column.columnName]"/>
+                </div>
+                <div *ngSwitchCase="'INT'">
+                  <input
+                    nbInput
+                    size="small"
+                    fullWidth
+                    type="text"
+                    class="p-0"
+                    [(ngModel)]="row[column.columnName]"/>
+                </div>
+                <div *ngSwitchCase="'LONG'">
+                  <input
+                    nbInput
+                    size="small"
+                    fullWidth
+                    type="text"
+                    class="p-0"
+                    [(ngModel)]="row[column.columnName]"/>
+                </div>
+                <div *ngSwitchCase="'DOUBLE'">
+                  <input
+                    nbInput
+                    size="small"
+                    fullWidth
+                    type="text"
+                    class="p-0"
+                    [(ngModel)]="row[column.columnName]"/>
+                </div>
+                <div *ngSwitchCase="'SIZE'">
+                  <ng-select [clearAllText]="'common.clearAllText'" [(ngModel)]="row[column.columnName]">
+                    placeholder="{{'common.placeHolder' |translate}}"
+                    notFoundText="{{'common.notFoundText' |translate}}"
+                    fullWidth>
+                    <ng-option *ngFor="let item1 of lstRole1" [value]="item1.id">
+                      <span title="{{item1.name | translate }}" class="cut-text"> {{ item1.name | translate }}</span>
+                    </ng-option>
+                  </ng-select>
+                </div>
+                <div *ngSwitchCase="'OBJ'">
+                  <ngx-dropdown-treeview-select [items]="item"
+                                                [value]="idParent"
+                                                [config]="treeViewConfig"
+                                                class="dropdown-treeview"
+                                                (valueChange)="parentIdChange($event)">
+                  </ngx-dropdown-treeview-select>
+                </div>
+
+                <div *ngSwitchCase="'BIGINT'">
+                  <input
+                    nbInput
+                    size="small"
+                    fullWidth
+                    type="text"
+                    class="p-0"
+                    [(ngModel)]="row[column.columnName]"/>
+                </div>
+                <div *ngSwitchCase="'DATE'">
+                  <input
+                    nbInput
+                    class="p-0"
+                    fullWidth
+                    [(ngModel)]="row[column.columnName]"
+                    [nbDatepicker]="formpicker">
+                  <nb-datepicker #formpicker format="yyyy-MM-dd"></nb-datepicker>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </ng-container>
+      </ng-template>
+    </ngx-datatable-column>
+  </ng-container>
+</ngx-datatable>

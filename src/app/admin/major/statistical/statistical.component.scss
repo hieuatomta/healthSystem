@@ -1,0 +1,25 @@
+
+@import '../../../@theme/styles/themes';
+
+.custom-clear-user-dept {
+  position: relative !important;
+}
+
+
+@include nb-install-component() {
+  :host nb-tab {
+    padding: 1.25rem;
+  }
+  ngx-chart-bar {
+    display: block;
+    height: nb-theme(card-height-medium);
+    width: 100%;
+
+    ::ng-deep chart {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+

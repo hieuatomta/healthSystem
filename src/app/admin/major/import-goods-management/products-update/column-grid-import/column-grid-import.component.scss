@@ -1,0 +1,12 @@
+:host {
+  ::ng-deep {
+    .datatable-header-inner {
+      white-space: unset !important;
+    }
+
+    .datatable-header-cell {
+      white-space: unset !important;
+    }
+  }
+}
+

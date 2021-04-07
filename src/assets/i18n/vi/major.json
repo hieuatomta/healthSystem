@@ -1,0 +1,53 @@
+{
+  "products": {
+    "title": "Quản lý sản phẩm",
+    "insert_btn": "Thêm mới sản phẩm",
+    "title_add": "Thêm mới sản phẩm",
+    "title_edit": "Sửa thông tin sản phẩm",
+    "title_delete": "Xác nhận xóa sản phẩm",
+    "unknown_error": "Lỗi không xác định",
+    "content_add_success": "Thêm sản phẩm thành công",
+    "content_edit_success": "Sửa thông tin thành công",
+    "delete_success": "Xóa sản phẩm thành công"
+  },
+  "order": {
+    "title": "Quản lý bán hàng",
+    "title_add": "Thêm mới phiếu bán hàng",
+    "title_edit": "Sửa thông tin phiếu bán hàng",
+    "title_delete": "Xác nhận xóa phiếu bán hàng",
+    "unknown_error": "Lỗi không xác định",
+    "content_edit_success": "Sửa thông tin thành công",
+    "delete_success": "Xóa phiếu bán hàng thành công"
+  },
+  "image": {
+    "title": "Quản lý hình ảnh",
+    "title_lock": "Xác nhận khoá hình ảnh",
+    "unknown_error": "Lỗi không xác định",
+    "content_add_success": "Upload hình ảnh thành công",
+    "lock_success": "Khoá sản phẩm thành công",
+    "title_delete": "Xác nhận xóa sản phẩm",
+    "delete_success": "Xóa sản phẩm thành công"
+  },
+  "suppliers": {
+    "title": "Quản lý Nhà cung cấp",
+    "title_add": "Thêm mới Nhà cung cấp",
+    "title_edit": "Sửa Nhà cung cấp",
+    "title_delete": "Xác nhận xóa Nhà cung cấp",
+    "content_add_success": "Thêm Nhà cung cấp thành công",
+    "content_edit_success": "Sửa Nhà cung cấp thành công",
+    "message_delete": "Bạn có chắc muốn xóa Nhà cung cấp",
+    "delete_success": "Xóa Nhà cung cấp thành công",
+    "title_map_popup": "Nhà cung cấp"
+  },
+  "import_products": {
+    "title": "Quản lý nhập hàng",
+    "insert_btn": "Tạo mới phiếu nhập hàng",
+    "title_add": "Tạo mới phiếu nhập hàng",
+    "title_edit": "Sửa thông tin phiếu nhập hàng",
+    "title_delete": "Xác nhận xóa phiếu nhập hàng",
+    "unknown_error": "Lỗi không xác định",
+    "content_add_success": "Thêm phiếu nhập hàng thành công",
+    "content_edit_success": "Sửa thông tin thành công",
+    "delete_success": "Xóa sản phẩm thành công"
+  }
+}
