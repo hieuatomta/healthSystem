@@ -51,9 +51,9 @@ const routes: Routes = [{
         .then(m => m.ImageManagementModule),
     },
     {
-      path: 'supplier',
-      loadChildren: () => import('./major/supplier/supplier.module')
-        .then(m => m.SupplierModule),
+      path: 'category',
+      loadChildren: () => import('./major/category/category.module')
+        .then(m => m.CategoryModule),
     },
     {
       path: 'products-selling',
@@ -71,9 +71,9 @@ const routes: Routes = [{
         .then(m => m.StatisticalModule),
     },
     {
-      path: 'products-management',
-      loadChildren: () => import('./major/product-management/product-management.module')
-        .then(m => m.ProductManagementModule),
+      path: 'news-management',
+      loadChildren: () => import('./major/news-management/news-management.module')
+        .then(m => m.NewsManagementModule),
     },
     {
       path: 'export-goods-management',

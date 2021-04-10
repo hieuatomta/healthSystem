@@ -7,6 +7,8 @@ import {ContactComponent} from './contact/contact.component';
 import {ProductDetailComponent} from './product-detail/product-detail.component';
 import {ProductComponent} from './products/product.component';
 import {ClientComponent} from './client.component';
+import {BlogComponent} from './blog/blog.component';
+import {BlogDetailComponent} from './blog-detail/blog-detail.component';
 
 
 const routes: Routes = [
@@ -17,6 +19,14 @@ const routes: Routes = [
       {
         path: 'trang-chu',
         component: HomeClientComponent,
+      },
+      {
+        path: 'tin-tuc',
+        component: BlogComponent,
+      },
+      {
+        path: 'tin-tuc-key',
+        component: BlogDetailComponent,
       },
       {
         path: 'thanh-toan',

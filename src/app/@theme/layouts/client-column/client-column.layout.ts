@@ -6,7 +6,7 @@ declare var main: any;
   template: `
     <nb-layout>
       <nb-layout-header style="padding: 0 !important; height: 40px !important;">
-        <ngx-header-client></ngx-header-client>
+        <ngx-header-client style="width: 100% !important;"></ngx-header-client>
       </nb-layout-header>
       <nb-layout-column style="padding: 0 !important;">
         <ng-content select="router-outlet"></ng-content>
