@@ -1,14 +1,14 @@
 {
-  "products": {
-    "title": "Quản lý sản phẩm",
-    "insert_btn": "Thêm mới sản phẩm",
-    "title_add": "Thêm mới sản phẩm",
-    "title_edit": "Sửa thông tin sản phẩm",
-    "title_delete": "Xác nhận xóa sản phẩm",
+  "news": {
+    "title": "Quản lý tin tức",
+    "insert_btn": "Thêm mới tin tức",
+    "title_add": "Thêm mới tin tức",
+    "title_edit": "Sửa thông tin tin tức",
+    "title_delete": "Xác nhận xóa tin tức",
     "unknown_error": "Lỗi không xác định",
-    "content_add_success": "Thêm sản phẩm thành công",
+    "content_add_success": "Thêm tin tức thành công",
     "content_edit_success": "Sửa thông tin thành công",
-    "delete_success": "Xóa sản phẩm thành công"
+    "delete_success": "Xóa tin tức thành công"
   },
   "order": {
     "title": "Quản lý bán hàng",
@@ -24,9 +24,9 @@
     "title_lock": "Xác nhận khoá hình ảnh",
     "unknown_error": "Lỗi không xác định",
     "content_add_success": "Upload hình ảnh thành công",
-    "lock_success": "Khoá sản phẩm thành công",
-    "title_delete": "Xác nhận xóa sản phẩm",
-    "delete_success": "Xóa sản phẩm thành công"
+    "lock_success": "Khoá tin tức thành công",
+    "title_delete": "Xác nhận xóa tin tức",
+    "delete_success": "Xóa tin tức thành công"
   },
   "category": {
     "title": "Quản lý Chủ đề",
@@ -48,6 +48,6 @@
     "unknown_error": "Lỗi không xác định",
     "content_add_success": "Thêm phiếu nhập hàng thành công",
     "content_edit_success": "Sửa thông tin thành công",
-    "delete_success": "Xóa sản phẩm thành công"
+    "delete_success": "Xóa tin tức thành công"
   }
 }

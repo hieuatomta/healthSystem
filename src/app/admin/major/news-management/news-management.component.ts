@@ -54,11 +54,11 @@ export class NewsManagementComponent implements OnInit {
   };
   columns = [
     {name: 'common.table.item_number', prop: 'index', flexGrow: 0.3},
-    {name: 'common.table.item_product_code', prop: 'code', flexGrow: 1},
-    {name: 'common.table.item_product_name', prop: 'name', flexGrow: 1.5},
-    // {name: 'common.table.item_product_cost', prop: 'cost', flexGrow: 1},
+    {name: 'common.table.item_news_code', prop: 'code', flexGrow: 1},
+    {name: 'common.table.item_news_name', prop: 'name', flexGrow: 1.5},
+    // {name: 'common.table.item_news_cost', prop: 'cost', flexGrow: 1},
     {name: 'common.table.item_status', prop: 'status', flexGrow: 1},
-    {name: 'common.table.item_product_paren_object', prop: 'parenObject', flexGrow: 1},
+    {name: 'common.table.item_news_paren_object', prop: 'parenObject', flexGrow: 1},
     {name: 'common.table.item_update_time', prop: 'updateTime', flexGrow: 1},
     {name: 'common.table.item_image', prop: 'map_image', flexGrow: 0.6},
     {name: 'common.table.item_size_color', prop: 'map_size_color', flexGrow: 0.6},
@@ -80,9 +80,9 @@ export class NewsManagementComponent implements OnInit {
   editUsers(data) {
     let title;
     if (data == null) {
-      title = this.translate.instant('products.title_add');
+      title = this.translate.instant('news.title_add');
     } else {
-      title = this.translate.instant('products.title_edit');
+      title = this.translate.instant('news.title_edit');
     }
     this.dialogService.open(NewsUpdateComponent, {
       context: {
@@ -94,10 +94,10 @@ export class NewsManagementComponent implements OnInit {
       value => {
         if (value) {
           if (data == null) {
-            this.toastrService.success(this.translate.instant('products.content_add_success'),
+            this.toastrService.success(this.translate.instant('news.content_add_success'),
               this.translate.instant('common.title_notification'));
           } else {
-            this.toastrService.success(this.translate.instant('products.content_edit_success'),
+            this.toastrService.success(this.translate.instant('news.content_edit_success'),
               this.translate.instant('common.title_notification'));
           }
           this.search(0);
@@ -139,13 +139,13 @@ export class NewsManagementComponent implements OnInit {
     this.dialogService.open(ConfirmDialogComponent, {
       context: {
         title: this.translate.instant('common.title_notification'),
-        message: this.translate.instant('products.title_delete') + ' ' + data.name
+        message: this.translate.instant('news.title_delete') + ' ' + data.name
       },
     }).onClose.subscribe(res => {
       if (res) {
         this.isLoad = true;
         this.productsService.delete(data.id).subscribe(() => {
-          this.toastrService.success(this.translate.instant('products.delete_success'),
+          this.toastrService.success(this.translate.instant('news.delete_success'),
             this.translate.instant('common.title_notification'));
           this.search(0);
           this.isLoad = false;

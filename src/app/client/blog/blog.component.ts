@@ -1,4 +1,8 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {LoginService} from '../../@core/services/login.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {ToastrService} from '../../@core/mock/toastr-service';
 
 declare var $: any;
 
@@ -10,6 +14,17 @@ declare var $: any;
 })
 export class BlogComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
+  }
+
+  onClick() {
+    this.router.navigate(['/trang-chu']);
+    // console.log("sa");
+  }
+
+
+  constructor(private router: Router,
+              private route: ActivatedRoute) {
+
   }
 
   ngOnInit(): void {

@@ -2,10 +2,10 @@
   <div class="col-lg-12">
     <nb-card>
       <nb-card-header class="d-flex">
-        <label>{{ 'products.title' | translate }}</label>
+        <label>{{ 'news.title' | translate }}</label>
         <button nbButton status="primary" size="tiny" class="ml-auto" (click)="editUsers(null)">
           <nb-icon icon="plus" pack="eva"></nb-icon>
-          {{ 'products.title_add' | translate }}
+          {{ 'news.title_add' | translate }}
         </button>
       </nb-card-header>
       <nb-card-body>
@@ -14,13 +14,13 @@
             <div class="row">
               <div class="col-lg-4 form-group">
                 <label class="label">
-                  {{ 'common.table.item_product_code' | translate }}
+                  {{ 'common.table.item_news_code' | translate }}
                 </label>
                 <input (keyup.enter)="search(0)" nbInput fullWidth formControlName="code">
               </div>
               <div class="col-lg-4 form-group">
                 <label class="label">
-                  {{ 'common.table.item_product_name' | translate }}
+                  {{ 'common.table.item_news_name' | translate }}
                 </label>
                 <input (keyup.enter)="search(0)" nbInput fullWidth formControlName="name">
               </div>

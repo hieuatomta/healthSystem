@@ -176,31 +176,31 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
     {
       id: 2,
       parenID: 0,
-      tendulieu: 'Quần áo',
+      tendulieu: 'Giới thiệu',
       link: 'danh-sach-san-pham',
-      check: false
+      check: true
     }, {
       id: 3,
       parenID: 0,
-      tendulieu: 'Giầy dép',
-      link: 'danh-sach-san-pham',
-      check: false
+      tendulieu: 'Tin tức',
+      link: 'tin-tuc',
+      check: true
     }, {
       id: 4,
       parenID: 0,
-      tendulieu: 'Nam',
+      tendulieu: 'Khám chữa bệnh',
       link: 'danh-sach-san-pham',
       check: false
     }, {
       id: 5,
       parenID: 0,
-      tendulieu: 'Nữ',
+      tendulieu: 'Dịch vụ',
       link: 'danh-sach-san-pham',
       check: false
     }, {
       id: 6,
       parenID: 0,
-      tendulieu: 'Giới thiệu',
+      tendulieu: 'Đào taọ trực tuyến',
       link: 've-chung-toi',
       check: false
     }, {
@@ -209,13 +209,35 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
       tendulieu: 'Liên lạc',
       link: 'lien-he',
       check: false
+    }, {
+      id: 8,
+      parenID: 3,
+      tendulieu: 'Tin tức sự kiện',
+      check: false
+    },
+    {
+      id: 9,
+      parenID: 3,
+      tendulieu: 'Y học thưởng thức',
+      check: false
+    },
+    {
+      id: 10,
+      parenID: 3,
+      tendulieu: 'Ý kiến khách hàng',
+      check: false
+    },  {
+      id: 11,
+      parenID: 2,
+      tendulieu: 'Ban giám đốc',
+      check: false
+    },  {
+      id: 12,
+      parenID: 2,
+      tendulieu: 'Lịch sử bệnh viện',
+      check: false
     }
-    // , {
-    //   id: 8,
-    //   parenID: 6,
-    //   tendulieu: 'lv3',
-    //   check: true
-    // }, {
+    // {
     //   id: 9,
     //   parenID: 0,
     //   tendulieu: 'lv1',
@@ -270,11 +292,11 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
       if (this.tree[x].parenID === parent) {
         this.htmlStrTxt += '<li class="tieu_de level-' + level + '"><a href="/ltnc/' + this.tree[x].link + '" class="nd_tieu_de">' + this.tree[x].tendulieu + '</a>';
         if (this.tree[x].check) {
-          // if (level !== 0) {
-          //   this.htmlStrTxt += '<span class="caret"><i class="fa fa-caret-right" aria-hidden="true"></i></span>';
-          // } else {
-          //   this.htmlStrTxt += '<span class="caret"><i class="fa fa-caret-down" aria-hidden="true"></i></span>';
-          // }
+          if (level !== 0) {
+            this.htmlStrTxt += '<span class="caret"><i class="fa fa-caret-right" aria-hidden="true"></i></span>';
+          } else {
+            this.htmlStrTxt += '<span class="caret"><i class="fa fa-caret-down" aria-hidden="true"></i></span>';
+          }
           this.htmlStrTxt += this.dequy(this.tree[x].id, level + 1, 0);
         }
         this.htmlStrTxt += '</li>';
