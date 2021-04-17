@@ -8,7 +8,7 @@ import {HttpHeaders} from '@angular/common/http';
 import {ConfirmDialogComponent} from '../../../shares/directives/confirm-dialog/confirm-dialog.component';
 import {SizeService} from '../../../@core/services/size.service';
 import {CategoryUpdateComponent} from './category-update/category-update.component';
-import {SuppliersService} from '../../../@core/services/suppliers.service';
+import {CategoriesService} from '../../../@core/services/categories.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -31,7 +31,7 @@ export class CategoryComponent implements OnInit {
     private translate: TranslateService,
     private toastrService: NbToastrService,
     private userService: UsersService,
-    private suppliersService: SuppliersService,
+    private suppliersService: CategoriesService,
     private dialogService: NbDialogService) {
   }
 

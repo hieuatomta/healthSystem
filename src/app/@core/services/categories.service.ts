@@ -7,7 +7,7 @@ import {createRequestOption} from '../../shares/utils/request-util';
 @Injectable({
   providedIn: 'root'
 })
-export class SuppliersService {
+export class CategoriesService {
   constructor(private http: HttpClient) {
   }
 

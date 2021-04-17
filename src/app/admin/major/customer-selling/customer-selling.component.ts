@@ -7,7 +7,7 @@ import {UsersService} from '../../../@core/services/users.service';
 import {HttpHeaders} from '@angular/common/http';
 import {ConfirmDialogComponent} from '../../../shares/directives/confirm-dialog/confirm-dialog.component';
 import {SupplierUpdateComponent} from './supplier-update/supplier-update.component';
-import {SuppliersService} from '../../../@core/services/suppliers.service';
+import {CategoriesService} from '../../../@core/services/categories.service';
 import {DatatableComponent} from '@swimlane/ngx-datatable';
 import {ExcelService} from './excel.service';
 import {StatisticalService} from '../../../@core/services/statistical.service';
@@ -53,7 +53,7 @@ export class CustomerSellingComponent implements OnInit {
     private translate: TranslateService,
     private toastrService: NbToastrService,
     private userService: UsersService,
-    private suppliersService: SuppliersService,
+    private suppliersService: CategoriesService,
     private excelService: ExcelService,
     private statisticalService: StatisticalService,
     private dialogService: NbDialogService) {

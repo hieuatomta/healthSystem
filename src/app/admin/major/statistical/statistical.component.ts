@@ -5,7 +5,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {UsersService} from '../../../@core/services/users.service';
 import {HttpHeaders} from '@angular/common/http';
-import {SuppliersService} from '../../../@core/services/suppliers.service';
+import {CategoriesService} from '../../../@core/services/categories.service';
 import {StatisticalService} from '../../../@core/services/statistical.service';
 import {formatDate} from '@angular/common';
 import {checkVaidDate} from '../../../validator';
@@ -138,7 +138,7 @@ export class StatisticalComponent implements OnDestroy, OnInit {
     private translate: TranslateService,
     private toastrService: NbToastrService,
     private userService: UsersService,
-    private suppliersService: SuppliersService,
+    private suppliersService: CategoriesService,
     private statisticalService: StatisticalService,
     private dialogService: NbDialogService) {
   }

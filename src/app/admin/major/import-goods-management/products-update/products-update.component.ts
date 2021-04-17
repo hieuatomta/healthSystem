@@ -11,7 +11,7 @@ import {ColumnChangesService, DimensionsHelper, ScrollbarHelper} from '@swimlane
 import {ColumnGridImportComponent} from './column-grid-import/column-grid-import.component';
 import {Page} from '../../../../@core/model/page.model';
 import * as moment from 'moment';
-import {SuppliersService} from '../../../../@core/services/suppliers.service';
+import {CategoriesService} from '../../../../@core/services/categories.service';
 import {ImportProductsService} from '../../../../@core/services/importProducts.service';
 
 @Component({
@@ -63,7 +63,7 @@ export class ProductsUpdateComponent implements OnInit {
     private translate: TranslateService,
     public ref: NbDialogRef<ProductsUpdateComponent>,
     private sizeService: SizeService,
-    private suppliersService: SuppliersService,
+    private suppliersService: CategoriesService,
     private importProductsService: ImportProductsService,
     private productsService: ProductsService,
   ) {

@@ -11,7 +11,7 @@ import {ProductsUpdateComponent} from './products-update/products-update.compone
 import {MapPopupComponent} from './map-popup/map-popup.component';
 import {MapImageProductComponent} from './map-image-product/map-image-product.component';
 import {ImportProductsService} from '../../../@core/services/importProducts.service';
-import {SuppliersService} from '../../../@core/services/suppliers.service';
+import {CategoriesService} from '../../../@core/services/categories.service';
 
 class RequestOptions {
   constructor(param: { headers: Headers }) {
@@ -41,7 +41,7 @@ export class ImportGoodsManagementComponent implements OnInit {
     private toastrService: NbToastrService,
     private userService: UsersService,
     private productsService: ProductsService,
-    private suppliersService: SuppliersService,
+    private suppliersService: CategoriesService,
     private importProductsService: ImportProductsService,
     private dialogService: NbDialogService) {
   }

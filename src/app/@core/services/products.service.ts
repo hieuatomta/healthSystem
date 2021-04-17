@@ -12,20 +12,20 @@ export class ProductsService {
   }
 
   query(): Observable<any> {
-    return this.http.get<any[]>(`${environment.apiUrl}/products/getAll`, {
+    return this.http.get<any[]>(`${environment.apiUrl}/news/getAll`, {
       observe: 'response'
     });
   }
 
   doSearchByCode(id: any): Observable<any> {
-    return this.http.get<any[]>(`${environment.apiUrl}/products-size/${id}`, {
+    return this.http.get<any[]>(`${environment.apiUrl}/news-size/${id}`, {
       observe: 'response'
     });
   }
 
   public doSearch(req?: any): Observable<any> {
     const options = createRequestOption(req);
-    return this.http.get<any[]>(`${environment.apiUrl}/products`, {
+    return this.http.get<any[]>(`${environment.apiUrl}/news`, {
       params: options,
       observe: 'response'
     });
@@ -34,32 +34,27 @@ export class ProductsService {
 
   public doSearch1(req?: any, body?: any): Observable<any> {
     const options = createRequestOption(req);
-    return this.http.get<any[]>(`${environment.apiUrl}/client/products`, {
+    return this.http.get<any[]>(`${environment.apiUrl}/client/news`, {
       params: options,
       observe: 'response'
     });
   }
 
   public update(data: any): Observable<any> {
-    return this.http.put<any>(`${environment.apiUrl}/products`, data, {
+    return this.http.put<any>(`${environment.apiUrl}/news`, data, {
       observe: 'response'
     });
   }
 
   public insert(data: any): Observable<any> {
-    return this.http.post <any>(`${environment.apiUrl}/products`, data, {
+    return this.http.post <any>(`${environment.apiUrl}/news`, data, {
       observe: 'response'
     });
   }
 
-  public insert1(data: any): Observable<any> {
-    return this.http.post <any>(`${environment.apiUrl}/import-coupons`, data, {
-      observe: 'response'
-    });
-  }
 
   delete(id: any): Observable<any> {
-    return this.http.delete<any>(`${environment.apiUrl}/products/${id}`);
+    return this.http.delete<any>(`${environment.apiUrl}/news/${id}`);
   }
 
   public insertSizeColor(data: any): Observable<any> {
@@ -69,7 +64,7 @@ export class ProductsService {
   }
 
   deleteSizeColor(id: any): Observable<any> {
-    return this.http.delete<any>(`${environment.apiUrl}/productsSizeColor/${id}`);
+    return this.http.delete<any>(`${environment.apiUrl}/newsSizeColor/${id}`);
   }
 
 }

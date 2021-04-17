@@ -4,7 +4,7 @@ import {NbDialogRef, NbToastrService} from '@nebular/theme';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SizeService} from '../../../../@core/services/size.service';
 import {TranslateService} from '@ngx-translate/core';
-import {SuppliersService} from '../../../../@core/services/suppliers.service';
+import {CategoriesService} from '../../../../@core/services/categories.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -46,7 +46,7 @@ export class SupplierUpdateComponent implements OnInit {
     private toastr: NbToastrService,
     private translate: TranslateService,
     public ref: NbDialogRef<SupplierUpdateComponent>,
-    private suppliersService: SuppliersService) {
+    private suppliersService: CategoriesService) {
   }
 
 

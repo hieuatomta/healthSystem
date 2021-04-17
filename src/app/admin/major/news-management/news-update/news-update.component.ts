@@ -2,13 +2,14 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ToastrService} from '../../../../@core/mock/toastr-service';
 import {NbDialogRef, NbToastrService} from '@nebular/theme';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {SizeService} from '../../../../@core/services/size.service';
 import {TranslateService} from '@ngx-translate/core';
 import {TreeviewConfig, TreeviewItem} from 'ngx-treeview';
 import {ObjectsService} from '../../../../@core/services/objects.service';
 import {ColorService} from '../../../../@core/services/color.service';
 import {ProductsService} from '../../../../@core/services/products.service';
 import {ColumnChangesService, DimensionsHelper, ScrollbarHelper} from '@swimlane/ngx-datatable';
+import {HttpHeaders} from '@angular/common/http';
+import {CategoriesService} from '../../../../@core/services/categories.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -52,22 +53,43 @@ export class NewsUpdateComponent implements OnInit {
     private toastr: NbToastrService,
     private translate: TranslateService,
     public ref: NbDialogRef<NewsUpdateComponent>,
-    private sizeService: SizeService,
+    private categoriesService: CategoriesService,
     private colorService: ColorService,
     private productsService: ProductsService,
   ) {
   }
 
+  protected onSuccess(data: any | null, headers: HttpHeaders, page: number): void {
+    this.page.count = data.count;
+    this.page.offset = page || 0;
+    this.rows = data.list || [];
+  }
+
+  page = {
+    limit: 5,
+    count: 0,
+    offset: 0,
+  };
 
   ngOnInit(): void {
+    this.categoriesService.doSearch({
+      status: 1,
+    }).subscribe(
+      (res) => {
+        this.lstRole1 = res.body.data.list;
+      },
+      (error) => {
+        // this.isLoad = false;
+      },
+      // () => this.isLoad = false,
+    );
+
     this.inputProduct = new FormGroup({
       id: new FormControl(this.data?.id, []),
-      name: new FormControl(null, [Validators.required]),
-      code: new FormControl(null, [Validators.required]),
-      cost: new FormControl(null, [Validators.required]),
-      description: new FormControl(null, []),
-      status: new FormControl(this.data?.status === undefined ? this.translate.instant('common.state.1') : this.data?.status, [Validators.required]),
-      objectsId: new FormControl(this.data?.objectsId, [Validators.required])
+      title: new FormControl(null, [Validators.required]),
+      bodyChild: new FormControl(null, [Validators.required]),
+      bodyNews: new FormControl(null, [Validators.required]),
+      categoryId: new FormControl(null, [Validators.required]),
     });
     if (this.data) {
       this.inputProduct.patchValue(this.data);
@@ -121,15 +143,16 @@ export class NewsUpdateComponent implements OnInit {
     if (this.inputProduct.valid) {
       this.loading = true;
       if (this.data == null) {
-        this.inputProduct.get('status').setValue(1);
-        this.productsService.insert(this.inputProduct.value).subscribe(
-          (value) => this.ref.close(value),
-          (error) => {
-            this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
-            this.loading = false;
-          },
-          () => this.loading = false
-        );
+        console.log(this.inputProduct.value);
+        // this.inputProduct.get('status').setValue(1);
+        // this.productsService.insert(this.inputProduct.value).subscribe(
+        //   (value) => this.ref.close(value),
+        //   (error) => {
+        //     this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
+        //     this.loading = false;
+        //   },
+        //   () => this.loading = false
+        // );
       } else {
         this.productsService.update(this.inputProduct.value).subscribe(
           (value) => this.ref.close(value),
