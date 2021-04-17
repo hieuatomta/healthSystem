@@ -38,13 +38,11 @@
                                 [formName]="inputProduct.get('title')"></ngx-inline-message>
           </div>
 
-          <div class="col-lg-6 form-group">
+          <div class="col-lg-12 form-group">
             <label class="label">
               {{ 'common.table.item_news_body_child' | translate }} <span style="color: red">(*)</span>
             </label>
-            <textarea nbInput fullWidth formControlName="bodyChild"></textarea>
-<!--            <input class="custom-border" formControlName="bodyChild" type="text" nbInput fullWidth trim="blur"-->
-<!--                   [ngClass]="{'status-danger': this.inputProduct.get('bodyChild').touched && this.inputProduct.get('name').errors}">-->
+            <textarea  nbInput fullWidth formControlName="bodyChild"></textarea>
             <ngx-inline-message [message]="'common.table.item_news_body_child'|translate"
                                 [formName]="inputProduct.get('bodyChild')"></ngx-inline-message>
           </div>
@@ -52,10 +50,7 @@
             <label class="label">
               {{ 'common.table.item_news_body' | translate }} <span style="color: red">(*)</span>
             </label>
-            <textarea nbInput fullWidth formControlName="bodyNews"></textarea>
-
-            <!--            <input class="custom-border" formControlName="cost" type="text" nbInput fullWidth trim="blur"-->
-<!--                   [ngClass]="{'status-danger': this.inputProduct.get('cost').touched && this.inputProduct.get('cost').errors}">-->
+            <textarea style="min-height: 800px !important;" nbInput fullWidth formControlName="bodyNews"></textarea>
             <ngx-inline-message [message]="'common.table.item_news_body'|translate"
                                 [formName]="inputProduct.get('bodyNews')"></ngx-inline-message>
           </div>
@@ -65,6 +60,7 @@
         </div>
       </div>
     </form>
+    <ngx-map-image></ngx-map-image>
   </nb-card-body>
   <nb-card-footer class="text-right">
     <button nbButton type="button" status="primary" (click)="submit()" [disabled]="inputProduct.invalid"

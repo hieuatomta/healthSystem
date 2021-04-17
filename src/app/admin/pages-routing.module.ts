@@ -76,6 +76,11 @@ const routes: Routes = [{
         .then(m => m.NewsManagementModule),
     },
     {
+      path: 'news-approval-management',
+      loadChildren: () => import('./major/news-approval-management/news-approval-management.module')
+        .then(m => m.NewsApprovalManagementModule),
+    },
+    {
       path: 'export-goods-management',
       loadChildren: () => import('./major/export-goods-management/export-goods-management.module')
         .then(m => m.ExportGoodsManagementModule),

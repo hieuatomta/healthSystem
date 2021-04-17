@@ -10,6 +10,8 @@ import {ProductsService} from '../../../../@core/services/products.service';
 import {ColumnChangesService, DimensionsHelper, ScrollbarHelper} from '@swimlane/ngx-datatable';
 import {HttpHeaders} from '@angular/common/http';
 import {CategoriesService} from '../../../../@core/services/categories.service';
+import {Observable} from 'rxjs';
+import {UploadFileService} from '../../../../@core/services/uploadFileService.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -56,6 +58,7 @@ export class NewsUpdateComponent implements OnInit {
     private categoriesService: CategoriesService,
     private colorService: ColorService,
     private productsService: ProductsService,
+    private uploadService: UploadFileService,
   ) {
   }
 
@@ -94,49 +97,11 @@ export class NewsUpdateComponent implements OnInit {
     if (this.data) {
       this.inputProduct.patchValue(this.data);
     }
-    this.getParenTree(this.data?.type ? this.data.type : 1);
-
   };
 
   parentIdChange($event) {
     this.inputProduct.get('objectsId').setValue($event);
   }
-
-
-  getParenTree(e: Number) {
-    this.loading = true;
-    this.objectsService.query().subscribe(res => {
-        const result = res.body.data.list.filter(function (hero) {
-          return hero.type === e;
-        });
-        this.item = this.formatDataTree(result, 0);
-      }, (error) => {
-        this.loading = false;
-      },
-      () => this.loading = false);
-  }
-
-  formatDataTree(data, parentId) {
-    const arr = [];
-    for (let i = 0; i < data.length; i++) {
-      const dataItem = data[i];
-      if (dataItem.parentId === parentId) {
-        let children = [];
-        if (dataItem.id != null) {
-          children = this.formatDataTree(data, dataItem.id);
-        }
-        if (children.length > 0) {
-          dataItem.children = children;
-        } else {
-          dataItem.children = null;
-        }
-        const dataTreeview = new TreeviewItem({text: dataItem.name, value: dataItem.id, children: dataItem.children});
-        arr.push(dataTreeview);
-      }
-    }
-    return arr;
-  }
-
 
   submit() {
     this.inputProduct.markAllAsTouched();
@@ -144,15 +109,14 @@ export class NewsUpdateComponent implements OnInit {
       this.loading = true;
       if (this.data == null) {
         console.log(this.inputProduct.value);
-        // this.inputProduct.get('status').setValue(1);
-        // this.productsService.insert(this.inputProduct.value).subscribe(
-        //   (value) => this.ref.close(value),
-        //   (error) => {
-        //     this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
-        //     this.loading = false;
-        //   },
-        //   () => this.loading = false
-        // );
+        this.productsService.insert(this.inputProduct.value).subscribe(
+          (value) => this.ref.close(value),
+          (error) => {
+            this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
+            this.loading = false;
+          },
+          () => this.loading = false
+        );
       } else {
         this.productsService.update(this.inputProduct.value).subscribe(
           (value) => this.ref.close(value),
@@ -169,5 +133,68 @@ export class NewsUpdateComponent implements OnInit {
 
   cancel() {
     this.ref.close();
+  }
+
+  // code upload file
+  selectedFiles: FileList;
+  currentFile: File;
+  progress = 0;
+  message = '';
+
+  fileInfos: Observable<any>;
+  canUpdate = true;
+
+  protected onSuccess1(data: any | null): void {
+    this.rows = data.DS_Image || [];
+  }
+
+  search() {
+    this.loading = true;
+    this.uploadService.doSearchByCode(this.data?.id).subscribe(res => {
+        this.onSuccess1(res.body.data);
+        this.loading = false;
+      },
+      (error) => {
+        this.loading = false;
+      });
+  };
+
+  selectFile(event) {
+    if (event !== null) {
+      this.selectedFiles = event.target.files;
+    } else {
+      this.canUpdate = true;
+      this.selectedFiles = null;
+    }
+    if (this.selectedFiles === null) {
+      this.canUpdate = true;
+    } else {
+      this.canUpdate = false;
+    }
+  }
+
+  upload() {
+    this.progress = 0;
+
+    this.currentFile = this.selectedFiles.item(0);
+    if (this.data.id) {
+      this.uploadService.upload({id: this.data.id}, this.currentFile).subscribe(
+        (res) => {
+          this.message = res.body.data;
+          this.search();
+          this.canUpdate = true;
+        },
+        (error) => {
+          this.progress = 0;
+          this.message = 'Could not upload the file!';
+          this.currentFile = undefined;
+          this.canUpdate = true;
+          // this.isLoad = false;
+        },
+        () => this.canUpdate = true,
+      );
+    }
+    this.selectFile(null);
+    // this.selectedFiles = null;
   }
 }

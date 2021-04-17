@@ -7,7 +7,7 @@ import {UsersService} from '../../../@core/services/users.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ConfirmDialogComponent} from '../../../shares/directives/confirm-dialog/confirm-dialog.component';
 import {ProductsService} from '../../../@core/services/products.service';
-import {NewsUpdateComponent} from './news-update/news-update.component';
+import {NewsApprovalUpdateComponent} from './news-approval-update/news-approval-update.component';
 import {MapPopupComponent} from './map-popup/map-popup.component';
 import {MapImageProductComponent} from './map-image-product/map-image-product.component';
 
@@ -21,10 +21,10 @@ class RequestOptions {
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'ngx-image-management',
-  styleUrls: ['./news-management.component.scss'],
-  templateUrl: './news-management.component.html',
+  styleUrls: ['./news-approval-management.component.scss'],
+  templateUrl: './news-approval-management.component.html',
 })
-export class NewsManagementComponent implements OnInit {
+export class NewsApprovalManagementComponent implements OnInit {
   ngOnInit(): void {
     this.search(0);
   }
@@ -55,10 +55,10 @@ export class NewsManagementComponent implements OnInit {
     {name: 'common.table.item_news_code', prop: 'code', flexGrow: 1},
     {name: 'common.table.item_news_name', prop: 'title', flexGrow: 1.5},
     {name: 'common.table.item_news_paren_object', prop: 'categoryName', flexGrow: 1},
+    {name: 'common.table.item_news_users_name', prop: 'usersName', flexGrow: 1},
     {name: 'common.table.item_status', prop: 'status', flexGrow: 1},
     {name: 'common.table.item_reasonForRefusal', prop: 'reasonForRefusal', flexGrow: 1},
     {name: 'common.table.item_update_time', prop: 'updateTime', flexGrow: 1},
-    {name: 'common.table.item_image', prop: 'map_image', flexGrow: 0.6},
     {name: 'common.table.item_action', prop: 'action_btn', flexGrow: 1}
   ];
 
@@ -74,32 +74,25 @@ export class NewsManagementComponent implements OnInit {
     this.search(pageInfo.offset);
   }
 
-  editUsers(data) {
-    let title;
-    if (data == null) {
-      title = this.translate.instant('news.title_add');
-    } else {
-      title = this.translate.instant('news.title_edit');
-    }
-    this.dialogService.open(NewsUpdateComponent, {
-      context: {
-        title: title,
-        data: data,
+  editUsers(row) {
+    console.log(row);
+    const data = {
+      id: row.id,
+      status: 0,
+      reasonForRefusal: null
+    };
+    this.isLoad = true;
+    console.log(data);
+    this.productsService.newsRefuse(data).subscribe(
+      (value) => {
+        this.toastrService.success(this.translate.instant('news.delete_success'));
+        this.search(0);
       },
-      dialogClass: 'modal-full',
-    }).onClose.subscribe(
-      value => {
-        if (value) {
-          if (data == null) {
-            this.toastrService.success(this.translate.instant('news.content_add_success'),
-              this.translate.instant('common.title_notification'));
-          } else {
-            this.toastrService.success(this.translate.instant('news.content_edit_success'),
-              this.translate.instant('common.title_notification'));
-          }
-          this.search(0);
-        }
-      }
+      (error) => {
+        this.toastrService.danger(error.error.message, this.translate.instant('common.title_notification'));
+        this.isLoad = false;
+      },
+      () => this.isLoad = false
     );
   }
 
@@ -112,13 +105,13 @@ export class NewsManagementComponent implements OnInit {
   search(pageToLoad: number) {
     this.isLoad = true;
     this.page.offset = pageToLoad;
-    this.productsService.doSearch({
+    this.productsService.doSearchAll({
       page: this.page.offset,
       page_size: this.page.limit,
-      name: this.inputForm.get("name").value,
-      code: this.inputForm.get("code").value,
-      updateTime: this.inputForm.get("updateTime").value,
-      status: this.inputForm.get("status").value,
+      name: this.inputForm.get('name').value,
+      code: this.inputForm.get('code').value,
+      updateTime: this.inputForm.get('updateTime').value,
+      status: this.inputForm.get('status').value,
     }).subscribe(
       (res) => {
         console.log(res);
@@ -130,7 +123,6 @@ export class NewsManagementComponent implements OnInit {
       () => this.isLoad = false,
     );
   }
-
 
 
   deleteUsers(data) {
@@ -156,6 +148,21 @@ export class NewsManagementComponent implements OnInit {
     });
   }
 
+
+  refuse(data) {
+    const openMap = this.dialogService.open(NewsApprovalUpdateComponent, {
+      context: {
+        title: this.translate.instant('common.table.item_reasonForRefusal'),
+        data: data,
+      }
+    });
+    openMap.onClose.subscribe(value => {
+      this.search(0);
+      // this.toastr.success(this.translate.instant('common.content_map_action_success'),
+      this.translate.instant('objects.title_notification');
+    });
+  }
+
   openMapModule(data) {
     const openMap = this.dialogService.open(MapPopupComponent, {
       context: {
@@ -164,9 +171,9 @@ export class NewsManagementComponent implements OnInit {
       }
     });
     openMap.onClose.subscribe(value => {
-        this.search(0);
-        // this.toastr.success(this.translate.instant('common.content_map_action_success'),
-          this.translate.instant('objects.title_notification');
+      this.search(0);
+      // this.toastr.success(this.translate.instant('common.content_map_action_success'),
+      this.translate.instant('objects.title_notification');
     });
   }
 

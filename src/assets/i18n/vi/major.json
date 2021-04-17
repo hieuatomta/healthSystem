@@ -1,5 +1,6 @@
 {
   "news": {
+    "approval" : "Phê duyệt tin tức",
     "title": "Quản lý tin tức",
     "insert_btn": "Thêm mới tin tức",
     "title_add": "Thêm mới tin tức",

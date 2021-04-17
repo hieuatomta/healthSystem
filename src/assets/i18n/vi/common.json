@@ -20,11 +20,9 @@
       "1": "Client"
     },
     "state": {
-      "0": "Đang bán",
+      "0": "Đã được phê duyệt",
       "1": "Đang đợi phê duyệt",
-      "2": "Tạm thời hết hàng",
-      "3": "Ngừng kinh doanh",
-      "4": "Hàng mới nhập"
+      "2": "Từ chối phê duyệt"
     },
     "statusOrder": {
       "0": "Đã thanh toán",
@@ -42,6 +40,8 @@
       "item_dateOfBirth": "Ngày sinh",
       "item_role": "Quyền người dùng",
       "item_status": "Trạng thái",
+      "item_reasonForRefusal": "Lý do từ chối",
+      "item_news_users_name": "Tác giả",
       "item_type": "Chức năng",
       "item_imageUrl": "Đường dẫn ảnh",
       "item_url": "Đường dẫn",
@@ -101,6 +101,8 @@
     "selectedMessage": "bản ghi được chọn",
     "clearAllText": "Xóa",
     "lock": "Khoá",
+    "refuse": "Từ chối",
+    "approval": "Phê duyệt",
     "save": "Lưu lại",
     "add": "Thêm",
     "cancel": "Huỷ bỏ",

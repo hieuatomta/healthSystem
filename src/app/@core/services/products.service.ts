@@ -30,6 +30,13 @@ export class ProductsService {
       observe: 'response'
     });
   }
+  public doSearchAll(req?: any): Observable<any> {
+    const options = createRequestOption(req);
+    return this.http.get<any[]>(`${environment.apiUrl}/news-all`, {
+      params: options,
+      observe: 'response'
+    });
+  }
 
 
   public doSearch1(req?: any, body?: any): Observable<any> {
@@ -48,6 +55,11 @@ export class ProductsService {
 
   public insert(data: any): Observable<any> {
     return this.http.post <any>(`${environment.apiUrl}/news`, data, {
+      observe: 'response'
+    });
+  }
+  public newsRefuse(data: any): Observable<any> {
+    return this.http.post <any>(`${environment.apiUrl}/news-refuse`, data, {
       observe: 'response'
     });
   }

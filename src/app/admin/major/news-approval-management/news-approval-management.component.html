@@ -2,11 +2,7 @@
   <div class="col-lg-12">
     <nb-card>
       <nb-card-header class="d-flex">
-        <label>{{ 'news.title' | translate }}</label>
-        <button nbButton status="primary" size="tiny" class="ml-auto" (click)="editUsers(null)">
-          <nb-icon icon="plus" pack="eva"></nb-icon>
-          {{ 'news.title_add' | translate }}
-        </button>
+        <label>{{ 'news.approval' | translate }}</label>
       </nb-card-header>
       <nb-card-body>
         <form [formGroup]="inputForm">
@@ -68,7 +64,7 @@
                   {{ page.offset * page.limit + rowIndex + 1 }}
                 </ng-container>
                 <ng-container
-                  *ngIf="col.prop ==='code' || col.prop ==='title' || col.prop ==='categoryName'|| col.prop ==='reasonForRefusal'"
+                  *ngIf="col.prop ==='code' || col.prop ==='title' || col.prop ==='categoryName'|| col.prop ==='usersName'|| col.prop ==='reasonForRefusal'"
                   class="text-right">
                   <span class="row-data-show"
                         title="{{value}}">{{value.length > 50 ? value.substring(0, 50).concat('...') : value}}</span>
@@ -85,23 +81,17 @@
                 <ng-container *ngIf="col.prop ==='status'">
                   {{  'common.state.' + value | translate }}
                 </ng-container>
-                <ng-container *ngIf="col.prop === 'map_size_color'">
-                  <button class="p-1" nbButton ghost status="info" (click)="openMapModule(row)">
-                    <nb-icon icon="link-outline" pack="eva" size="tiny"></nb-icon>
-                  </button>
-                </ng-container>
-                <ng-container *ngIf="col.prop === 'map_image'">
-                  <button class="p-1" nbButton ghost status="info" (click)="openMapModuleImage(row)">
-                    <nb-icon icon="link-outline" pack="eva" size="tiny"></nb-icon>
-                  </button>
-                </ng-container>
                 <ng-container *ngIf="col.prop ==='action_btn'" class="text-right">
                   <div>
-                    <button class="p-1" nbButton status="info" ghost title="{{ 'common.edit' | translate}}"
+                    <button class="p-1" nbButton status="info" ghost title="{{ 'common.approval' | translate}}"
                             (click)="editUsers(row)">
-                      <nb-icon icon="edit-outline" pack="eva" size="tiny"></nb-icon>
+                      <nb-icon icon="checkmark-square-outline" pack="eva" size="tiny"></nb-icon>
                     </button>
-                    <button class="p-1" nbButton status="danger" ghost title="{{ 'common.delete' | translate }}"
+                    <button class="p-1" nbButton status="danger" ghost title="{{ 'common.refuse' | translate }}"
+                            (click)="refuse(row)">
+                      <nb-icon icon="close-square-outline" pack="eva" size="tiny"></nb-icon>
+                    </button>
+                      <button class="p-1" nbButton status="danger" ghost title="{{ 'common.delete' | translate }}"
                             (click)="deleteUsers(row)">
                       <nb-icon icon="trash-2-outline" pack="eva" size="tiny"></nb-icon>
                     </button>
