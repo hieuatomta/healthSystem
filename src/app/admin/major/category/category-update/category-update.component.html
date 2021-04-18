@@ -12,15 +12,15 @@
     <form [formGroup]="inputSize">
       <div class="mb-4">
         <div class="row">
-          <div class="col-lg-6 form-group">
-            <label class="label">
-              {{ 'common.table.item_category_code' | translate }} <span style="color: red">(*)</span>
-            </label>
-            <input class="custom-border" type="text" formControlName="code" nbInput fullWidth trim="blur"
-                   [ngClass]="{'status-danger': this.inputSize.get('code').touched && this.inputSize.get('code').errors}">
-            <ngx-inline-message [message]="'common.table.item_category_code'|translate"
-                                [formName]="inputSize.get('code')"></ngx-inline-message>
-          </div>
+<!--          <div class="col-lg-6 form-group">-->
+<!--            <label class="label">-->
+<!--              {{ 'common.table.item_category_code' | translate }} <span style="color: red">(*)</span>-->
+<!--            </label>-->
+<!--            <input class="custom-border" type="text" formControlName="code" nbInput fullWidth trim="blur"-->
+<!--                   [ngClass]="{'status-danger': this.inputSize.get('code').touched && this.inputSize.get('code').errors}">-->
+<!--            <ngx-inline-message [message]="'common.table.item_category_code'|translate"-->
+<!--                                [formName]="inputSize.get('code')"></ngx-inline-message>-->
+<!--          </div>-->
 
           <div class="col-lg-6 form-group">
             <label class="label">

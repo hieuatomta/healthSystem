@@ -39,9 +39,9 @@ export class ProductsService {
   }
 
 
-  public doSearch1(req?: any, body?: any): Observable<any> {
+  public doSearch1(req?: any, code?: any): Observable<any> {
     const options = createRequestOption(req);
-    return this.http.get<any[]>(`${environment.apiUrl}/client/news`, {
+    return this.http.get<any[]>(`${environment.apiUrl}/client/news-by-code`, {
       params: options,
       observe: 'response'
     });

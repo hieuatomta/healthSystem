@@ -183,7 +183,7 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
       id: 3,
       parenID: 0,
       tendulieu: 'Tin tức',
-      link: 'tin-tuc',
+      link: 'tin-tuc/tin-tuc-noi-bat',
       check: true
     }, {
       id: 4,
@@ -213,12 +213,14 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
       id: 8,
       parenID: 3,
       tendulieu: 'Tin tức sự kiện',
+      link: 'tin-tuc/tin-tuc-su-kien',
       check: false
     },
     {
       id: 9,
       parenID: 3,
       tendulieu: 'Y học thưởng thức',
+      link: 'tin-tuc/y-hoc-thuong-thuong',
       check: false
     },
     {
@@ -237,47 +239,6 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
       tendulieu: 'Lịch sử bệnh viện',
       check: false
     }
-    // {
-    //   id: 9,
-    //   parenID: 0,
-    //   tendulieu: 'lv1',
-    //   check: true
-    // }, {
-    //   id: 10,
-    //   parenID: 0,
-    //   tendulieu: 'lv1',
-    //   check: false
-    // }, {
-    //   id: 11,
-    //   parenID: 0,
-    //   tendulieu: 'lv1',
-    //   check: false
-    // }, {
-    //   id: 12,
-    //   parenID: 0,
-    //   tendulieu: 'lv1',
-    //   check: false
-    // }, {
-    //   id: 13,
-    //   parenID: 9,
-    //   tendulieu: 'lv2',
-    //   check: false
-    // }, {
-    //   id: 14,
-    //   parenID: 8,
-    //   tendulieu: 'lv4',
-    //   check: false
-    // }, {
-    //   id: 15,
-    //   parenID: 8,
-    //   tendulieu: 'lv4',
-    //   check: false
-    // }, {
-    //   id: 16,
-    //   parenID: 8,
-    //   tendulieu: 'lv4',
-    //   check: false
-    // }
   ];
 
   dequy(parent, level, a) {

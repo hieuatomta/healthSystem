@@ -1,4 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ProductsService} from '../../@core/services/products.service';
 
 declare var $: any;
 
@@ -10,6 +12,21 @@ declare var $: any;
 })
 export class BlogDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
+  }
+  key: any;
+  key1: any;
+
+  constructor(private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private productsService: ProductsService,
+              private route: ActivatedRoute) {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      console.log(params);
+      this.key = params['key'];
+      this.key1 = params['key1'];
+      console.log(this.key)
+      console.log(this.key1)
+    });
   }
 
   ngOnInit(): void {

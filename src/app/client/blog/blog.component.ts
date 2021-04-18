@@ -1,8 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {LoginService} from '../../@core/services/login.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
-import {ToastrService} from '../../@core/mock/toastr-service';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ProductsService} from '../../@core/services/products.service';
+import {HttpHeaders} from '@angular/common/http';
 
 declare var $: any;
 
@@ -21,13 +20,49 @@ export class BlogComponent implements OnInit, OnDestroy {
     // console.log("sa");
   }
 
+  key: any;
+
 
   constructor(private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private productsService: ProductsService,
               private route: ActivatedRoute) {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      console.log(params);
+      this.key = params['key'];
+    });
+  }
 
+  arr = [];
+  onSuccess(data: any | null, headers: HttpHeaders, page: number): void {
+    // this.page.count = data.totalPages;
+    // this.page.offset = page || 0;
+    this.arr = data.list;
+    console.log(data);
+    console.log(this.arr)
+    // this.rows = data.list || [];
+    // console.log(this.rows);
+    // this.obj = this.rows[0];
+    // this.inputForm.get('id').setValue(this.rows[0]?.id);
+    // this.inputForm.get('cost').setValue(this.rows[0]?.cost);
+    // this.inputForm.get('name').setValue(this.rows[0]?.name);
+    // this.inputForm.get('imageLink').setValue(this.rows[0]?.DS_Image[0].imageLink);
   }
 
   ngOnInit(): void {
+
+    this.productsService.doSearch1({
+      page: 0,
+      page_size: 10,
+      code: this.key
+    }).subscribe(res => {
+        this.onSuccess(res.body.data, res.headers, 0);
+        // this.loading = false;
+      },
+      (error) => {
+        // this.loading = false;
+      });
+
 
     const $topeContainer = $('.isotope-grid');
     const $filter = $('.filter-tope-group');
@@ -37,9 +72,7 @@ export class BlogComponent implements OnInit, OnDestroy {
         const filterValue = $(this).attr('data-filter');
         $topeContainer.isotope({filter: filterValue});
       });
-
     });
-
     // init Isotope
     $(window).on('load', function () {
       const $grid = $topeContainer.each(function () {

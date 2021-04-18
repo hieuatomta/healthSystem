@@ -15,7 +15,7 @@
         </div>
 
         <label class="btn btn-default">
-          <input type="file" accept="image/*" (change)="selectFile($event)"/>
+          <input type="file" accept="image/*" (change)="selectFile($event)" multiple/>
         </label>
 
         <button class="btn btn-success" [disabled]="canUpdate" (click)="upload()">

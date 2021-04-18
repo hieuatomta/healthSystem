@@ -30,6 +30,8 @@ import {SearchFilterComponent} from './search-filter/search-filter.component';
 import {ListProductComponent} from './list-product/list-product.component';
 import {JwPaginationModule} from 'jw-angular-pagination';
 import {NgSelectModule} from '@ng-select/ng-select';
+import {BlogComponent} from './blog/blog.component';
+import {BlogDetailComponent} from './blog-detail/blog-detail.component';
 
 
 @NgModule({
@@ -60,6 +62,8 @@ import {NgSelectModule} from '@ng-select/ng-select';
   declarations: [
     SearchFilterComponent,
     ClientComponent,
+    BlogComponent,
+    BlogDetailComponent,
     HomeClientComponent,
     ShopingCartComponent,
     AboutComponent,

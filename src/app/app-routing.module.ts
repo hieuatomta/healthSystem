@@ -1,6 +1,5 @@
 import {ExtraOptions, RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
-import {HomeClientComponent} from './client/home_client/home-client.component';
 import {AuthGuardService} from './@core/mock/auth-guard.service';
 import {AuthGuardAuthsService} from './@core/mock/auth-guard-auths.service';
 
@@ -26,8 +25,8 @@ export const routes: Routes = [
     loadChildren: () => import('./client/client.module')
       .then(m => m.ClientModule),
   },
-  { path: '', redirectTo: 'admin', pathMatch: 'full' },
-  { path: '**', redirectTo: 'admin' },
+  {path: '', redirectTo: 'admin', pathMatch: 'full'},
+  {path: '**', redirectTo: 'admin'},
 ];
 
 const config: ExtraOptions = {

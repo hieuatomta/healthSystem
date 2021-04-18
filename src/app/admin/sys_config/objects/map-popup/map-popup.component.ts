@@ -139,11 +139,11 @@ export class MapPopupComponent implements OnInit {
       });
     }
     const data1 = {
-      idObjects: this.data.id,
+      objectsId: this.data.id,
       listAdd: listAdd
     };
     const data2 = {
-      idObjects: this.data.id,
+      objectsId: this.data.id,
       listUncheck: listUncheck
     };
     this.objectActionService.delete(data2).subscribe(

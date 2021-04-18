@@ -50,6 +50,7 @@ export class MapImageProductComponent implements OnInit {
   }
 
   protected onSuccess(data: any | null): void {
+    console.log(data);
     this.rows = data.DS_Image || [];
   }
 
@@ -86,8 +87,8 @@ export class MapImageProductComponent implements OnInit {
   }
 
   // upload ts
-  selectedFiles: FileList;
-  currentFile: File;
+  selectedFiles: any[];
+  currentFile: any;
   progress = 0;
   message = '';
 
@@ -97,7 +98,7 @@ export class MapImageProductComponent implements OnInit {
   upload() {
     this.progress = 0;
 
-    this.currentFile = this.selectedFiles.item(0);
+    this.currentFile = this.selectedFiles;
     if (this.data.id) {
       this.uploadService.upload({id: this.data.id}, this.currentFile).subscribe(
         (res) => {
@@ -119,9 +120,40 @@ export class MapImageProductComponent implements OnInit {
     // this.selectedFiles = null;
   }
 
+  urls = [];
+  files = [];
+  arr = [];
+
   selectFile(event) {
+
+    console.log(this.files);
+    console.log(this.rows);
     if (event !== null) {
-      this.selectedFiles = event.target.files;
+      if (event.target.files && event.target.files[0]) {
+        const filesAmount = event.target.files.length;
+        for (let i = 0; i < filesAmount; i++) {
+          this.files.push(event.target.files);
+          const reader = new FileReader();
+          const obj = {
+            id: null,
+            imageLink: null,
+            name: null,
+            newsId: null,
+            status: null,
+            updateTime: null,
+          };
+          obj.name = this.removeVietnameseTones(event.target.files[i].name);
+          reader.onload = (event1: any) => {
+            obj.imageLink = event1.target.result;
+            this.urls.push(event1.target.result);
+          };
+          this.arr.push(obj);
+          reader.readAsDataURL(event.target.files[i]);
+        }
+        this.rows = this.arr;
+        this.rows = [...this.rows];
+      }
+      this.selectedFiles = this.arr;
     } else {
       this.canUpdate = true;
       this.selectedFiles = null;

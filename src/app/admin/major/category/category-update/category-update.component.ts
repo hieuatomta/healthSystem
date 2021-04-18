@@ -28,7 +28,6 @@ export class CategoryUpdateComponent implements OnInit {
     this.inputSize = new FormGroup({
       id: new FormControl(this.data?.id, []),
       name: new FormControl(null, [Validators.required]),
-      code: new FormControl(null, [Validators.required]),
       description: new FormControl(null, []),
       status: new FormControl(null, [Validators.required])
     });

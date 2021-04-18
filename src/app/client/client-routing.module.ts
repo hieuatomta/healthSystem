@@ -1,11 +1,8 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {HomeClientComponent} from './home_client/home-client.component';
-import {ShopingCartComponent} from './shoping-cart/shoping-cart.component';
 import {AboutComponent} from './about/about.component';
 import {ContactComponent} from './contact/contact.component';
-import {ProductDetailComponent} from './product-detail/product-detail.component';
-import {ProductComponent} from './products/product.component';
 import {ClientComponent} from './client.component';
 import {BlogComponent} from './blog/blog.component';
 import {BlogDetailComponent} from './blog-detail/blog-detail.component';
@@ -21,37 +18,21 @@ const routes: Routes = [
         component: HomeClientComponent,
       },
       {
-        path: 'tin-tuc',
+        path: 'tin-tuc/:key',
         component: BlogComponent,
       },
       {
-        path: 'tin-tuc-key',
+        path: 'chi-tiet-tin-tuc/:key',
         component: BlogDetailComponent,
-      },
-      {
-        path: 'thanh-toan',
-        component: ShopingCartComponent,
       },
       {
         path: 've-chung-toi',
         component: AboutComponent,
       },
       {
-        path: 'danh-sach-san-pham',
-        component: ProductComponent,
-      },
-      {
         path: 'lien-he',
         component: ContactComponent,
       },
-      {
-        path: 'product-detail/:key',
-        component: ProductDetailComponent,
-      },
-      // {
-      //   path: 'chi-tiet/:key',
-      //   component: ProductDetailComponent,
-      // },
       {
         path: '',
         redirectTo: 'trang-chu',
