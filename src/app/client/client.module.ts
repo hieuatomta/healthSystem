@@ -32,6 +32,9 @@ import {JwPaginationModule} from 'jw-angular-pagination';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {BlogComponent} from './blog/blog.component';
 import {BlogDetailComponent} from './blog-detail/blog-detail.component';
+import {ListCategoryComponent} from './listCategory/listCategory.component';
+import {RecentPostComponent} from './recent-post/recent-post.component';
+import { NewsLetterComponent } from './news-letter/news-letter.component';
 
 
 @NgModule({
@@ -70,7 +73,10 @@ import {BlogDetailComponent} from './blog-detail/blog-detail.component';
     ContactComponent,
     ProductDetailComponent,
     ListProductComponent,
-    ProductComponent
+    ProductComponent,
+    ListCategoryComponent,
+    RecentPostComponent,
+    NewsLetterComponent,
   ],
   providers: [
     {

@@ -25,6 +25,14 @@ export class CategoriesService {
     });
   }
 
+  public doSearchByClient(req?: any): Observable<any> {
+    const options = createRequestOption(req);
+    return this.http.get<any[]>(`${environment.apiUrl}/client/categories`, {
+      params: options,
+      observe: 'response'
+    });
+  }
+
   public update(data: any): Observable<any> {
     return this.http.put<any>(`${environment.apiUrl}/categories`, data, {
       observe: 'response'

@@ -91,10 +91,15 @@
                             (click)="refuse(row)">
                       <nb-icon icon="close-square-outline" pack="eva" size="tiny"></nb-icon>
                     </button>
+                    <button class="p-1" nbButton status="info" ghost title="{{ 'common.highlights' | translate }}"
+                            (click)="deleteUsers(row)">
+                      <nb-icon icon="done-all-outline" pack="eva" size="tiny"></nb-icon>
+                    </button>
                       <button class="p-1" nbButton status="danger" ghost title="{{ 'common.delete' | translate }}"
                             (click)="deleteUsers(row)">
                       <nb-icon icon="trash-2-outline" pack="eva" size="tiny"></nb-icon>
                     </button>
+
                   </div>
                 </ng-container>
               </ng-template>

@@ -1,18 +1,18 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ProductsService} from '../../@core/services/products.service';
-import {HttpHeaders} from '@angular/common/http';
 import {CategoriesService} from '../../@core/services/categories.service';
+import {HttpHeaders} from '@angular/common/http';
 
 declare var $: any;
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  selector: 'ngx-home-client',
-  styleUrls: ['./blog.component.scss'],
-  templateUrl: './blog.component.html',
+  selector: 'ngx-recent-post-client',
+  styleUrls: ['./recent-post.component.scss'],
+  templateUrl: './recent-post.component.html',
 })
-export class BlogComponent implements OnInit, OnDestroy {
+export class RecentPostComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
 
@@ -28,33 +28,27 @@ export class BlogComponent implements OnInit, OnDestroy {
               private productsService: ProductsService,
               private categoriesService: CategoriesService,
               private route: ActivatedRoute) {
-    this.activatedRoute.params.subscribe((params: Params) => {
-      console.log(params);
-      this.key = params['key'];
-      this.search();
-    });
-  }
-
-  search() {
     this.productsService.doSearch1({
       page: 0,
       page_size: 10,
-      code: this.key
+      code: "tin-tuc-gan-day"
     }).subscribe(res => {
         this.onSuccess(res.body.data, res.headers, 0);
       },
       (error) => {
       });
+
   }
 
   arr = [];
-  arrCategories = [];
 
   onSuccess(data: any | null, headers: HttpHeaders, page: number): void {
+    console.log(data.list);
     this.arr = data.list;
   }
 
   ngOnInit(): void {
+
     const $topeContainer = $('.isotope-grid');
     const $filter = $('.filter-tope-group');
     // filter items on button click

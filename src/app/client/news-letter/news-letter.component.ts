@@ -1,18 +1,17 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ProductsService} from '../../@core/services/products.service';
-import {HttpHeaders} from '@angular/common/http';
 import {CategoriesService} from '../../@core/services/categories.service';
 
 declare var $: any;
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  selector: 'ngx-home-client',
-  styleUrls: ['./blog.component.scss'],
-  templateUrl: './blog.component.html',
+  selector: 'ngx-news-letter-client',
+  styleUrls: ['./news-letter.component.scss'],
+  templateUrl: './news-letter.component.html',
 })
-export class BlogComponent implements OnInit, OnDestroy {
+export class NewsLetterComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
 
@@ -28,33 +27,25 @@ export class BlogComponent implements OnInit, OnDestroy {
               private productsService: ProductsService,
               private categoriesService: CategoriesService,
               private route: ActivatedRoute) {
-    this.activatedRoute.params.subscribe((params: Params) => {
-      console.log(params);
-      this.key = params['key'];
-      this.search();
-    });
-  }
-
-  search() {
-    this.productsService.doSearch1({
-      page: 0,
-      page_size: 10,
-      code: this.key
-    }).subscribe(res => {
-        this.onSuccess(res.body.data, res.headers, 0);
+    this.categoriesService.doSearchByClient({
+      status: 1,
+    }).subscribe(
+      (res) => {
+        console.log(res.body.data);
+        this.arrCategories = res.body.data.list;
       },
       (error) => {
-      });
+        // this.isLoad = false;
+      },
+      // () => this.isLoad = false,
+    );
+
   }
 
-  arr = [];
   arrCategories = [];
 
-  onSuccess(data: any | null, headers: HttpHeaders, page: number): void {
-    this.arr = data.list;
-  }
-
   ngOnInit(): void {
+
     const $topeContainer = $('.isotope-grid');
     const $filter = $('.filter-tope-group');
     // filter items on button click

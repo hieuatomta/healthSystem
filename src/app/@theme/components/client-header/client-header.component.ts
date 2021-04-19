@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
+import {CategoriesService} from '../../../@core/services/categories.service';
 
 declare const jQuery: any;
 
@@ -13,6 +14,7 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
   size = 0;
   obj = null;
   totalPrice = null;
+
   openOrder() {
     const data = JSON.parse(localStorage.getItem('list_order'));
     console.log(data);
@@ -20,15 +22,8 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
       this.obj = [];
     } else {
       this.obj = data.data;
-      // for (let i = 0; i < this?.obj.length; i++) {
-      //   console.log(this.obj[i].amount);
-      //   this.size += this.obj[i].amount;
-      // }
       this.size = data.totalOrder;
-      this.totalPrice = data.totalPrice.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
-      // for (let i = 0; i < this.obj?.length; i++) {
-      //
-      // }
+      this.totalPrice = data.totalPrice.toLocaleString('it-IT', {style: 'currency', currency: 'VND'});
     }
 
   }
@@ -50,8 +45,9 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
     } else {
       this.obj = data.data;
     }
+    this.search();
     // this.size = this.obj?.length;
-    this.menudacap = this.dequy(0, 0, 1);
+    console.log(this.tree);
     (function ($) {
       let posWrapHeader;
       /*==================================================================
@@ -209,31 +205,13 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
       tendulieu: 'Liên lạc',
       link: 'lien-he',
       check: false
-    }, {
-      id: 8,
-      parenID: 3,
-      tendulieu: 'Tin tức sự kiện',
-      link: 'tin-tuc/tin-tuc-su-kien',
-      check: false
     },
     {
-      id: 9,
-      parenID: 3,
-      tendulieu: 'Y học thưởng thức',
-      link: 'tin-tuc/y-hoc-thuong-thuong',
-      check: false
-    },
-    {
-      id: 10,
-      parenID: 3,
-      tendulieu: 'Ý kiến khách hàng',
-      check: false
-    },  {
       id: 11,
       parenID: 2,
       tendulieu: 'Ban giám đốc',
       check: false
-    },  {
+    }, {
       id: 12,
       parenID: 2,
       tendulieu: 'Lịch sử bệnh viện',
@@ -286,9 +264,46 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
   }
 
   constructor(private router: Router,
+              private categoriesService: CategoriesService,
   ) {
 
   }
 
+  search() {
+    this.categoriesService.doSearchByClient({
+      status: 1,
+    }).subscribe(
+      (res) => {
+        console.log(res.body.data);
+        for (let i = 0; i < res.body.data.list?.length; i++) {
+          const obj = {
+            id: null,
+            parenID: 3,
+            tendulieu: null,
+            link: null,
+            check: false
+          };
+          obj.id = 999 + i;
+          obj.tendulieu = res.body.data.list[i].name;
+          obj.link = 'tin-tuc/' + res.body.data.list[i].code;
+          this.tree.push(obj);
+        }
+        console.log(this.tree)
+        this.menudacap = this.dequy(0, 0, 1);
+
+        // this.onSuccess(res.body.data, res.headers, pageToLoad);
+      },
+      (error) => {
+        // this.isLoad = false;
+      },
+      // () => this.isLoad = false,
+    );
+  }
+
+  // protected onSuccess(data: any | null, headers: HttpHeaders, page: number): void {
+  //   this.page.count = data.count;
+  //   this.page.offset = page || 0;
+  //   this.rows = data.list || [];
+  // }
 
 }

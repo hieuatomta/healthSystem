@@ -45,7 +45,7 @@ export class CategoryUpdateComponent implements OnInit {
     private toastr: NbToastrService,
     private translate: TranslateService,
     public ref: NbDialogRef<CategoryUpdateComponent>,
-    private suppliersService: CategoriesService) {
+    private categoriesService: CategoriesService) {
   }
 
 
@@ -55,7 +55,7 @@ export class CategoryUpdateComponent implements OnInit {
     if (this.inputSize.valid) {
       this.loading = true;
       if (this.data == null) {
-        this.suppliersService.insert(this.inputSize.value).subscribe(
+        this.categoriesService.insert(this.inputSize.value).subscribe(
           (value) => this.ref.close(value),
           (error) => {
             this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
@@ -64,7 +64,7 @@ export class CategoryUpdateComponent implements OnInit {
           () => this.loading = false
         );
       } else {
-        this.suppliersService.update(this.inputSize.value).subscribe(
+        this.categoriesService.update(this.inputSize.value).subscribe(
           (value) => this.ref.close(value),
           (error) => {
             this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));

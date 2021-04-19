@@ -19,11 +19,6 @@ import {CategoriesService} from '../../../@core/services/categories.service';
 export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     this.search(0);
-    // this.sizeService.doSearch({}).subscribe(res => {
-    //   console.log(res), err => {
-    //     console.log(err);
-    //   };
-    // });
   }
 
   constructor(
@@ -31,7 +26,7 @@ export class CategoryComponent implements OnInit {
     private translate: TranslateService,
     private toastrService: NbToastrService,
     private userService: UsersService,
-    private suppliersService: CategoriesService,
+    private categoriesService: CategoriesService,
     private dialogService: NbDialogService) {
   }
 
@@ -105,7 +100,7 @@ export class CategoryComponent implements OnInit {
   search(pageToLoad: number) {
     this.isLoad = true;
     this.page.offset = pageToLoad;
-    this.suppliersService.doSearch({
+    this.categoriesService.doSearch({
       page: this.page.offset,
       page_size: this.page.limit,
       name: this.inputForm.get("name").value,
@@ -133,7 +128,7 @@ export class CategoryComponent implements OnInit {
     }).onClose.subscribe(res => {
       if (res) {
         this.isLoad = true;
-        this.suppliersService.delete(data.id).subscribe(() => {
+        this.categoriesService.delete(data.id).subscribe(() => {
           this.toastrService.success(this.translate.instant('category.delete_success'),
             this.translate.instant('common.title_notification'));
           this.search(0);
