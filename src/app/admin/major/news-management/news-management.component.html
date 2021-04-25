@@ -95,7 +95,7 @@
                     <nb-icon icon="link-outline" pack="eva" size="tiny"></nb-icon>
                   </button>
                 </ng-container>
-                <ng-container *ngIf="col.prop ==='action_btn'" class="text-right">
+                <ng-container *ngIf="col.prop ==='action_btn' && row.status !==0" class="text-right">
                   <div>
                     <button class="p-1" nbButton status="info" ghost title="{{ 'common.edit' | translate}}"
                             (click)="editUsers(row)">

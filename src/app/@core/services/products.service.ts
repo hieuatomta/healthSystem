@@ -30,6 +30,7 @@ export class ProductsService {
       observe: 'response'
     });
   }
+
   public doSearchAll(req?: any): Observable<any> {
     const options = createRequestOption(req);
     return this.http.get<any[]>(`${environment.apiUrl}/news-all`, {
@@ -58,6 +59,7 @@ export class ProductsService {
       observe: 'response'
     });
   }
+
   public newsRefuse(data: any): Observable<any> {
     return this.http.post <any>(`${environment.apiUrl}/news-refuse`, data, {
       observe: 'response'
@@ -67,6 +69,14 @@ export class ProductsService {
 
   delete(id: any): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}/news/${id}`);
+  }
+
+  highlights(id: any): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/news-highlights/${id}`);
+  }
+
+  offHighlights(id: any): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/news-off-highlights/${id}`);
   }
 
   public insertSizeColor(data: any): Observable<any> {

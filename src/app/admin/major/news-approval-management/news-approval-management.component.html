@@ -81,19 +81,26 @@
                 <ng-container *ngIf="col.prop ==='status'">
                   {{  'common.state.' + value | translate }}
                 </ng-container>
+                <ng-container *ngIf="col.prop ==='highlights' && row.highlights === 0">
+                  {{  'common.highlightsStatus.' + value | translate }}
+                </ng-container>
                 <ng-container *ngIf="col.prop ==='action_btn'" class="text-right">
                   <div>
-                    <button class="p-1" nbButton status="info" ghost title="{{ 'common.approval' | translate}}"
+                    <button *ngIf="row.status !== 0" class="p-1" nbButton status="info" ghost title="{{ 'common.approval' | translate}}"
                             (click)="editUsers(row)">
                       <nb-icon icon="checkmark-square-outline" pack="eva" size="tiny"></nb-icon>
                     </button>
-                    <button class="p-1" nbButton status="danger" ghost title="{{ 'common.refuse' | translate }}"
+                    <button *ngIf="row.status === 0" class="p-1" nbButton status="danger" ghost title="{{ 'common.refuse' | translate }}"
                             (click)="refuse(row)">
                       <nb-icon icon="close-square-outline" pack="eva" size="tiny"></nb-icon>
                     </button>
-                    <button class="p-1" nbButton status="info" ghost title="{{ 'common.highlights' | translate }}"
-                            (click)="deleteUsers(row)">
+                    <button *ngIf="row.highlights !== 0" class="p-1" nbButton status="info" ghost title="{{ 'common.highlights' | translate }}"
+                            (click)="highlightsNews(row)">
                       <nb-icon icon="done-all-outline" pack="eva" size="tiny"></nb-icon>
+                    </button>
+                    <button *ngIf="row.highlights === 0" class="p-1" nbButton status="danger" ghost title="{{ 'common.offHighlights' | translate }}"
+                            (click)="offHighlightsNews(row)">
+                      <nb-icon icon="close-circle-outline" pack="eva" size="tiny"></nb-icon>
                     </button>
                       <button class="p-1" nbButton status="danger" ghost title="{{ 'common.delete' | translate }}"
                             (click)="deleteUsers(row)">

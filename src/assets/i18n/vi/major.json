@@ -6,10 +6,14 @@
     "title_add": "Thêm mới tin tức",
     "title_edit": "Sửa thông tin tin tức",
     "title_delete": "Xác nhận xóa tin tức",
+    "title_highlights": "Xác nhận đặt thành tin tức nổi bật",
+    "title_offHighlights": "Xác nhận huỷ trạng thái tin tức nổi bật",
     "unknown_error": "Lỗi không xác định",
     "content_add_success": "Thêm tin tức thành công",
     "content_edit_success": "Sửa thông tin thành công",
-    "delete_success": "Xóa tin tức thành công"
+    "delete_success": "Xóa tin tức thành công",
+    "highlights_success": "Đặt tin tức nổi bật thành công",
+    "offHighlights_success": "Huỷ trạng thái tin tức nổi bật thành công"
   },
   "order": {
     "title": "Quản lý bán hàng",

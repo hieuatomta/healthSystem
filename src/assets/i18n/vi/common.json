@@ -24,6 +24,9 @@
       "1": "Đang đợi phê duyệt",
       "2": "Từ chối phê duyệt"
     },
+    "highlightsStatus": {
+      "0": "Tin tức nổi bật"
+    },
     "statusOrder": {
       "0": "Đã thanh toán",
       "1": "Thanh toán thất bại",
@@ -68,6 +71,7 @@
       "item_objects_popup": "Map action",
       "item_icon": "Icon",
       "item_contact": "Liên lạc",
+      "item_news_highlights": "Nổi bật",
       "item_order_code": "Mã phiếu bán",
       "item_news_code": "Mã tin tức",
       "item_news_title": "Tiêu đề",
@@ -106,6 +110,7 @@
     "save": "Lưu lại",
     "add": "Thêm",
     "highlights": "Nổi bật",
+    "offHighlights": "Bỏ trạng thái nổi bật",
     "cancel": "Huỷ bỏ",
     "edit": "Sửa",
     "delete": "Xóa",

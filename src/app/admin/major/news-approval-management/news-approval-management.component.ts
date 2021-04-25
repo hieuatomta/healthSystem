@@ -56,6 +56,7 @@ export class NewsApprovalManagementComponent implements OnInit {
     {name: 'common.table.item_news_name', prop: 'title', flexGrow: 1.5},
     {name: 'common.table.item_news_paren_object', prop: 'categoryName', flexGrow: 1},
     {name: 'common.table.item_news_users_name', prop: 'usersName', flexGrow: 1},
+    {name: 'common.table.item_news_highlights', prop: 'highlights', flexGrow: 1},
     {name: 'common.table.item_status', prop: 'status', flexGrow: 1},
     {name: 'common.table.item_reasonForRefusal', prop: 'reasonForRefusal', flexGrow: 1},
     {name: 'common.table.item_update_time', prop: 'updateTime', flexGrow: 1},
@@ -136,6 +137,50 @@ export class NewsApprovalManagementComponent implements OnInit {
         this.isLoad = true;
         this.productsService.delete(data.id).subscribe(() => {
           this.toastrService.success(this.translate.instant('news.delete_success'),
+            this.translate.instant('common.title_notification'));
+          this.search(0);
+          this.isLoad = false;
+        }, (err) => {
+          this.toastrService.success(err.message),
+            this.translate.instant('common.title_notification');
+          this.isLoad = false;
+        });
+      }
+    });
+  }
+  highlightsNews(data) {
+    this.dialogService.open(ConfirmDialogComponent, {
+      context: {
+        title: this.translate.instant('common.title_notification'),
+        message: this.translate.instant('news.title_highlights') + ' ' + data.name
+      },
+    }).onClose.subscribe(res => {
+      if (res) {
+        this.isLoad = true;
+        this.productsService.highlights(data.id).subscribe(() => {
+          this.toastrService.success(this.translate.instant('news.highlights_success'),
+            this.translate.instant('common.title_notification'));
+          this.search(0);
+          this.isLoad = false;
+        }, (err) => {
+          this.toastrService.success(err.message),
+            this.translate.instant('common.title_notification');
+          this.isLoad = false;
+        });
+      }
+    });
+  }
+  offHighlightsNews(data) {
+    this.dialogService.open(ConfirmDialogComponent, {
+      context: {
+        title: this.translate.instant('common.title_notification'),
+        message: this.translate.instant('news.title_offHighlights') + ' ' + data.name
+      },
+    }).onClose.subscribe(res => {
+      if (res) {
+        this.isLoad = true;
+        this.productsService.offHighlights(data.id).subscribe(() => {
+          this.toastrService.success(this.translate.instant('news.offHighlights_success'),
             this.translate.instant('common.title_notification'));
           this.search(0);
           this.isLoad = false;

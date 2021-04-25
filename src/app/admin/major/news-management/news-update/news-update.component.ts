@@ -89,9 +89,15 @@ export class NewsUpdateComponent implements OnInit {
 
     this.inputProduct = new FormGroup({
       id: new FormControl(this.data?.id, []),
+      code: new FormControl(this.data?.code, []),
       title: new FormControl(null, [Validators.required]),
       bodyChild: new FormControl(null, [Validators.required]),
       bodyNews: new FormControl(null, [Validators.required]),
+      description: new FormControl(this.data?.description, []),
+      reasonForRefusal: new FormControl(this.data?.reasonForRefusal, []),
+      status: new FormControl(this.data?.status, []),
+      numberOfViewer: new FormControl(this.data?.numberOfViewer, []),
+      highlights: new FormControl(this.data?.highlights, []),
       categoryId: new FormControl(null, [Validators.required]),
     });
     if (this.data) {
