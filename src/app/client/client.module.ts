@@ -35,6 +35,7 @@ import {BlogDetailComponent} from './blog-detail/blog-detail.component';
 import {ListCategoryComponent} from './listCategory/listCategory.component';
 import {RecentPostComponent} from './recent-post/recent-post.component';
 import { NewsLetterComponent } from './news-letter/news-letter.component';
+import {PdfViewerModule} from 'ng2-pdf-viewer';
 
 
 @NgModule({
@@ -56,11 +57,12 @@ import { NewsLetterComponent } from './news-letter/news-letter.component';
         RecaptchaFormsModule,
         ReactiveFormsModule,
         TranslateModule,
-      NbButtonModule,
+        NbButtonModule,
         SharedModule,
         SlideshowModule,
         NgbModule,
-        NgSelectModule
+        NgSelectModule,
+        PdfViewerModule
     ],
   declarations: [
     SearchFilterComponent,

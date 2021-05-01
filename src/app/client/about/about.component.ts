@@ -10,7 +10,9 @@ import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 export class AboutComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
+  pdfSrc = "assets/pdf/bvptw.pdf";
 
   ngOnInit(): void {
+    // pdfSrc =
   }
 }

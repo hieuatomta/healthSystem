@@ -185,19 +185,19 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
       id: 4,
       parenID: 0,
       tendulieu: 'Khám chữa bệnh',
-      link: 'danh-sach-san-pham',
+      // link: 'danh-sach-san-pham',
       check: false
     }, {
       id: 5,
       parenID: 0,
       tendulieu: 'Dịch vụ',
-      link: 'danh-sach-san-pham',
+      // link: 'danh-sach-san-pham',
       check: false
     }, {
       id: 6,
       parenID: 0,
       tendulieu: 'Đào taọ trực tuyến',
-      link: 've-chung-toi',
+      // link: 've-chung-toi',
       check: false
     }, {
       id: 7,
@@ -215,7 +215,8 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
       id: 12,
       parenID: 2,
       tendulieu: 'Lịch sử bệnh viện',
-      check: false
+      check: false,
+      link: 've-chung-toi'
     }
   ];
 

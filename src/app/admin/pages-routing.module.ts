@@ -56,6 +56,15 @@ const routes: Routes = [{
         .then(m => m.CategoryModule),
     },
     {
+      path: 'type-disease',
+      loadChildren: () => import('./major/type-disease/type-disease.module')
+        .then(m => m.TypeDiseaseModule),
+    }, {
+      path: 'symptom',
+      loadChildren: () => import('./major/type-symptom/type-symptom.module')
+        .then(m => m.TypeSymptomModule),
+    },
+    {
       path: 'products-selling',
       loadChildren: () => import('./major/products-selling/products-selling.module')
         .then(m => m.ProductsSellingModule),

@@ -44,6 +44,28 @@
     "delete_success": "Xóa Chủ đề thành công",
     "title_map_popup": "Chủ đề"
   },
+  "type_disease": {
+    "title": "Quản lý bệnh",
+    "title_add": "Thêm mới bệnh",
+    "title_edit": "Sửa bệnh",
+    "title_delete": "Xác nhận xóa bệnh",
+    "content_add_success": "Thêm bệnh thành công",
+    "content_edit_success": "Sửa bệnh thành công",
+    "message_delete": "Bạn có chắc muốn xóa bệnh",
+    "delete_success": "Xóa bệnh thành công",
+    "title_map_popup": "bệnhề"
+  },
+  "type_symptom": {
+    "title": "Quản lý triệu chứng",
+    "title_add": "Thêm mới triệu chứng",
+    "title_edit": "Sửa triệu chứng",
+    "title_delete": "Xác nhận xóa triệu chứng",
+    "content_add_success": "Thêm triệu chứng thành công",
+    "content_edit_success": "Sửa triệu chứng thành công",
+    "message_delete": "Bạn có chắc muốn xóa triệu chứng",
+    "delete_success": "Xóa triệu chứng thành công",
+    "title_map_popup": "bệnhề"
+  },
   "import_products": {
     "title": "Quản lý nhập hàng",
     "insert_btn": "Tạo mới phiếu nhập hàng",

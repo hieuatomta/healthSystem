@@ -31,6 +31,7 @@ import {NbDateFnsDateModule} from '@nebular/date-fns';
 import { NgxMaskModule } from 'ngx-mask';
 import {FacebookModule} from 'ngx-facebook';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {PdfViewerModule} from 'ng2-pdf-viewer';
 
 registerLocaleData(vi, 'vi-VI', viEt);
 
@@ -43,6 +44,7 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    PdfViewerModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
