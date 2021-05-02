@@ -10,6 +10,7 @@ import {SizeService} from '../../../@core/services/size.service';
 import {TypeSymptomUpdateComponent} from './type-symptom-update/type-symptom-update.component';
 import {CategoriesService} from '../../../@core/services/categories.service';
 import {TypeDiseaseService} from '../../../@core/services/type-disease.service';
+import {SymptomsService} from '../../../@core/services/symptoms.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -27,7 +28,7 @@ export class TypeSymptomComponent implements OnInit {
     private translate: TranslateService,
     private toastrService: NbToastrService,
     private userService: UsersService,
-    private typeDiseaseService: TypeDiseaseService,
+    private typeDiseaseService: SymptomsService,
     private dialogService: NbDialogService) {
   }
 
@@ -36,6 +37,15 @@ export class TypeSymptomComponent implements OnInit {
     {name: 'common.status.1', code: 1},
     {name: 'common.status.0', code: 0}
   ];
+
+  listType = [
+    {name: 'common.typeSymptom.0', code: 0},
+    {name: 'common.typeSymptom.1', code: 1},
+    {name: 'common.typeSymptom.2', code: 2},
+    {name: 'common.typeSymptom.3', code: 3},
+    {name: 'common.typeSymptom.4', code: 4}
+  ];
+
   rows: Object[];
   page = {
     limit: 5,
@@ -44,9 +54,8 @@ export class TypeSymptomComponent implements OnInit {
   };
   columns = [
     {name: 'common.table.item_number', prop: 'index', flexGrow: 0.3},
-    {name: 'common.table.item_type_symptom_code', prop: 'code', flexGrow: 1},
     {name: 'common.table.item_type_symptom_name', prop: 'name', flexGrow: 1.5},
-    {name: 'common.table.item_description', prop: 'description', flexGrow: 1.5},
+    {name: 'common.table.item_type_symptom_type', prop: 'type', flexGrow: 1},
     {name: 'common.table.item_status', prop: 'status', flexGrow: 1},
     {name: 'common.table.item_update_time', prop: 'updateTime', flexGrow: 1},
     {name: 'common.table.item_action', prop: 'action_btn', flexGrow: 1}
@@ -54,7 +63,7 @@ export class TypeSymptomComponent implements OnInit {
 
   inputForm = new FormGroup({
     name: new FormControl(null, []),
-    code: new FormControl(null, []),
+    type: new FormControl(null, []),
     updateTime: new FormControl(null, []),
     status: new FormControl(null, [])
   });
@@ -105,7 +114,7 @@ export class TypeSymptomComponent implements OnInit {
       page: this.page.offset,
       page_size: this.page.limit,
       name: this.inputForm.get("name").value,
-      code: this.inputForm.get("code").value,
+      type: this.inputForm.get("type").value,
       updateTime: this.inputForm.get("updateTime").value,
       status: this.inputForm.get("status").value,
     }).subscribe(

@@ -2,10 +2,10 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ToastrService} from '../../../../@core/mock/toastr-service';
 import {NbDialogRef, NbToastrService} from '@nebular/theme';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {SizeService} from '../../../../@core/services/size.service';
 import {TranslateService} from '@ngx-translate/core';
-import {CategoriesService} from '../../../../@core/services/categories.service';
+import {SymptomsService} from '../../../../@core/services/symptoms.service';
 import {TypeDiseaseService} from '../../../../@core/services/type-disease.service';
+import {HttpHeaders} from '@angular/common/http';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -16,21 +16,25 @@ import {TypeDiseaseService} from '../../../../@core/services/type-disease.servic
 export class TypeSymptomUpdateComponent implements OnInit {
   lstRole = [];
   listStatus = [
-    {name: 'common.status.1', code: 1},
-    {name: 'common.status.0', code: 0}
+    {name: 'common.typeSymptom.0', code: 0},
+    {name: 'common.typeSymptom.1', code: 1},
+    {name: 'common.typeSymptom.2', code: 2},
+    {name: 'common.typeSymptom.3', code: 3},
+    {name: 'common.typeSymptom.4', code: 4}
   ];
   inputSize: any;
   itemRoles: any;
   loading = false;
   title: string;
   data: any;
+  isLoad: boolean;
 
   ngOnInit(): void {
     this.inputSize = new FormGroup({
       id: new FormControl(this.data?.id, []),
       name: new FormControl(null, [Validators.required]),
-      code: new FormControl(null, [Validators.required]),
-      description: new FormControl(null, []),
+      type: new FormControl(null, [Validators.required]),
+      diseaseId: new FormControl(null, []),
       status: new FormControl(null, [Validators.required])
     });
     this.inputSize.get('status').setValue(true);
@@ -38,16 +42,46 @@ export class TypeSymptomUpdateComponent implements OnInit {
       this.inputSize.patchValue(this.data);
       const status = this.data.status === 1 ? true : false;
       this.inputSize.get('status').patchValue(status);
-    };
+    }
+    ;
+    this.isLoad = true;
+    this.typeDiseaseService.doSearch({
+      status: 1,
+    }).subscribe(
+      (res) => {
+        this.onSuccess(res.body.data, res.headers);
+      },
+      (error) => {
+        this.isLoad = false;
+      },
+      () => this.isLoad = false,
+    );
   };
 
+  rows: any;
+
+  protected onSuccess(data: any | null, headers: HttpHeaders): void {
+    this.rows = data.list || [];
+    console.log(this.rows);
+  }
+
+  isCheckType = false;
+
+  update_select() {
+    if (this.inputSize.get('type').value !== 0) {
+      this.isCheckType = true;
+    } else {
+      this.isCheckType = false;
+    }
+  }
 
   constructor(
     private toastr1: ToastrService,
     private toastr: NbToastrService,
     private translate: TranslateService,
     public ref: NbDialogRef<TypeSymptomUpdateComponent>,
-    private typeDiseaseService: TypeDiseaseService) {
+    private typeDiseaseService: TypeDiseaseService,
+    private symptomsService: SymptomsService) {
   }
 
 
@@ -57,7 +91,7 @@ export class TypeSymptomUpdateComponent implements OnInit {
     if (this.inputSize.valid) {
       this.loading = true;
       if (this.data == null) {
-        this.typeDiseaseService.insert(this.inputSize.value).subscribe(
+        this.symptomsService.insert(this.inputSize.value).subscribe(
           (value) => this.ref.close(value),
           (error) => {
             this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
@@ -66,7 +100,7 @@ export class TypeSymptomUpdateComponent implements OnInit {
           () => this.loading = false
         );
       } else {
-        this.typeDiseaseService.update(this.inputSize.value).subscribe(
+        this.symptomsService.update(this.inputSize.value).subscribe(
           (value) => this.ref.close(value),
           (error) => {
             this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));

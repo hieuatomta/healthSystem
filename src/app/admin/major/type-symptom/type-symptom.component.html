@@ -12,17 +12,25 @@
         <form [formGroup]="inputForm">
           <div class="mb-4">
             <div class="row">
-              <div class="col-lg-4 form-group">
-                <label class="label">
-                  {{ 'common.table.item_type_symptom_code' | translate }}
-                </label>
-                <input (keyup.enter)="search(0)" nbInput fullWidth formControlName="code">
-              </div>
+
               <div class="col-lg-4 form-group">
                 <label class="label">
                   {{ 'common.table.item_type_symptom_name' | translate }}
                 </label>
                 <input (keyup.enter)="search(0)" nbInput fullWidth formControlName="name">
+              </div>
+              <div class="col-lg-4 form-group">
+                <label class="label">
+                  {{ 'common.table.item_type_symptom_type' | translate }}
+                </label>
+                <ng-select fullWidth appendTo="body"
+                           placeholder="{{'common.placeHolder' |translate}}"
+                           notFoundText="{{'common.notFoundText' |translate}}"
+                           clearAllText="{{'common.clearAllText' |translate}}"
+                           formControlName="type">
+                  <ng-option *ngFor="let item of listType" [value]="item.code"> {{ item.name | translate }}
+                  </ng-option>
+                </ng-select>
               </div>
               <div class="col-lg-4 form-group">
                 <label class="label">
@@ -68,7 +76,7 @@
                   {{ page.offset * page.limit + rowIndex + 1 }}
                 </ng-container>
                 <ng-container
-                  *ngIf="col.prop ==='code' || col.prop ==='name' || col.prop ==='description'"
+                  *ngIf="col.prop ==='name' || col.prop ==='description'"
                   class="text-right">
                   <span class="row-data-show"
                         title="{{value}}">{{value.length > 50 ? value.substring(0, 50).concat('...') : value}}</span>
@@ -78,6 +86,8 @@
                 </ng-container>
                 <ng-container *ngIf="col.prop ==='status'">
                   {{  'common.status.' + value | translate }}
+                </ng-container> <ng-container *ngIf="col.prop ==='type'">
+                  {{  'common.typeSymptom.' + value | translate }}
                 </ng-container>
                 <ng-container *ngIf="col.prop ==='action_btn'" class="text-right">
                   <div>

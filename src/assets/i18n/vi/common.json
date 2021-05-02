@@ -27,10 +27,12 @@
     "highlightsStatus": {
       "0": "Tin tức nổi bật"
     },
-    "statusOrder": {
-      "0": "Đã thanh toán",
-      "1": "Thanh toán thất bại",
-      "2": "Đang thực hiện thanh toán"
+    "typeSymptom": {
+      "0": "Dấu hiệu chung",
+      "1": "Dấu hiệu nhận biết",
+      "2": "Lâm sàn",
+      "3": "Cận lâm sàn",
+      "4": "Giai đoạn"
     },
     "table": {
       "item_number": "STT",
@@ -65,6 +67,7 @@
       "item_type_disease_code": "Mã bệnh",
       "item_type_disease_name": "Tên bệnh",
       "item_type_symptom_code": "Mã triệu chứng",
+      "item_type_symptom_type": "Chẩn đoán",
       "item_type_symptom_name": "Tên triệu chứng",
       "item_color_code": "Mã màu",
       "item_color_name": "Tên màu",
