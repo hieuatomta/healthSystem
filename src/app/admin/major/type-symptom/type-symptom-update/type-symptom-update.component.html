@@ -36,12 +36,28 @@
                        placeholder="{{'common.placeHolder' |translate}}"
                        notFoundText="{{'common.notFoundText' |translate}}"
                        clearAllText="{{'common.clearAllText' |translate}}"
-                       formControlName="diseaseId">
-              <ng-option *ngFor="let item of rows" [value]="item.code"> {{ item.name | translate }}
+                       formControlName="typediseaseId">
+              <ng-option *ngFor="let item of rows" [value]="item.id"> {{ item.name | translate }}
               </ng-option>
             </ng-select>
             <ngx-inline-message [message]="'common.table.item_type_disease_name'|translate"
-                                [formName]="inputSize.get('diseaseId')"></ngx-inline-message>
+                                [formName]="inputSize.get('typediseaseId')"></ngx-inline-message>
+          </div>
+
+          <div *ngIf="isCheckType3" class="col-lg-6 form-group">
+            <label class="label">
+              {{ 'common.table.item_test_disease_name' | translate }}  <span style="color: red">(*)</span>
+            </label>
+            <ng-select fullWidth appendTo="body"
+                       placeholder="{{'common.placeHolder' |translate}}"
+                       notFoundText="{{'common.notFoundText' |translate}}"
+                       clearAllText="{{'common.clearAllText' |translate}}"
+                       formControlName="testdiseaseId">
+              <ng-option *ngFor="let item of rows" [value]="item.id"> {{ item.name | translate }}
+              </ng-option>
+            </ng-select>
+            <ngx-inline-message [message]="'common.table.item_test_disease_name'|translate"
+                                [formName]="inputSize.get('testdiseaseId')"></ngx-inline-message>
           </div>
 
           <div class="col-lg-6 form-group">

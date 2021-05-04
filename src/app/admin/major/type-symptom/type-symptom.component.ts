@@ -104,6 +104,7 @@ export class TypeSymptomComponent implements OnInit {
   protected onSuccess(data: any | null, headers: HttpHeaders, page: number): void {
     this.page.count = data.count;
     this.page.offset = page || 0;
+    console.log(data.list)
     this.rows = data.list || [];
   }
 

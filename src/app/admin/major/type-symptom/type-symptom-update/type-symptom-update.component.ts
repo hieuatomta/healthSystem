@@ -34,7 +34,8 @@ export class TypeSymptomUpdateComponent implements OnInit {
       id: new FormControl(this.data?.id, []),
       name: new FormControl(null, [Validators.required]),
       type: new FormControl(null, [Validators.required]),
-      diseaseId: new FormControl(null, []),
+      typediseaseId: new FormControl(null, []),
+      testdiseaseId: new FormControl(null, []),
       status: new FormControl(null, [Validators.required])
     });
     this.inputSize.get('status').setValue(true);
@@ -56,6 +57,7 @@ export class TypeSymptomUpdateComponent implements OnInit {
       },
       () => this.isLoad = false,
     );
+    this.update_select();
   };
 
   rows: any;
@@ -66,12 +68,20 @@ export class TypeSymptomUpdateComponent implements OnInit {
   }
 
   isCheckType = false;
+  isCheckType3 = false;
 
   update_select() {
-    if (this.inputSize.get('type').value !== 0) {
+    console.log(this.inputSize.get('type').value);
+    if (this.inputSize.get('type').value !== 0 && this.inputSize.get('type').value !== null) {
       this.isCheckType = true;
+      if (this.inputSize.get('type').value === 3) {
+        this.isCheckType3 = true;
+      } else {
+        this.isCheckType3 = false;
+      }
     } else {
       this.isCheckType = false;
+      this.isCheckType3 = false;
     }
   }
 
