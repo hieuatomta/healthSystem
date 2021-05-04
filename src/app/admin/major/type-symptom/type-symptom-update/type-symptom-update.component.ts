@@ -6,6 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {SymptomsService} from '../../../../@core/services/symptoms.service';
 import {TypeDiseaseService} from '../../../../@core/services/type-disease.service';
 import {HttpHeaders} from '@angular/common/http';
+import {TypeTestService} from '../../../../@core/services/type-test.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -58,9 +59,11 @@ export class TypeSymptomUpdateComponent implements OnInit {
       () => this.isLoad = false,
     );
     this.update_select();
+    this.update_select_type();
   };
 
   rows: any;
+  listTest: any;
 
   protected onSuccess(data: any | null, headers: HttpHeaders): void {
     this.rows = data.list || [];
@@ -71,18 +74,36 @@ export class TypeSymptomUpdateComponent implements OnInit {
   isCheckType3 = false;
 
   update_select() {
-    console.log(this.inputSize.get('type').value);
     if (this.inputSize.get('type').value !== 0 && this.inputSize.get('type').value !== null) {
       this.isCheckType = true;
-      if (this.inputSize.get('type').value === 3) {
-        this.isCheckType3 = true;
-      } else {
-        this.isCheckType3 = false;
-      }
     } else {
       this.isCheckType = false;
       this.isCheckType3 = false;
     }
+  }
+
+  update_select_type() {
+    if (this.inputSize.get('type').value === 3 && this.inputSize.get('type').value !== null) {
+      this.isCheckType3 = true;
+      this.listTest = null;
+      console.log(this.inputSize.get('typediseaseId').value);
+      if (this.inputSize.get('typediseaseId').value !== null && this.inputSize.get('typediseaseId').value !== undefined) {
+        this.typeTestService.query({typediseaseId: this.inputSize.get('typediseaseId').value}).subscribe(
+          res => {
+            this.listTest = res.body.data.list;
+          },
+          (error) => {
+            // this.toAstrError();
+            this.loading = false;
+          },
+          // () => this.search(),
+        );
+      }
+    } else {
+      this.isCheckType3 = false;
+    }
+
+
   }
 
   constructor(
@@ -91,6 +112,7 @@ export class TypeSymptomUpdateComponent implements OnInit {
     private translate: TranslateService,
     public ref: NbDialogRef<TypeSymptomUpdateComponent>,
     private typeDiseaseService: TypeDiseaseService,
+    private typeTestService: TypeTestService,
     private symptomsService: SymptomsService) {
   }
 
@@ -100,7 +122,7 @@ export class TypeSymptomUpdateComponent implements OnInit {
     this.inputSize.markAllAsTouched();
     if (this.inputSize.valid) {
       this.loading = true;
-      if (this.data == null) {
+      if (this.data.id == null) {
         this.symptomsService.insert(this.inputSize.value).subscribe(
           (value) => this.ref.close(value),
           (error) => {

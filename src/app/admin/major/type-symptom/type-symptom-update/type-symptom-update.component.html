@@ -36,6 +36,7 @@
                        placeholder="{{'common.placeHolder' |translate}}"
                        notFoundText="{{'common.notFoundText' |translate}}"
                        clearAllText="{{'common.clearAllText' |translate}}"
+                       (change)="update_select_type()"
                        formControlName="typediseaseId">
               <ng-option *ngFor="let item of rows" [value]="item.id"> {{ item.name | translate }}
               </ng-option>
@@ -53,7 +54,7 @@
                        notFoundText="{{'common.notFoundText' |translate}}"
                        clearAllText="{{'common.clearAllText' |translate}}"
                        formControlName="testdiseaseId">
-              <ng-option *ngFor="let item of rows" [value]="item.id"> {{ item.name | translate }}
+              <ng-option *ngFor="let item of listTest" [value]="item.testdiseaseId"> {{ item.nameTypeDisease | translate }}
               </ng-option>
             </ng-select>
             <ngx-inline-message [message]="'common.table.item_test_disease_name'|translate"

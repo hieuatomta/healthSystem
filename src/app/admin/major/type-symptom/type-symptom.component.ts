@@ -101,6 +101,37 @@ export class TypeSymptomComponent implements OnInit {
       }
     );
   }
+  copy(data) {
+    data.id = null;
+    data.name = null;
+    let title;
+    console.log(data);
+    if (data.id == null) {
+      title = this.translate.instant('type_symptom.title_add');
+    } else {
+      title = this.translate.instant('type_symptom.title_edit');
+    }
+    this.dialogService.open(TypeSymptomUpdateComponent, {
+      context: {
+        title: title,
+        data: data,
+      },
+      dialogClass: 'modal-full',
+    }).onClose.subscribe(
+      value => {
+        if (value) {
+          if (data.id == null) {
+            this.toastrService.success(this.translate.instant('type_symptom.content_add_success'),
+              this.translate.instant('common.title_notification'));
+          } else {
+            this.toastrService.success(this.translate.instant('type_symptom.content_edit_success'),
+              this.translate.instant('common.title_notification'));
+          }
+          this.search(0);
+        }
+      }
+    );
+  }
   protected onSuccess(data: any | null, headers: HttpHeaders, page: number): void {
     this.page.count = data.count;
     this.page.offset = page || 0;

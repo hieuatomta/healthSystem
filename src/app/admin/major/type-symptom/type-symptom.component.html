@@ -91,6 +91,10 @@
                 </ng-container>
                 <ng-container *ngIf="col.prop ==='action_btn'" class="text-right">
                   <div>
+                    <button class="p-1" nbButton status="primary" ghost title="{{ 'common.copy' | translate}}"
+                            (click)="copy(row)">
+                      <nb-icon icon="copy-outline" pack="eva" size="tiny"></nb-icon>
+                    </button>
                     <button class="p-1" nbButton status="info" ghost title="{{ 'common.edit' | translate}}"
                             (click)="editUsers(row)">
                       <nb-icon icon="edit-outline" pack="eva" size="tiny"></nb-icon>
