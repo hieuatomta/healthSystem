@@ -2,10 +2,10 @@
   <div class="col-lg-12">
     <nb-card>
       <nb-card-header class="d-flex">
-        <label>{{ 'type_disease.title' | translate }}</label>
+        <label>{{ 'test_disease.title' | translate }}</label>
         <button nbButton status="primary" size="tiny" class="ml-auto" (click)="editUsers(null)">
           <nb-icon icon="plus" pack="eva"></nb-icon>
-          {{ 'type_disease.title_add' | translate }}
+          {{ 'test_disease.title_add' | translate }}
         </button>
       </nb-card-header>
       <nb-card-body>
@@ -14,13 +14,13 @@
             <div class="row">
               <div class="col-lg-4 form-group">
                 <label class="label">
-                  {{ 'common.table.item_type_disease_code' | translate }}
+                  {{ 'common.table.item_test_disease_code' | translate }}
                 </label>
                 <input (keyup.enter)="search(0)" nbInput fullWidth formControlName="code">
               </div>
               <div class="col-lg-4 form-group">
                 <label class="label">
-                  {{ 'common.table.item_type_disease_name' | translate }}
+                  {{ 'common.table.item_test_disease_name' | translate }}
                 </label>
                 <input (keyup.enter)="search(0)" nbInput fullWidth formControlName="name">
               </div>
@@ -78,11 +78,6 @@
                 </ng-container>
                 <ng-container *ngIf="col.prop ==='status'">
                   {{  'common.status.' + value | translate }}
-                </ng-container>
-                <ng-container *ngIf="col.prop === 'map_popup'">
-                  <button class="p-1" nbButton ghost status="info" (click)="openMapModule(row)">
-                    <nb-icon icon="link-outline" pack="eva" size="tiny"></nb-icon>
-                  </button>
                 </ng-container>
                 <ng-container *ngIf="col.prop ==='action_btn'" class="text-right">
                   <div>

@@ -55,6 +55,17 @@
     "delete_success": "Xóa bệnh thành công",
     "title_map_popup": "bệnhề"
   },
+  "test_disease": {
+    "title": "Quản lý xét nghiệm",
+    "title_add": "Thêm mới xét nghiệm",
+    "title_edit": "Sửa xét nghiệm",
+    "title_delete": "Xác nhận xóa xét nghiệm",
+    "content_add_success": "Thêm xét nghiệm thành công",
+    "content_edit_success": "Sửa xét nghiệm thành công",
+    "message_delete": "Bạn có chắc muốn xóa xét nghiệm",
+    "delete_success": "Xóa xét nghiệm thành công",
+    "title_map_popup": "xét nghiệm"
+  },
   "type_symptom": {
     "title": "Quản lý triệu chứng",
     "title_add": "Thêm mới triệu chứng",

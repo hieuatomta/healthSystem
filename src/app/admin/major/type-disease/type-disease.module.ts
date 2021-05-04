@@ -26,6 +26,8 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {SharedModule} from '../../../shares/shared.module';
 import {TypeDiseaseComponent} from './type-disease.component';
+import { MapPopupComponent } from './map-popup/map-popup.component';
+import {TestDiseaseModule} from '../test-disease/test-disease.module';
 
 
 @NgModule({
@@ -49,12 +51,12 @@ import {TypeDiseaseComponent} from './type-disease.component';
     NgSelectModule, SharedModule,
     ReactiveFormsModule,
     NgxDatatableModule,
-    NbSpinnerModule, NbToggleModule,
+    NbSpinnerModule, NbToggleModule, TestDiseaseModule,
   ],
   entryComponents: [
     TypeDiseaseUpdateComponent
   ],
-  declarations: [TypeDiseaseComponent, TypeDiseaseUpdateComponent],
+  declarations: [TypeDiseaseComponent, TypeDiseaseUpdateComponent, MapPopupComponent],
 })
 export class TypeDiseaseModule {
 }

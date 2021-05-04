@@ -7,18 +7,17 @@ import {UsersService} from '../../../@core/services/users.service';
 import {HttpHeaders} from '@angular/common/http';
 import {ConfirmDialogComponent} from '../../../shares/directives/confirm-dialog/confirm-dialog.component';
 import {SizeService} from '../../../@core/services/size.service';
-import {TypeDiseaseUpdateComponent} from './type-disease-update/type-disease-update.component';
+import {TestDiseaseUpdateComponent} from './test-disease-update/test-disease-update.component';
 import {CategoriesService} from '../../../@core/services/categories.service';
-import {TypeDiseaseService} from '../../../@core/services/type-disease.service';
-import {MapPopupComponent} from './map-popup/map-popup.component';
+import {TestDiseaseService} from '../../../@core/services/test-disease.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  selector: 'ngx-users',
-  styleUrls: ['./type-disease.component.scss'],
-  templateUrl: './type-disease.component.html',
+  selector: 'ngx-test-disease',
+  styleUrls: ['./test-disease.component.scss'],
+  templateUrl: './test-disease.component.html',
 })
-export class TypeDiseaseComponent implements OnInit {
+export class TestDiseaseComponent implements OnInit {
   ngOnInit(): void {
     this.search(0);
   }
@@ -28,7 +27,7 @@ export class TypeDiseaseComponent implements OnInit {
     private translate: TranslateService,
     private toastrService: NbToastrService,
     private userService: UsersService,
-    private typeDiseaseService: TypeDiseaseService,
+    private testDiseaseService: TestDiseaseService,
     private dialogService: NbDialogService) {
   }
 
@@ -45,12 +44,11 @@ export class TypeDiseaseComponent implements OnInit {
   };
   columns = [
     {name: 'common.table.item_number', prop: 'index', flexGrow: 0.3},
-    {name: 'common.table.item_type_disease_code', prop: 'code', flexGrow: 1},
-    {name: 'common.table.item_type_disease_name', prop: 'name', flexGrow: 1.5},
+    {name: 'common.table.item_test_disease_code', prop: 'code', flexGrow: 1},
+    {name: 'common.table.item_test_disease_name', prop: 'name', flexGrow: 1.5},
     {name: 'common.table.item_description', prop: 'description', flexGrow: 1.5},
     {name: 'common.table.item_status', prop: 'status', flexGrow: 1},
     {name: 'common.table.item_update_time', prop: 'updateTime', flexGrow: 1},
-    {name: 'common.table.item_test', prop: 'map_popup', flexGrow: 0.6},
     {name: 'common.table.item_action', prop: 'action_btn', flexGrow: 1}
   ];
 
@@ -61,20 +59,6 @@ export class TypeDiseaseComponent implements OnInit {
     status: new FormControl(null, [])
   });
 
-  openMapModule(data) {
-    const openMap = this.dialogService.open(MapPopupComponent, {
-      context: {
-        title: this.translate.instant('common.table.item_test'),
-        data: data,
-      }
-    });
-    openMap.onClose.subscribe(value => {
-      this.search(0);
-      // this.toastr.success(this.translate.instant('common.content_map_action_success'),
-      this.translate.instant('objects.title_notification');
-    });
-  }
-
   pageCallback(pageInfo: { count?: number, pageSize?: number, limit?: number, offset?: number }) {
     this.page.offset = pageInfo.offset;
     this.search(pageInfo.offset);
@@ -83,11 +67,11 @@ export class TypeDiseaseComponent implements OnInit {
   editUsers(data) {
     let title;
     if (data == null) {
-      title = this.translate.instant('type_disease.title_add');
+      title = this.translate.instant('test_disease.title_add');
     } else {
-      title = this.translate.instant('type_disease.title_edit');
+      title = this.translate.instant('test_disease.title_edit');
     }
-    this.dialogService.open(TypeDiseaseUpdateComponent, {
+    this.dialogService.open(TestDiseaseUpdateComponent, {
       context: {
         title: title,
         data: data,
@@ -97,10 +81,10 @@ export class TypeDiseaseComponent implements OnInit {
       value => {
         if (value) {
           if (data == null) {
-            this.toastrService.success(this.translate.instant('type_disease.content_add_success'),
+            this.toastrService.success(this.translate.instant('test_disease.content_add_success'),
               this.translate.instant('common.title_notification'));
           } else {
-            this.toastrService.success(this.translate.instant('type_disease.content_edit_success'),
+            this.toastrService.success(this.translate.instant('test_disease.content_edit_success'),
               this.translate.instant('common.title_notification'));
           }
           this.search(0);
@@ -117,7 +101,7 @@ export class TypeDiseaseComponent implements OnInit {
   search(pageToLoad: number) {
     this.isLoad = true;
     this.page.offset = pageToLoad;
-    this.typeDiseaseService.doSearch({
+    this.testDiseaseService.doSearch({
       page: this.page.offset,
       page_size: this.page.limit,
       name: this.inputForm.get("name").value,
@@ -140,13 +124,13 @@ export class TypeDiseaseComponent implements OnInit {
     this.dialogService.open(ConfirmDialogComponent, {
       context: {
         title: this.translate.instant('common.title_notification'),
-        message: this.translate.instant('type_disease.title_delete') + ' ' + data.name
+        message: this.translate.instant('test_disease.title_delete') + ' ' + data.name
       },
     }).onClose.subscribe(res => {
       if (res) {
         this.isLoad = true;
-        this.typeDiseaseService.delete(data.id).subscribe(() => {
-          this.toastrService.success(this.translate.instant('type_disease.delete_success'),
+        this.testDiseaseService.delete(data.id).subscribe(() => {
+          this.toastrService.success(this.translate.instant('test_disease.delete_success'),
             this.translate.instant('common.title_notification'));
           this.search(0);
           this.isLoad = false;

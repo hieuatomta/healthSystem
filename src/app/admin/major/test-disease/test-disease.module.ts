@@ -17,16 +17,15 @@ import {
 
 import {ThemeModule} from '../../../@theme/theme.module';
 
-import {SizesRoutingModule} from './type-symptom-routing.module';
-import {TypeSymptomUpdateComponent} from './type-symptom-update/type-symptom-update.component';
+import {SizesRoutingModule} from './test-disease-routing.module';
+import {TestDiseaseUpdateComponent} from './test-disease-update/test-disease-update.component';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {FormsModule as ngFormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {SharedModule} from '../../../shares/shared.module';
-import {TypeSymptomComponent} from './type-symptom.component';
-import {MapPopupComponent} from '../type-disease/map-popup/map-popup.component';
+import {TestDiseaseComponent} from './test-disease.component';
 
 
 @NgModule({
@@ -53,9 +52,12 @@ import {MapPopupComponent} from '../type-disease/map-popup/map-popup.component';
     NbSpinnerModule, NbToggleModule,
   ],
   entryComponents: [
-    TypeSymptomUpdateComponent
+    TestDiseaseUpdateComponent
   ],
-  declarations: [TypeSymptomComponent, TypeSymptomUpdateComponent],
+  declarations: [TestDiseaseComponent, TestDiseaseUpdateComponent],
+  exports: [
+    TestDiseaseComponent
+  ]
 })
-export class TypeSymptomModule {
+export class TestDiseaseModule {
 }
