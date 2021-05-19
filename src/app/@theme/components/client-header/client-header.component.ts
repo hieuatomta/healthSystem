@@ -1,6 +1,7 @@
-import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewEncapsulation, Renderer2} from '@angular/core';
 import {Router} from '@angular/router';
 import {CategoriesService} from '../../../@core/services/categories.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 declare const jQuery: any;
 
@@ -10,14 +11,15 @@ declare const jQuery: any;
   styleUrls: ['./client-header.component.scss'],
   templateUrl: './client-header.component.html',
 })
-export class ClientHeaderComponent implements OnInit, OnDestroy {
+export class ClientHeaderComponent implements OnInit, OnDestroy, AfterViewInit {
   size = 0;
   obj = null;
   totalPrice = null;
+  public removeEventListener: () => void;
+  public anchors;
 
   openOrder() {
     const data = JSON.parse(localStorage.getItem('list_order'));
-    console.log(data);
     if (data === undefined || data === null || data.data === undefined || data.data === null) {
       this.obj = [];
     } else {
@@ -36,6 +38,13 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
     })(jQuery);
   }
 
+  public handleAnchorClick = (event: Event) => {
+    // Prevent opening anchors the default way
+    event.preventDefault();
+    const anchor = event.target as HTMLAnchorElement;
+    this.router.navigate([anchor.href.replace (/^[a-z]{4,5}\:\/{2}[a-z]{1,}\:[0-9]{1,4}.(.*)/, '$1').slice(4)]);
+  }
+
   ngOnInit() {
     const data = JSON.parse(localStorage.getItem('list_order'));
     // this.obj = data?.data;
@@ -47,7 +56,12 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
     }
     this.search();
     // this.size = this.obj?.length;
-    console.log(this.tree);
+    this.removeEventListener = this.renderer.listen(this.elementRef.nativeElement, 'click', (event) => {
+      if (event.target instanceof HTMLAnchorElement) {
+        // Your custom anchor click event handler
+        this.handleAnchorClick(event);
+      }
+    });
     (function ($) {
       let posWrapHeader;
       /*==================================================================
@@ -107,7 +121,6 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
 
           $('.sub-menu-m').each(function () {
             if ($(this).css('display') === 'block') {
-              console.log('hello');
               $(this).css('display', 'none');
               $(arrowMainMenu).removeClass('turn-arrow-main-menu-m');
             }
@@ -156,6 +169,9 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.anchors.forEach((anchor: HTMLAnchorElement) => {
+      anchor.removeEventListener('click', this.handleAnchorClick)
+    })
   }
 
   htmlStrTxt: any;
@@ -184,22 +200,24 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
     }, {
       id: 4,
       parenID: 0,
-      tendulieu: 'Khám chữa bệnh',
-      // link: 'danh-sach-san-pham',
+      tendulieu: 'Chẩn đoán',
+      link: 'chan-doan',
       check: false
-    }, {
-      id: 5,
-      parenID: 0,
-      tendulieu: 'Dịch vụ',
-      // link: 'danh-sach-san-pham',
-      check: false
-    }, {
-      id: 6,
-      parenID: 0,
-      tendulieu: 'Đào taọ trực tuyến',
-      // link: 've-chung-toi',
-      check: false
-    }, {
+    },
+    // {
+    //   id: 5,
+    //   parenID: 0,
+    //   tendulieu: 'Dịch vụ',
+    //   // link: 'danh-sach-san-pham',
+    //   check: false
+    // }, {
+    //   id: 6,
+    //   parenID: 0,
+    //   tendulieu: 'Đào taọ trực tuyến',
+    //   // link: 've-chung-toi',
+    //   check: false
+    // },
+    {
       id: 7,
       parenID: 0,
       tendulieu: 'Liên lạc',
@@ -210,6 +228,7 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
       id: 11,
       parenID: 2,
       tendulieu: 'Ban giám đốc',
+      link: 'ban-giam-doc',
       check: false
     }, {
       id: 12,
@@ -219,6 +238,14 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
       link: 've-chung-toi'
     }
   ];
+
+  ngAfterViewInit() {
+    // Solution for catching click events on anchors using querySelectorAll:
+    this.anchors = this.elementRef.nativeElement.querySelectorAll('a');
+    this.anchors.forEach((anchor: HTMLAnchorElement) => {
+      anchor.addEventListener('click', this.handleAnchorClick)
+    })
+  }
 
   dequy(parent, level, a) {
     if (a === 1) {
@@ -266,6 +293,10 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
               private categoriesService: CategoriesService,
+              public domSanitizer: DomSanitizer,
+              public el: ElementRef,
+              private renderer: Renderer2,
+              private elementRef: ElementRef
   ) {
 
   }
@@ -275,7 +306,6 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
       status: 1,
     }).subscribe(
       (res) => {
-        console.log(res.body.data);
         for (let i = 0; i < res.body.data.list?.length; i++) {
           const obj = {
             id: null,
@@ -289,10 +319,7 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
           obj.link = 'tin-tuc/' + res.body.data.list[i].code;
           this.tree.push(obj);
         }
-        console.log(this.tree)
         this.menudacap = this.dequy(0, 0, 1);
-
-        // this.onSuccess(res.body.data, res.headers, pageToLoad);
       },
       (error) => {
         // this.isLoad = false;
@@ -300,11 +327,5 @@ export class ClientHeaderComponent implements OnInit, OnDestroy {
       // () => this.isLoad = false,
     );
   }
-
-  // protected onSuccess(data: any | null, headers: HttpHeaders, page: number): void {
-  //   this.page.count = data.count;
-  //   this.page.offset = page || 0;
-  //   this.rows = data.list || [];
-  // }
 
 }

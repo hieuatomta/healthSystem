@@ -1,0 +1,27 @@
+<section style="    background: white;" class="blog_area section-padding">
+  <div class="container">
+    <div class="row">
+      <nb-card style="width: 100%; background: white; ">
+        <nb-card-header style="color: black;">Dấu hiệu chung</nb-card-header>
+        <nb-card-body>
+          <form [formGroup]="form">
+            <div *ngFor="let data of Data; let i=index">
+              <label class="container1"> {{data.name}}
+                <input type="checkbox" [value]="data.id" (change)="onCheckboxChange($event)"/>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <ngx-inline-message [message]="'common.table.item_suppliers_name'|translate"
+                                [formName]="form.controls['checkArray']"></ngx-inline-message>
+          </form>
+
+        </nb-card-body>
+        <nb-card-footer class="text-right">
+          <button nbButton type="button" nbButton> {{ 'common.come' | translate }} </button>
+          <button nbButton type="button" class="ml-2" status="primary" (click)="submitForm()"
+                  id="dialogCancelBtn">{{ 'common.cd' | translate }}</button>
+        </nb-card-footer>
+      </nb-card>
+    </div>
+  </div>
+</section>

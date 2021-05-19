@@ -103,7 +103,7 @@ export class TypeSymptomComponent implements OnInit {
   }
   copy(data) {
     data.id = null;
-    data.name = null;
+    // data.name = null;
     let title;
     console.log(data);
     if (data.id == null) {

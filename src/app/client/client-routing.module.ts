@@ -7,6 +7,9 @@ import {ClientComponent} from './client.component';
 import {BlogComponent} from './blog/blog.component';
 import {BlogDetailComponent} from './blog-detail/blog-detail.component';
 import {DiagnoseComponent} from './diagnose/diagnose.component';
+import {GeneralSignsComponent} from './generalSigns/generalSigns.component';
+import {RadioCheckBoxComponent} from './radioCheckBox/radioCheckBox.component';
+import {BgdComponent} from './bgd/bgd.component';
 
 
 const routes: Routes = [
@@ -31,8 +34,20 @@ const routes: Routes = [
         component: AboutComponent,
       },
       {
+        path: 'ban-giam-doc',
+        component: BgdComponent,
+      },
+      {
         path: 'chan-doan',
         component: DiagnoseComponent,
+      },
+      {
+        path: 'chan-doan/dau-hieu-chung',
+        component: GeneralSignsComponent,
+      },
+      {
+        path: 'chan-doan/:key',
+        component: RadioCheckBoxComponent,
       },
       {
         path: 'lien-he',

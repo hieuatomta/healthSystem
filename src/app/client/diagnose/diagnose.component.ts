@@ -11,7 +11,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class DiagnoseComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
-  pdfSrc = "assets/pdf/bvptw.pdf";
   inputForm: any;
 
   ngOnInit(): void {

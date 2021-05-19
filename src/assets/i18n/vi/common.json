@@ -127,6 +127,8 @@
     "edit": "Sửa",
     "copy": "Copy",
     "delete": "Xóa",
+    "come": "Quay lại",
+    "cd": "Chẩn đoán",
     "format_date": "dd/MM/yyyy"
   }
 }

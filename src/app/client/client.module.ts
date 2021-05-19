@@ -7,7 +7,7 @@ import {
   NbIconModule,
   NbInputModule,
   NbLayoutModule,
-  NbMenuModule,
+  NbMenuModule, NbRadioModule,
   NbSpinnerModule,
 } from '@nebular/theme';
 
@@ -37,6 +37,9 @@ import {RecentPostComponent} from './recent-post/recent-post.component';
 import {NewsLetterComponent} from './news-letter/news-letter.component';
 import {PdfViewerModule} from 'ng2-pdf-viewer';
 import {DiagnoseComponent} from './diagnose/diagnose.component';
+import {GeneralSignsComponent} from './generalSigns/generalSigns.component';
+import {RadioCheckBoxComponent} from './radioCheckBox/radioCheckBox.component';
+import {BgdComponent} from './bgd/bgd.component';
 
 
 @NgModule({
@@ -63,7 +66,8 @@ import {DiagnoseComponent} from './diagnose/diagnose.component';
     SlideshowModule,
     NgbModule,
     NgSelectModule,
-    PdfViewerModule
+    PdfViewerModule,
+    NbRadioModule
   ],
   declarations: [
     SearchFilterComponent,
@@ -72,14 +76,14 @@ import {DiagnoseComponent} from './diagnose/diagnose.component';
     BlogDetailComponent,
     HomeClientComponent,
     ShopingCartComponent,
-    AboutComponent,
+    AboutComponent, BgdComponent,
     ContactComponent,
     ProductDetailComponent,
     ListProductComponent,
     ProductComponent,
     ListCategoryComponent,
     RecentPostComponent,
-    NewsLetterComponent, DiagnoseComponent,
+    NewsLetterComponent, DiagnoseComponent, GeneralSignsComponent, RadioCheckBoxComponent
   ],
   providers: [
     {

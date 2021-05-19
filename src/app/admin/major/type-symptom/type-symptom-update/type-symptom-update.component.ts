@@ -122,7 +122,7 @@ export class TypeSymptomUpdateComponent implements OnInit {
     this.inputSize.markAllAsTouched();
     if (this.inputSize.valid) {
       this.loading = true;
-      if (this.data.id == null) {
+      if (this.data?.id == null) {
         this.symptomsService.insert(this.inputSize.value).subscribe(
           (value) => this.ref.close(value),
           (error) => {
