@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {
   NbAlertModule,
+  NbButtonModule,
   NbCardModule,
   NbCheckboxModule,
   NbIconModule,
@@ -8,7 +9,6 @@ import {
   NbLayoutModule,
   NbMenuModule,
   NbSpinnerModule,
-  NbButtonModule,
 } from '@nebular/theme';
 
 import {ThemeModule} from '../@theme/theme.module';
@@ -34,36 +34,37 @@ import {BlogComponent} from './blog/blog.component';
 import {BlogDetailComponent} from './blog-detail/blog-detail.component';
 import {ListCategoryComponent} from './listCategory/listCategory.component';
 import {RecentPostComponent} from './recent-post/recent-post.component';
-import { NewsLetterComponent } from './news-letter/news-letter.component';
+import {NewsLetterComponent} from './news-letter/news-letter.component';
 import {PdfViewerModule} from 'ng2-pdf-viewer';
+import {DiagnoseComponent} from './diagnose/diagnose.component';
 
 
 @NgModule({
-    imports: [
-        JwPaginationModule,
-        ClientRoutingModule,
-        ThemeModule,
-        NbMenuModule,
-        NbCardModule,
-        NbAlertModule,
-        FormsModule,
-        NbInputModule,
-        NbCheckboxModule,
-        NbIconModule,
-        ReactiveFormsModule,
-        NbLayoutModule,
-        NbSpinnerModule,
-        RecaptchaModule,
-        RecaptchaFormsModule,
-        ReactiveFormsModule,
-        TranslateModule,
-        NbButtonModule,
-        SharedModule,
-        SlideshowModule,
-        NgbModule,
-        NgSelectModule,
-        PdfViewerModule
-    ],
+  imports: [
+    JwPaginationModule,
+    ClientRoutingModule,
+    ThemeModule,
+    NbMenuModule,
+    NbCardModule,
+    NbAlertModule,
+    FormsModule,
+    NbInputModule,
+    NbCheckboxModule,
+    NbIconModule,
+    ReactiveFormsModule,
+    NbLayoutModule,
+    NbSpinnerModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    NbButtonModule,
+    SharedModule,
+    SlideshowModule,
+    NgbModule,
+    NgSelectModule,
+    PdfViewerModule
+  ],
   declarations: [
     SearchFilterComponent,
     ClientComponent,
@@ -78,7 +79,7 @@ import {PdfViewerModule} from 'ng2-pdf-viewer';
     ProductComponent,
     ListCategoryComponent,
     RecentPostComponent,
-    NewsLetterComponent,
+    NewsLetterComponent, DiagnoseComponent,
   ],
   providers: [
     {

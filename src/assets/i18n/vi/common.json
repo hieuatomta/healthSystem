@@ -66,6 +66,8 @@
       "item_category_name": "Tên chủ đề",
       "item_type_disease_code": "Mã bệnh",
       "item_type_disease_name": "Tên bệnh",
+      "item_general_signs_determined": "Số lượng triệu chứng",
+      "item_general_signs_name": "Chẩn đoán tình trạng",
       "item_test_disease_name": "Tên Xét nghiệm",
       "item_test_disease_code": "Mã Xét nghiệm",
       "item_type_symptom_code": "Mã triệu chứng",

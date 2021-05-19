@@ -6,6 +6,7 @@ import {ContactComponent} from './contact/contact.component';
 import {ClientComponent} from './client.component';
 import {BlogComponent} from './blog/blog.component';
 import {BlogDetailComponent} from './blog-detail/blog-detail.component';
+import {DiagnoseComponent} from './diagnose/diagnose.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 've-chung-toi',
         component: AboutComponent,
+      },
+      {
+        path: 'chan-doan',
+        component: DiagnoseComponent,
       },
       {
         path: 'lien-he',

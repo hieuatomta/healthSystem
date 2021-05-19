@@ -60,6 +60,10 @@ const routes: Routes = [{
       loadChildren: () => import('./major/type-disease/type-disease.module')
         .then(m => m.TypeDiseaseModule),
     }, {
+      path: 'general-signs',
+      loadChildren: () => import('./major/general-signs/general-signs.module')
+        .then(m => m.GeneralSignsModule),
+    }, {
       path: 'test-disease',
       loadChildren: () => import('./major/test-disease/test-disease.module')
         .then(m => m.TestDiseaseModule),

@@ -55,6 +55,17 @@
     "delete_success": "Xóa bệnh thành công",
     "title_map_popup": "bệnhề"
   },
+  "general_signs": {
+    "title": "Quản lý dấu hiệu chung",
+    "title_add": "Thêm mới dấu hiệu chung",
+    "title_edit": "Sửa dấu hiệu chung",
+    "title_delete": "Xác nhận xóa dấu hiệu chung",
+    "content_add_success": "Thêm dấu hiệu chung thành công",
+    "content_edit_success": "Sửa dấu hiệu chung thành công",
+    "message_delete": "Bạn có chắc muốn xóa dấu hiệu chung",
+    "delete_success": "Xóa dấu hiệu chung thành công",
+    "title_map_popup": "bệnhề"
+  },
   "test_disease": {
     "title": "Quản lý xét nghiệm",
     "title_add": "Thêm mới xét nghiệm",
