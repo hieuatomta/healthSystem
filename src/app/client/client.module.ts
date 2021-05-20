@@ -40,6 +40,7 @@ import {DiagnoseComponent} from './diagnose/diagnose.component';
 import {GeneralSignsComponent} from './generalSigns/generalSigns.component';
 import {RadioCheckBoxComponent} from './radioCheckBox/radioCheckBox.component';
 import {BgdComponent} from './bgd/bgd.component';
+import {AgmCoreModule} from '@agm/core';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import {BgdComponent} from './bgd/bgd.component';
     NgbModule,
     NgSelectModule,
     PdfViewerModule,
-    NbRadioModule
+    NbRadioModule,
+    AgmCoreModule
   ],
   declarations: [
     SearchFilterComponent,

@@ -32,6 +32,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import {FacebookModule} from 'ngx-facebook';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {PdfViewerModule} from 'ng2-pdf-viewer';
+import {AgmCoreModule} from '@agm/core';
 
 registerLocaleData(vi, 'vi-VI', viEt);
 
@@ -63,6 +64,11 @@ export function createTranslateLoader(http: HttpClient) {
     NgxMaskModule.forRoot(),
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+    }),
+    AgmCoreModule.forRoot({
+      // please get your own API key here:
+      // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
+      apiKey: 'AIzaSyCgrPfTlz3u7JD4n6x3jk6JeYEmsVY7nl4'
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),

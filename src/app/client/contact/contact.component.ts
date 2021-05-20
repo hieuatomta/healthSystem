@@ -11,6 +11,35 @@ export class ContactComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
 
+  zoom: number = 18;
+
+  // initial center position for the map
+  lat: number = 21.046905;
+  lng: number = 105.7842351;
+
+  clickedMarker(label: string, index: number) {
+    console.log(`clicked the marker: ${label || index}`)
+  }
+
+  // mapClicked($event: MouseEvent) {
+  //   this.markers.push({
+  //     draggable: true
+  //   });
+  // }
+
+  markerDragEnd(m: marker, $event: MouseEvent) {
+    console.log('dragEnd', m, $event);
+  }
+
+  markers: marker[] = [
+    {
+      lat: 21.046905,
+      lng: 105.7842351,
+      label: 'Health System',
+      draggable: true
+    },
+  ]
+
   ngOnInit(): void {
     function initMap() {
       const uluru = {
@@ -45,4 +74,10 @@ export class ContactComponent implements OnInit, OnDestroy {
       });
     }
   }
+}
+interface marker {
+  lat: number;
+  lng: number;
+  label?: string;
+  draggable: boolean;
 }
