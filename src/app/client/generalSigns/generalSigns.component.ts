@@ -2,10 +2,11 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {SymptomsService} from '../../@core/services/symptoms.service';
 import {Router} from '@angular/router';
-import {NbToastrService} from '@nebular/theme';
+import {NbDialogService, NbToastrService} from '@nebular/theme';
 import {TranslateService} from '@ngx-translate/core';
 import {ColorService} from '../../@core/services/color.service';
 import {StatusDiseaseService} from '../../@core/services/status-disease.service';
+import {ConfirmDialogComponent} from '../../shares/directives/confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class GeneralSignsComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private router: Router,
+              private dialogService: NbDialogService,
               private toastr: NbToastrService,
               private translate: TranslateService,
               private symptomsService: SymptomsService,
@@ -59,6 +61,24 @@ export class GeneralSignsComponent implements OnInit {
     }
   }
 
+  deleteUsers(data) {
+    this.dialogService.open(ConfirmDialogComponent, {
+      context: {
+        title: this.translate.instant('common.title_cd'),
+        message: data.name,
+        okTitle: this.translate.instant('common.title_tt'),
+        cancelTitle: this.translate.instant('common.title_ql')
+      },
+    }).onClose.subscribe(res => {
+      if (res) {
+        if (data !== null) {
+
+        }
+        this.router.navigate(['/chan-doan/dau-hieu-nhan-biet']);
+      }
+    });
+  }
+
   submitForm() {
     try {
       console.log(this.form.value.checkArray?.length);
@@ -67,11 +87,11 @@ export class GeneralSignsComponent implements OnInit {
         type: 0
       };
       this.statusDiseaseService.queryStatus(data).subscribe((res) => {
-          console.log(res)
+          console.log(res.body.data)
+        this.deleteUsers(res.body.data.list);
       }, (err) => {
         console.log(err);
       });
-      // this.router.navigate(['/chan-doan/dau-hieu-nhan-biet']);
     } catch (e) {
       this.toastr.danger("Có lỗi xảy ra trong quán trình chẩn đoán, vui lòng thử lại sau!", this.translate.instant('common.title_notification'));
     }

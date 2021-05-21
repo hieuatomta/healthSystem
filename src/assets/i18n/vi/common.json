@@ -9,6 +9,9 @@
       }
     },
     "title_notification": "Thông báo",
+    "title_cd": "Chẩn đoán",
+    "title_tt": "Tiếp tục",
+    "title_ql": "Quay lại",
     "status": {
       "active": "Hoạt động",
       "inactive": "Không hoạt động",

@@ -145,6 +145,5 @@ export class ColorsComponent implements OnInit {
         });
       }
     });
-
   }
 }
