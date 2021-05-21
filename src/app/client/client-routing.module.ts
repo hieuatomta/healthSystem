@@ -10,6 +10,10 @@ import {DiagnoseComponent} from './diagnose/diagnose.component';
 import {GeneralSignsComponent} from './generalSigns/generalSigns.component';
 import {RadioCheckBoxComponent} from './radioCheckBox/radioCheckBox.component';
 import {BgdComponent} from './bgd/bgd.component';
+import {KnowledgeComponent} from './knowledge/knowledge.component';
+import {KnowledgeKeyComponent} from './knowledge-key/knowledge-key.component';
+import {TreatmentComponent} from './treatment/treatment.component';
+import {TreatmentKeyComponent} from './treatment-key/treatment-key.component';
 
 
 const routes: Routes = [
@@ -32,6 +36,22 @@ const routes: Routes = [
       {
         path: 've-chung-toi',
         component: AboutComponent,
+      },
+      {
+        path: 'tri-thuc',
+        component: KnowledgeComponent,
+      },
+      {
+        path: 'dieu-tri',
+        component: TreatmentComponent,
+      },
+      {
+        path: 'dieu-tri/:key',
+        component: TreatmentKeyComponent,
+      },
+      {
+        path: 'tri-thuc/:key',
+        component: KnowledgeKeyComponent,
       },
       {
         path: 'ban-giam-doc',

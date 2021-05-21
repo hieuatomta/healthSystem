@@ -41,6 +41,10 @@ import {GeneralSignsComponent} from './generalSigns/generalSigns.component';
 import {RadioCheckBoxComponent} from './radioCheckBox/radioCheckBox.component';
 import {BgdComponent} from './bgd/bgd.component';
 import {AgmCoreModule} from '@agm/core';
+import {KnowledgeComponent} from './knowledge/knowledge.component';
+import {KnowledgeKeyComponent} from './knowledge-key/knowledge-key.component';
+import { TreatmentComponent } from './treatment/treatment.component';
+import {TreatmentKeyComponent} from './treatment-key/treatment-key.component';
 
 
 @NgModule({
@@ -85,7 +89,8 @@ import {AgmCoreModule} from '@agm/core';
     ProductComponent,
     ListCategoryComponent,
     RecentPostComponent,
-    NewsLetterComponent, DiagnoseComponent, GeneralSignsComponent, RadioCheckBoxComponent
+    NewsLetterComponent, DiagnoseComponent, GeneralSignsComponent, RadioCheckBoxComponent, KnowledgeComponent,
+    KnowledgeKeyComponent, TreatmentComponent, TreatmentKeyComponent
   ],
   providers: [
     {

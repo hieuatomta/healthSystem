@@ -242,20 +242,20 @@ export class ClientHeaderComponent implements OnInit, OnDestroy, AfterViewInit {
       parenID: 4,
       tendulieu: 'Tri thức về bệnh',
       check: false,
-      link: 've-chung-toi'
+      link: 'tri-thuc'
     },
     {
       id: 14,
       parenID: 4,
       tendulieu: 'Chẩn đoán',
       check: false,
-      link: 've-chung-toi'
+      link: 'chan-doan'
     }, {
       id: 14,
       parenID: 4,
       tendulieu: 'Điều trị',
       check: false,
-      link: 've-chung-toi'
+      link: 'dieu-tri'
     }
   ];
 
