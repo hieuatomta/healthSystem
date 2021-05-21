@@ -12,8 +12,7 @@ import {Router} from '@angular/router';
 })
 export class GeneralSignsComponent implements OnInit {
   form: FormGroup;
-  Data: Array<any> = [
-  ];
+  Data: Array<any> = [];
 
   ngOnInit(): void {
     this.symptomsService.doSearchByClient({type: 0, status: 1}).subscribe(res => {
@@ -30,6 +29,10 @@ export class GeneralSignsComponent implements OnInit {
     this.form = this.fb.group({
       checkArray: this.fb.array([], [Validators.required])
     });
+  }
+
+  come() {
+    this.router.navigate(['/chan-doan']);
   }
 
   onCheckboxChange(e) {
@@ -51,6 +54,6 @@ export class GeneralSignsComponent implements OnInit {
 
   submitForm() {
     console.log(this.form.value);
-    // this.router.navigate(['/chan-doan/dau-hieu-nhan-biet']);
+    this.router.navigate(['/chan-doan/dau-hieu-nhan-biet']);
   }
 }

@@ -14,3 +14,16 @@ nav.limiter-menu-desktop.container {
 p {
   color: black !important;
 }
+
+::-webkit-input-placeholder {
+  color: red;
+}
+:-moz-placeholder {
+  color: red;
+}
+::-moz-placeholder {
+  color: red;
+}
+:-ms-input-placeholder {
+  color: red;
+}

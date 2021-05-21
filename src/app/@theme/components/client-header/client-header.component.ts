@@ -200,9 +200,9 @@ export class ClientHeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     }, {
       id: 4,
       parenID: 0,
-      tendulieu: 'Chẩn đoán',
+      tendulieu: 'Hệ chuyên gia',
       link: 'chan-doan',
-      check: false
+      check: true
     },
     // {
     //   id: 5,
@@ -234,6 +234,26 @@ export class ClientHeaderComponent implements OnInit, OnDestroy, AfterViewInit {
       id: 12,
       parenID: 2,
       tendulieu: 'Lịch sử bệnh viện',
+      check: false,
+      link: 've-chung-toi'
+    },
+    {
+      id: 13,
+      parenID: 4,
+      tendulieu: 'Tri thức về bệnh',
+      check: false,
+      link: 've-chung-toi'
+    },
+    {
+      id: 14,
+      parenID: 4,
+      tendulieu: 'Chẩn đoán',
+      check: false,
+      link: 've-chung-toi'
+    }, {
+      id: 14,
+      parenID: 4,
+      tendulieu: 'Điều trị',
       check: false,
       link: 've-chung-toi'
     }

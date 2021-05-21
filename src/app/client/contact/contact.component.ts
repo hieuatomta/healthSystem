@@ -1,4 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {marker} from './marker';
 
 
 @Component({
@@ -74,10 +75,4 @@ export class ContactComponent implements OnInit, OnDestroy {
       });
     }
   }
-}
-interface marker {
-  lat: number;
-  lng: number;
-  label?: string;
-  draggable: boolean;
 }

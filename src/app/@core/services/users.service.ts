@@ -18,11 +18,13 @@ export class UsersService {
       observe: 'response'
     });
   }
+
   query(id: any): Observable<any> {
     return this.http.get<any[]>(`${environment.apiUrl}/users/${id}`, {
       observe: 'response'
     });
   }
+
   public update(data: any): Observable<any> {
     return this.http.put<any>(`${environment.apiUrl}/users`, data, {
       observe: 'response'
@@ -31,6 +33,12 @@ export class UsersService {
 
   public insert(data: any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/users`, data, {
+      observe: 'response'
+    });
+  }
+
+  public insertClient(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/client/users`, data, {
       observe: 'response'
     });
   }
