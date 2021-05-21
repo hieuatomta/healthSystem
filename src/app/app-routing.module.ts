@@ -25,8 +25,8 @@ export const routes: Routes = [
     loadChildren: () => import('./client/client.module')
       .then(m => m.ClientModule),
   },
-  {path: '', redirectTo: 'admin', pathMatch: 'full'},
-  {path: '**', redirectTo: 'admin'},
+  {path: '', redirectTo: '', pathMatch: 'full'},
+  {path: '**', redirectTo: ''},
 ];
 
 const config: ExtraOptions = {
