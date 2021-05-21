@@ -2,6 +2,10 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {SymptomsService} from '../../@core/services/symptoms.service';
 import {Router} from '@angular/router';
+import {NbToastrService} from '@nebular/theme';
+import {TranslateService} from '@ngx-translate/core';
+import {ColorService} from '../../@core/services/color.service';
+import {StatusDiseaseService} from '../../@core/services/status-disease.service';
 
 
 @Component({
@@ -25,7 +29,10 @@ export class GeneralSignsComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private router: Router,
-              private symptomsService: SymptomsService) {
+              private toastr: NbToastrService,
+              private translate: TranslateService,
+              private symptomsService: SymptomsService,
+              private statusDiseaseService: StatusDiseaseService) {
     this.form = this.fb.group({
       checkArray: this.fb.array([], [Validators.required])
     });
@@ -53,7 +60,20 @@ export class GeneralSignsComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.form.value);
-    this.router.navigate(['/chan-doan/dau-hieu-nhan-biet']);
+    try {
+      console.log(this.form.value.checkArray?.length);
+      const data = {
+        value: this.form.value.checkArray?.length,
+        type: 0
+      };
+      this.statusDiseaseService.queryStatus(data).subscribe((res) => {
+          console.log(res)
+      }, (err) => {
+        console.log(err);
+      });
+      // this.router.navigate(['/chan-doan/dau-hieu-nhan-biet']);
+    } catch (e) {
+      this.toastr.danger("Có lỗi xảy ra trong quán trình chẩn đoán, vui lòng thử lại sau!", this.translate.instant('common.title_notification'));
+    }
   }
 }

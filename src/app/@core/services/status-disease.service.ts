@@ -17,6 +17,14 @@ export class StatusDiseaseService {
     });
   }
 
+  queryStatus(req: any): Observable<any> {
+    const options = createRequestOption(req);
+    return this.http.get<any[]>(`${environment.apiUrl}/client/status-diseases`, {
+      params: options,
+      observe: 'response'
+    });
+  }
+
   public doSearch(req?: any): Observable<any> {
     const options = createRequestOption(req);
     return this.http.get<any[]>(`${environment.apiUrl}/status-diseases`, {
