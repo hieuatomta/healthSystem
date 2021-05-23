@@ -2,6 +2,8 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {SymptomsService} from '../../@core/services/symptoms.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {NbDialogService, NbToastrService} from '@nebular/theme';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -26,8 +28,12 @@ export class RadioCheckBoxComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private router: Router,
+              private dialogService: NbDialogService,
+              private toastr: NbToastrService,
+              private translate: TranslateService,
               private activatedRoute: ActivatedRoute,
               private symptomsService: SymptomsService) {
+
     this.activatedRoute.params.subscribe((params: Params) => {
       console.log(params);
       this.key = params['key'];
@@ -42,5 +48,31 @@ export class RadioCheckBoxComponent implements OnInit {
 
   submitForm() {
     console.log(this.option);
+
+    try {
+      const data = {
+        id: this.option,
+        type: 1
+      };
+      this.symptomsService.doSearchByClient(data).subscribe((res) => {
+        if (res) {
+          if (data !== null) {
+
+          }
+          this.router.navigate(['/chan-doan/lam-san'],  { state: { id: res.body.data.list[0].typediseaseId } });
+        }
+        console.log(res.body.data);
+        //
+        // if (res.body.data.list.likStatus === 1) {
+        //   this.nextLink(res.body.data.list);
+        // } else {
+        //   this.noNextLink(res.body.data.list);
+        // }
+      }, (err) => {
+        console.log(err);
+      });
+    } catch (e) {
+      this.toastr.danger('Có lỗi xảy ra trong quán trình chẩn đoán, vui lòng thử lại sau!', this.translate.instant('common.title_notification'));
+    }
   }
 }

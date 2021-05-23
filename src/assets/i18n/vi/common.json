@@ -48,6 +48,7 @@
       "item_dateOfBirth": "Ngày sinh",
       "item_role": "Quyền người dùng",
       "item_status": "Trạng thái",
+      "item_link_status": "Trạng thái link",
       "item_reasonForRefusal": "Lý do từ chối",
       "item_news_users_name": "Tác giả",
       "item_type": "Chức năng",

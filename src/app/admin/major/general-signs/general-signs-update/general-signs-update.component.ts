@@ -33,13 +33,18 @@ export class GeneralSignsUpdateComponent implements OnInit {
       determined: new FormControl(null, [Validators.required, Validators.pattern(/\-?\d*\.?\d{1,2}/)]),
       description: new FormControl(null, []),
       status: new FormControl(null, [Validators.required]),
+      likStatus: new FormControl(null, [Validators.required]),
       type: new FormControl(0, [Validators.required])
     });
     this.inputSize.get('status').setValue(true);
+    this.inputSize.get('likStatus').setValue(false);
+    console.log(this.data);
     if (this.data) {
       this.inputSize.patchValue(this.data);
       const status = this.data.status === 1 ? true : false;
       this.inputSize.get('status').patchValue(status);
+      const link = this.data.likStatus === 1 ? true : false;
+      this.inputSize.get('likStatus').patchValue(link);
     };
   };
 
@@ -57,6 +62,7 @@ export class GeneralSignsUpdateComponent implements OnInit {
 
   submit() {
     this.inputSize.get('status').patchValue(this.inputSize.get('status').value ? 1 : 0);
+    this.inputSize.get('likStatus').patchValue(this.inputSize.get('likStatus').value ? 1 : 0);
     this.inputSize.markAllAsTouched();
     if (this.inputSize.valid) {
       this.loading = true;

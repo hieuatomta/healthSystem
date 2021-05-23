@@ -45,6 +45,7 @@ import {KnowledgeComponent} from './knowledge/knowledge.component';
 import {KnowledgeKeyComponent} from './knowledge-key/knowledge-key.component';
 import { TreatmentComponent } from './treatment/treatment.component';
 import {TreatmentKeyComponent} from './treatment-key/treatment-key.component';
+import {ClinicalComponent} from './clinical/clinical.component';
 
 
 @NgModule({
@@ -90,7 +91,7 @@ import {TreatmentKeyComponent} from './treatment-key/treatment-key.component';
     ListCategoryComponent,
     RecentPostComponent,
     NewsLetterComponent, DiagnoseComponent, GeneralSignsComponent, RadioCheckBoxComponent, KnowledgeComponent,
-    KnowledgeKeyComponent, TreatmentComponent, TreatmentKeyComponent
+    KnowledgeKeyComponent, TreatmentComponent, TreatmentKeyComponent, ClinicalComponent
   ],
   providers: [
     {

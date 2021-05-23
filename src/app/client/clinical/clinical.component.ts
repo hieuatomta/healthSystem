@@ -11,20 +11,25 @@ import {ConfirmDialogComponent} from '../../shares/directives/confirm-dialog/con
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'ngx-home-client',
-  styleUrls: ['./generalSigns.component.scss'],
-  templateUrl: './generalSigns.component.html',
+  styleUrls: ['./clinical.component.scss'],
+  templateUrl: './clinical.component.html',
 })
-export class GeneralSignsComponent implements OnInit {
+export class ClinicalComponent implements OnInit {
   form: FormGroup;
   Data: Array<any> = [];
+  typediseaseId: any;
 
   ngOnInit(): void {
-    this.symptomsService.doSearchByClient({type: 0, status: 1}).subscribe(res => {
-      this.Data = res.body.data.list;
-      console.log(res), err => {
-        console.log(err);
-      };
-    });
+    if (this.typediseaseId === undefined || this.typediseaseId === null) {
+      this.router.navigate(['/chan-doan/dau-hieu-nhan-biet']);
+    } else {
+      this.symptomsService.doSearchByClient({type: 2, status: 1, typediseaseId: this.typediseaseId}).subscribe(res => {
+        this.Data = res.body.data.list;
+        console.log(res), err => {
+          console.log(err);
+        };
+      });
+    }
   }
 
   constructor(private fb: FormBuilder,
@@ -34,6 +39,12 @@ export class GeneralSignsComponent implements OnInit {
               private translate: TranslateService,
               private symptomsService: SymptomsService,
               private statusDiseaseService: StatusDiseaseService) {
+    try {
+      this.typediseaseId = this.router.getCurrentNavigation()?.extras.state.id;
+    } catch (e) {
+      this.typediseaseId = null;
+    }
+
     this.form = this.fb.group({
       checkArray: this.fb.array([], [Validators.required])
     });

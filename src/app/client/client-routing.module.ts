@@ -14,6 +14,7 @@ import {KnowledgeComponent} from './knowledge/knowledge.component';
 import {KnowledgeKeyComponent} from './knowledge-key/knowledge-key.component';
 import {TreatmentComponent} from './treatment/treatment.component';
 import {TreatmentKeyComponent} from './treatment-key/treatment-key.component';
+import {ClinicalComponent} from './clinical/clinical.component';
 
 
 const routes: Routes = [
@@ -64,6 +65,10 @@ const routes: Routes = [
       {
         path: 'chan-doan/dau-hieu-chung',
         component: GeneralSignsComponent,
+      },
+      {
+        path: 'chan-doan/lam-san',
+        component: ClinicalComponent,
       },
       {
         path: 'chan-doan/:key',

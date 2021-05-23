@@ -85,7 +85,8 @@ export class GeneralSignsComponent implements OnInit {
     name: new FormControl(null, []),
     code: new FormControl(null, []),
     updateTime: new FormControl(null, []),
-    status: new FormControl(null, [])
+    status: new FormControl(null, []),
+    likStatus: new FormControl(null, [])
   });
 
   openMapModule(data) {
