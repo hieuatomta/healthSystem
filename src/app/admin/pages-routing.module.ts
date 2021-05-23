@@ -59,10 +59,15 @@ const routes: Routes = [{
       path: 'type-disease',
       loadChildren: () => import('./major/type-disease/type-disease.module')
         .then(m => m.TypeDiseaseModule),
-    }, {
+    },
+    {
       path: 'general-signs',
       loadChildren: () => import('./major/general-signs/general-signs.module')
         .then(m => m.GeneralSignsModule),
+    }, {
+      path: 'clinical',
+      loadChildren: () => import('./major/clinical/clinical.module')
+        .then(m => m.ClinicalModule),
     }, {
       path: 'test-disease',
       loadChildren: () => import('./major/test-disease/test-disease.module')
