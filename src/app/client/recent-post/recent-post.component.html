@@ -3,7 +3,7 @@
   <div *ngFor="let key of arr" class="media post_item">
     <img src="assets/images/post/post_1.png" alt="post">
     <div class="media-body">
-      <a href="single-blog.html">
+      <a routerLink="/chi-tiet-tin-tuc/{{key.code}}">
         <h3>{{key.title}}</h3>
       </a>
       <p>{{key.updateTime | date:'dd/MM/yyyy HH:mm:ss'}}</p>

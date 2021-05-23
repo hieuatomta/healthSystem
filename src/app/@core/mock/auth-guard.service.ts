@@ -9,6 +9,7 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const token = localStorage.getItem('httpHeaders');
+    console.log(token);
     if (token === undefined || token === null || token === '') {
       localStorage.clear();
       this.router.navigate(['/auths/login']);
@@ -22,7 +23,7 @@ export class AuthGuardService implements CanActivate {
       }
       for (let i = 0; i < obj?.length; i++) {
         const path =  state.url.substring(0, obj[i].link?.length);
-        if (obj[i].link === path) {
+        if (obj[i].link !== '' && obj[i].link === path) {
           role.slice(0, role.length);
           role.push(obj[i]);
           checkRole = true;
