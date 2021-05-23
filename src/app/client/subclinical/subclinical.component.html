@@ -1,0 +1,23 @@
+<section style="    background: white;" class="blog_area section-padding">
+  <div class="container">
+    <div class="row">
+      <nb-card style="width: 100%; background: white; ">
+        <nb-card-header style="color: black;">Dấu hiệu chung</nb-card-header>
+        <nb-card-body>
+          <nb-radio-group [(ngModel)]="option">
+            <nb-radio style="color: black;"
+                      *ngFor="let option of options"
+                      [value]="option.id">
+              {{ option.name }}
+            </nb-radio>
+          </nb-radio-group>
+        </nb-card-body>
+        <nb-card-footer class="text-right">
+          <button nbButton type="button" nbButton> {{ 'common.come' | translate }} </button>
+          <button nbButton type="button" class="ml-2" status="primary" (click)="submitForm()"
+                  id="dialogCancelBtn">{{ 'common.cd' | translate }}</button>
+        </nb-card-footer>
+      </nb-card>
+    </div>
+  </div>
+</section>

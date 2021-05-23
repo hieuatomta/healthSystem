@@ -6,9 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {UsersService} from '../../../@core/services/users.service';
 import {HttpHeaders} from '@angular/common/http';
 import {ConfirmDialogComponent} from '../../../shares/directives/confirm-dialog/confirm-dialog.component';
-import {SizeService} from '../../../@core/services/size.service';
-import {GeneralSignsUpdateComponent} from './general-signs-update/general-signs-update.component';
-import {CategoriesService} from '../../../@core/services/categories.service';
+import {SubclinicalUpdateComponent} from './subclinical-update/subclinical-update.component';
 import {TypeDiseaseService} from '../../../@core/services/type-disease.service';
 import {MapPopupComponent} from './map-popup/map-popup.component';
 import {SymptomsService} from '../../../@core/services/symptoms.service';
@@ -17,28 +15,15 @@ import {StatusDiseaseService} from '../../../@core/services/status-disease.servi
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'ngx-users',
-  styleUrls: ['./general-signs.component.scss'],
-  templateUrl: './general-signs.component.html',
+  styleUrls: ['./subclinical.component.scss'],
+  templateUrl: './subclinical.component.html',
 })
-export class GeneralSignsComponent implements OnInit {
+export class SubclinicalComponent implements OnInit {
   ngOnInit(): void {
-    // this.statusDiseaseService.query().subscribe(
-    //   (res) => {
-    //     this.listType = res.body.data.list;
-    //     this.isLoad = false;
-    //   },
-    //   (error) => {
-    //     this.isLoad = false;
-    //   },
-    //   () => this.isLoad = false,
-    // );
-    this.symptomsService.doSearch({
-      type: 0,
-      status: 1,
-    }).subscribe(
+    this.typeDiseaseService.query().subscribe(
       (res) => {
-        const result = res.body.data.list.map(({ name }) => name)
-        this.symptoms = result.join(' - ');
+        console.log(res);
+        this.listType = res.body.data.list;
         this.isLoad = false;
       },
       (error) => {
@@ -46,6 +31,20 @@ export class GeneralSignsComponent implements OnInit {
       },
       () => this.isLoad = false,
     );
+    // this.symptomsService.doSearch({
+    //   type: 2,
+    //   status: 1,
+    // }).subscribe(
+    //   (res) => {
+    //     const result = res.body.data.list.map(({ name }) => name)
+    //     this.symptoms = result.join(' - ');
+    //     this.isLoad = false;
+    //   },
+    //   (error) => {
+    //     this.isLoad = false;
+    //   },
+    //   () => this.isLoad = false,
+    // );
     this.search(0);
   }
 
@@ -56,8 +55,10 @@ export class GeneralSignsComponent implements OnInit {
     private userService: UsersService,
     private statusDiseaseService: StatusDiseaseService,
     private symptomsService: SymptomsService,
+    private typeDiseaseService: TypeDiseaseService,
     private dialogService: NbDialogService) {
   }
+
   listType = [];
   symptoms: any;
   isLoad: boolean;
@@ -73,6 +74,7 @@ export class GeneralSignsComponent implements OnInit {
   };
   columns = [
     {name: 'common.table.item_number', prop: 'index', flexGrow: 0.3},
+    {name: 'common.table.item_type_disease', prop: 'NameType', flexGrow: 1.5},
     {name: 'common.table.item_general_signs_name', prop: 'name', flexGrow: 1.5},
     {name: 'common.table.item_general_signs_determined', prop: 'determined', flexGrow: 1},
     {name: 'common.table.item_description', prop: 'description', flexGrow: 1.5},
@@ -86,6 +88,7 @@ export class GeneralSignsComponent implements OnInit {
     code: new FormControl(null, []),
     updateTime: new FormControl(null, []),
     status: new FormControl(null, []),
+    typediseaseId: new FormControl(null, []),
     likStatus: new FormControl(null, [])
   });
 
@@ -111,11 +114,11 @@ export class GeneralSignsComponent implements OnInit {
   editUsers(data) {
     let title;
     if (data == null) {
-      title = this.translate.instant('general_signs.title_add');
+      title = this.translate.instant('subclinical.title_add');
     } else {
-      title = this.translate.instant('general_signs.title_edit');
+      title = this.translate.instant('subclinical.title_edit');
     }
-    this.dialogService.open(GeneralSignsUpdateComponent, {
+    this.dialogService.open(SubclinicalUpdateComponent, {
       context: {
         title: title,
         data: data,
@@ -125,10 +128,10 @@ export class GeneralSignsComponent implements OnInit {
       value => {
         if (value) {
           if (data == null) {
-            this.toastrService.success(this.translate.instant('general_signs.content_add_success'),
+            this.toastrService.success(this.translate.instant('subclinical.content_add_success'),
               this.translate.instant('common.title_notification'));
           } else {
-            this.toastrService.success(this.translate.instant('general_signs.content_edit_success'),
+            this.toastrService.success(this.translate.instant('subclinical.content_edit_success'),
               this.translate.instant('common.title_notification'));
           }
           this.search(0);
@@ -136,6 +139,7 @@ export class GeneralSignsComponent implements OnInit {
       }
     );
   }
+
   protected onSuccess(data: any | null, headers: HttpHeaders, page: number): void {
     this.page.count = data.count;
     this.page.offset = page || 0;
@@ -148,11 +152,12 @@ export class GeneralSignsComponent implements OnInit {
     this.statusDiseaseService.doSearch({
       page: this.page.offset,
       page_size: this.page.limit,
-      name: this.inputForm.get("name").value,
-      code: this.inputForm.get("code").value,
-      updateTime: this.inputForm.get("updateTime").value,
-      type: 0,
-      status: this.inputForm.get("status").value,
+      name: this.inputForm.get('name').value,
+      code: this.inputForm.get('code').value,
+      updateTime: this.inputForm.get('updateTime').value,
+      status: this.inputForm.get('status').value,
+      typediseaseId: this.inputForm.get('typediseaseId').value,
+      type: 2
     }).subscribe(
       (res) => {
         this.onSuccess(res.body.data, res.headers, pageToLoad);
@@ -169,13 +174,13 @@ export class GeneralSignsComponent implements OnInit {
     this.dialogService.open(ConfirmDialogComponent, {
       context: {
         title: this.translate.instant('common.title_notification'),
-        message: this.translate.instant('general_signs.title_delete') + ' ' + data.name
+        message: this.translate.instant('subclinical.title_delete') + ' ' + data.name
       },
     }).onClose.subscribe(res => {
       if (res) {
         this.isLoad = true;
         this.statusDiseaseService.delete(data.id).subscribe(() => {
-          this.toastrService.success(this.translate.instant('general_signs.delete_success'),
+          this.toastrService.success(this.translate.instant('subclinical.delete_success'),
             this.translate.instant('common.title_notification'));
           this.search(0);
           this.isLoad = false;

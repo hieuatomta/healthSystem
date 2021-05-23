@@ -69,6 +69,10 @@ const routes: Routes = [{
       loadChildren: () => import('./major/clinical/clinical.module')
         .then(m => m.ClinicalModule),
     }, {
+      path: 'subclinical',
+      loadChildren: () => import('./major/subclinical/subclinical.module')
+        .then(m => m.SubclinicalModule),
+    }, {
       path: 'test-disease',
       loadChildren: () => import('./major/test-disease/test-disease.module')
         .then(m => m.TestDiseaseModule),
