@@ -25,8 +25,20 @@ export class GeneralSignsUpdateComponent implements OnInit {
   loading = false;
   title: string;
   data: any;
+  listType = [];
 
   ngOnInit(): void {
+    this.typeDiseaseService.query().subscribe(
+      (res) => {
+        console.log(res);
+        this.listType = res.body.data.list;
+        this.loading = false;
+      },
+      (error) => {
+        this.loading = false;
+      },
+      () => this.loading = false,
+    );
     this.inputSize = new FormGroup({
       id: new FormControl(this.data?.id, []),
       name: new FormControl(null, [Validators.required]),
@@ -34,7 +46,8 @@ export class GeneralSignsUpdateComponent implements OnInit {
       description: new FormControl(null, []),
       status: new FormControl(null, [Validators.required]),
       likStatus: new FormControl(null, [Validators.required]),
-      type: new FormControl(0, [Validators.required])
+      typediseaseId: new FormControl(null, [Validators.required]),
+      type: new FormControl(2, [Validators.required])
     });
     this.inputSize.get('status').setValue(true);
     this.inputSize.get('likStatus').setValue(false);

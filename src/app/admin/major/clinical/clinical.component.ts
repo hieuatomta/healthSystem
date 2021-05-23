@@ -75,6 +75,7 @@ export class ClinicalComponent implements OnInit {
   };
   columns = [
     {name: 'common.table.item_number', prop: 'index', flexGrow: 0.3},
+    {name: 'common.table.item_type_disease', prop: 'NameType', flexGrow: 1.5},
     {name: 'common.table.item_general_signs_name', prop: 'name', flexGrow: 1.5},
     {name: 'common.table.item_general_signs_determined', prop: 'determined', flexGrow: 1},
     {name: 'common.table.item_description', prop: 'description', flexGrow: 1.5},
@@ -88,6 +89,7 @@ export class ClinicalComponent implements OnInit {
     code: new FormControl(null, []),
     updateTime: new FormControl(null, []),
     status: new FormControl(null, []),
+    typediseaseId: new FormControl(null, []),
     likStatus: new FormControl(null, [])
   });
 
@@ -113,9 +115,9 @@ export class ClinicalComponent implements OnInit {
   editUsers(data) {
     let title;
     if (data == null) {
-      title = this.translate.instant('general_signs.title_add');
+      title = this.translate.instant('clinical.title_add');
     } else {
-      title = this.translate.instant('general_signs.title_edit');
+      title = this.translate.instant('clinical.title_edit');
     }
     this.dialogService.open(GeneralSignsUpdateComponent, {
       context: {
@@ -127,10 +129,10 @@ export class ClinicalComponent implements OnInit {
       value => {
         if (value) {
           if (data == null) {
-            this.toastrService.success(this.translate.instant('general_signs.content_add_success'),
+            this.toastrService.success(this.translate.instant('clinical.content_add_success'),
               this.translate.instant('common.title_notification'));
           } else {
-            this.toastrService.success(this.translate.instant('general_signs.content_edit_success'),
+            this.toastrService.success(this.translate.instant('clinical.content_edit_success'),
               this.translate.instant('common.title_notification'));
           }
           this.search(0);
@@ -154,6 +156,7 @@ export class ClinicalComponent implements OnInit {
       code: this.inputForm.get("code").value,
       updateTime: this.inputForm.get("updateTime").value,
       status: this.inputForm.get("status").value,
+      typediseaseId: this.inputForm.get("typediseaseId").value,
       type: 2
     }).subscribe(
       (res) => {
@@ -171,13 +174,13 @@ export class ClinicalComponent implements OnInit {
     this.dialogService.open(ConfirmDialogComponent, {
       context: {
         title: this.translate.instant('common.title_notification'),
-        message: this.translate.instant('general_signs.title_delete') + ' ' + data.name
+        message: this.translate.instant('clinical.title_delete') + ' ' + data.name
       },
     }).onClose.subscribe(res => {
       if (res) {
         this.isLoad = true;
         this.statusDiseaseService.delete(data.id).subscribe(() => {
-          this.toastrService.success(this.translate.instant('general_signs.delete_success'),
+          this.toastrService.success(this.translate.instant('clinical.delete_success'),
             this.translate.instant('common.title_notification'));
           this.search(0);
           this.isLoad = false;

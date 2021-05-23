@@ -66,6 +66,17 @@
     "delete_success": "Xóa dấu hiệu chung thành công",
     "title_map_popup": "bệnhề"
   },
+  "clinical": {
+    "title": "Quản lý bệnh lâm sàn",
+    "title_add": "Thêm mới bệnh lâm sàn",
+    "title_edit": "Sửa bệnh lâm sàn",
+    "title_delete": "Xác nhận xóa bệnh lâm sàn",
+    "content_add_success": "Thêm bệnh lâm sàn thành công",
+    "content_edit_success": "Sửa bệnh lâm sàn thành công",
+    "message_delete": "Bạn có chắc muốn xóa bệnh lâm sàn",
+    "delete_success": "Xóa bệnh lâm sàn thành công",
+    "title_map_popup": "bệnhề"
+  },
   "test_disease": {
     "title": "Quản lý xét nghiệm",
     "title_add": "Thêm mới xét nghiệm",

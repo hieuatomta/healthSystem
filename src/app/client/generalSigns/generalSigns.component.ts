@@ -100,7 +100,8 @@ export class GeneralSignsComponent implements OnInit {
       console.log(this.form.value.checkArray?.length);
       const data = {
         value: this.form.value.checkArray?.length,
-        type: 0
+        type: 0,
+        typediseaseId: null
       };
       this.statusDiseaseService.queryStatus(data).subscribe((res) => {
         console.log(res.body.data);

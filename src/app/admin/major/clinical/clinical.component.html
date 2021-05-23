@@ -2,10 +2,10 @@
   <div class="col-lg-12">
     <nb-card>
       <nb-card-header class="d-flex">
-        <label>{{ 'general_signs.title' | translate }}</label>
+        <label>{{ 'clinical.title' | translate }}</label>
         <button nbButton status="primary" size="tiny" class="ml-auto" (click)="editUsers(null)">
           <nb-icon icon="plus" pack="eva"></nb-icon>
-          {{ 'general_signs.title_add' | translate }}
+          {{ 'clinical.title_add' | translate }}
         </button>
       </nb-card-header>
       <nb-card-body>
@@ -14,13 +14,13 @@
             <div class="row">
               <div class="col-lg-4 form-group">
                 <label class="label">
-                  {{ 'common.table.item_general_signs_code' | translate }}
+                  {{ 'common.table.item_type_disease' | translate }}
                 </label>
                 <ng-select fullWidth appendTo="body"
                            placeholder="{{'common.placeHolder' |translate}}"
                            notFoundText="{{'common.notFoundText' |translate}}"
                            clearAllText="{{'common.clearAllText' |translate}}"
-                           formControlName="status">
+                           formControlName="typediseaseId">
                   <ng-option *ngFor="let item of listType" [value]="item.id"> {{ item.name | translate }}
                   </ng-option>
                 </ng-select>
@@ -75,7 +75,7 @@
                   {{ page.offset * page.limit + rowIndex + 1 }}
                 </ng-container>
                 <ng-container
-                  *ngIf="col.prop ==='determined' || col.prop ==='name' || col.prop ==='description'"
+                  *ngIf="col.prop ==='determined' || col.prop ==='name' || col.prop ==='NameType' || col.prop ==='description'"
                   class="text-right">
                   <span class="row-data-show"
                         title="{{value}}">{{value.length > 50 ? value.substring(0, 50).concat('...') : value}}</span>
