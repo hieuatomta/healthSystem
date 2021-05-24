@@ -1,20 +1,20 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {HomeClientComponent} from './home_client/home-client.component';
-import {AboutComponent} from './about/about.component';
+import {AboutComponent} from './introduce/about/about.component';
 import {ContactComponent} from './contact/contact.component';
 import {ClientComponent} from './client.component';
-import {BlogComponent} from './blog/blog.component';
-import {BlogDetailComponent} from './blog-detail/blog-detail.component';
-import {DiagnoseComponent} from './diagnose/diagnose.component';
-import {GeneralSignsComponent} from './generalSigns/generalSigns.component';
-import {RadioCheckBoxComponent} from './radioCheckBox/radioCheckBox.component';
-import {BgdComponent} from './bgd/bgd.component';
-import {KnowledgeComponent} from './knowledge/knowledge.component';
-import {KnowledgeKeyComponent} from './knowledge-key/knowledge-key.component';
-import {TreatmentComponent} from './treatment/treatment.component';
-import {TreatmentKeyComponent} from './treatment-key/treatment-key.component';
-import {ClinicalComponent} from './clinical/clinical.component';
+import {BlogComponent} from './news/blog/blog.component';
+import {BlogDetailComponent} from './news/blog-detail/blog-detail.component';
+import {DiagnoseComponent} from './expert-system/diagnostic/diagnose/diagnose.component';
+import {GeneralSignsComponent} from './expert-system/diagnostic/generalSigns/generalSigns.component';
+import {RadioCheckBoxComponent} from './expert-system/diagnostic/radioCheckBox/radioCheckBox.component';
+import {BgdComponent} from './introduce/bgd/bgd.component';
+import {KnowledgeComponent} from './expert-system/knowledges/knowledge/knowledge.component';
+import {KnowledgeKeyComponent} from './expert-system/knowledges/knowledge-key/knowledge-key.component';
+import {TreatmentComponent} from './expert-system/treatments/treatment/treatment.component';
+import {TreatmentKeyComponent} from './expert-system/treatments/treatment-key/treatment-key.component';
+import {ClinicalComponent} from './expert-system/diagnostic/clinical/clinical.component';
 
 
 const routes: Routes = [

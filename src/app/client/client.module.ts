@@ -7,7 +7,8 @@ import {
   NbIconModule,
   NbInputModule,
   NbLayoutModule,
-  NbMenuModule, NbRadioModule,
+  NbMenuModule,
+  NbRadioModule,
   NbSpinnerModule,
 } from '@nebular/theme';
 
@@ -20,33 +21,29 @@ import {TranslateModule} from '@ngx-translate/core';
 import {SharedModule} from '../shares/shared.module';
 import {HomeClientComponent} from './home_client/home-client.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
-import {ShopingCartComponent} from './shoping-cart/shoping-cart.component';
-import {AboutComponent} from './about/about.component';
+import {AboutComponent} from './introduce/about/about.component';
 import {ContactComponent} from './contact/contact.component';
-import {ProductDetailComponent} from './product-detail/product-detail.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {ProductComponent} from './products/product.component';
-import {SearchFilterComponent} from './search-filter/search-filter.component';
-import {ListProductComponent} from './list-product/list-product.component';
+import {SearchFilterComponent} from './news/search-filter/search-filter.component';
 import {JwPaginationModule} from 'jw-angular-pagination';
 import {NgSelectModule} from '@ng-select/ng-select';
-import {BlogComponent} from './blog/blog.component';
-import {BlogDetailComponent} from './blog-detail/blog-detail.component';
-import {ListCategoryComponent} from './listCategory/listCategory.component';
-import {RecentPostComponent} from './recent-post/recent-post.component';
-import {NewsLetterComponent} from './news-letter/news-letter.component';
+import {BlogComponent} from './news/blog/blog.component';
+import {BlogDetailComponent} from './news/blog-detail/blog-detail.component';
+import {ListCategoryComponent} from './news/listCategory/listCategory.component';
+import {RecentPostComponent} from './news/recent-post/recent-post.component';
+import {NewsLetterComponent} from './news/news-letter/news-letter.component';
 import {PdfViewerModule} from 'ng2-pdf-viewer';
-import {DiagnoseComponent} from './diagnose/diagnose.component';
-import {GeneralSignsComponent} from './generalSigns/generalSigns.component';
-import {RadioCheckBoxComponent} from './radioCheckBox/radioCheckBox.component';
-import {BgdComponent} from './bgd/bgd.component';
+import {DiagnoseComponent} from './expert-system/diagnostic/diagnose/diagnose.component';
+import {GeneralSignsComponent} from './expert-system/diagnostic/generalSigns/generalSigns.component';
+import {RadioCheckBoxComponent} from './expert-system/diagnostic/radioCheckBox/radioCheckBox.component';
+import {BgdComponent} from './introduce/bgd/bgd.component';
 import {AgmCoreModule} from '@agm/core';
-import {KnowledgeComponent} from './knowledge/knowledge.component';
-import {KnowledgeKeyComponent} from './knowledge-key/knowledge-key.component';
-import { TreatmentComponent } from './treatment/treatment.component';
-import {TreatmentKeyComponent} from './treatment-key/treatment-key.component';
-import {ClinicalComponent} from './clinical/clinical.component';
-import {SubclinicalComponent} from './subclinical/subclinical.component';
+import {KnowledgeComponent} from './expert-system/knowledges/knowledge/knowledge.component';
+import {KnowledgeKeyComponent} from './expert-system/knowledges/knowledge-key/knowledge-key.component';
+import {TreatmentComponent} from './expert-system/treatments/treatment/treatment.component';
+import {TreatmentKeyComponent} from './expert-system/treatments/treatment-key/treatment-key.component';
+import {ClinicalComponent} from './expert-system/diagnostic/clinical/clinical.component';
+import {SubclinicalComponent} from './expert-system/diagnostic/subclinical/subclinical.component';
 
 
 @NgModule({
@@ -83,12 +80,8 @@ import {SubclinicalComponent} from './subclinical/subclinical.component';
     BlogComponent,
     BlogDetailComponent,
     HomeClientComponent,
-    ShopingCartComponent,
     AboutComponent, BgdComponent,
     ContactComponent,
-    ProductDetailComponent,
-    ListProductComponent,
-    ProductComponent,
     ListCategoryComponent,
     RecentPostComponent,
     NewsLetterComponent, DiagnoseComponent, GeneralSignsComponent, RadioCheckBoxComponent, KnowledgeComponent,
