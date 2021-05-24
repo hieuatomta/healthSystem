@@ -32,6 +32,13 @@ export class SymptomsService {
       observe: 'response'
     });
   }
+public doSearchByClientSubclinical(req?: any): Observable<any> {
+    const options = createRequestOption(req);
+    return this.http.get<any[]>(`${environment.apiUrl}/client/status-diseases-subclinical`, {
+      params: options,
+      observe: 'response'
+    });
+  }
 
   public update(data: any): Observable<any> {
     return this.http.put<any>(`${environment.apiUrl}/symptoms`, data, {

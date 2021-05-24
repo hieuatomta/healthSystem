@@ -15,6 +15,7 @@ import {KnowledgeKeyComponent} from './expert-system/knowledges/knowledge-key/kn
 import {TreatmentComponent} from './expert-system/treatments/treatment/treatment.component';
 import {TreatmentKeyComponent} from './expert-system/treatments/treatment-key/treatment-key.component';
 import {ClinicalComponent} from './expert-system/diagnostic/clinical/clinical.component';
+import {SubclinicalComponent} from './expert-system/diagnostic/subclinical/subclinical.component';
 
 
 const routes: Routes = [
@@ -69,6 +70,10 @@ const routes: Routes = [
       {
         path: 'chan-doan/lam-san',
         component: ClinicalComponent,
+      },
+      {
+        path: 'chan-doan/can-lam-san',
+        component: SubclinicalComponent,
       },
       {
         path: 'chan-doan/:key',

@@ -2,15 +2,21 @@
   <div class="container">
     <div class="row">
       <nb-card style="width: 100%; background: white; ">
-        <nb-card-header style="color: black;">Dấu hiệu chung</nb-card-header>
+        <nb-card-header style="color: black;">Cận lâm sàng</nb-card-header>
         <nb-card-body>
-          <nb-radio-group [(ngModel)]="option">
+          <span style="color: black;font-size: 18px; font-weight: 500;" *ngFor="let status of options"> {{status.name}}
+            <nb-radio-group style="display: block; margin-left: 30px; margin-top: 10px; margin-bottom: 10px;"
+                            [name]="status.name">
             <nb-radio style="color: black;"
-                      *ngFor="let option of options"
+                      *ngFor="let option of status.symptomDTOList"
+                      (valueChange)="onChange($event)"
                       [value]="option.id">
               {{ option.name }}
             </nb-radio>
+
           </nb-radio-group>
+          </span>
+
         </nb-card-body>
         <nb-card-footer class="text-right">
           <button nbButton type="button" nbButton> {{ 'common.come' | translate }} </button>
