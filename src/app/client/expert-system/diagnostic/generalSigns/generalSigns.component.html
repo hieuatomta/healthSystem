@@ -1,27 +1,39 @@
 <section style="    background: white;" class="blog_area section-padding">
   <div class="container">
     <div class="row">
-      <nb-card style="width: 100%; background: white; ">
-        <nb-card-header style="color: black;">Chẩn đoán chung bệnh về phổi</nb-card-header>
-        <nb-card-body>
-          <form [formGroup]="form">
-            <div *ngFor="let data of Data; let i=index">
-              <label class="container1"> {{data.name}}
-                <input type="checkbox" [value]="data.id" (change)="onCheckboxChange($event)"/>
-                <span class="checkmark"></span>
-              </label>
-            </div>
-            <ngx-inline-message [message]="'common.table.item_suppliers_name'|translate"
-                                [formName]="form.controls['checkArray']"></ngx-inline-message>
-          </form>
+      <div class="col-lg-8 mb-5 mb-lg-0">
+        <h3 class="mtext-111 cl2 p-b-16" style="text-align: center; margin-bottom: 30px;">
+          HỆ CHUYÊN GIA HỖ TRỢ CHẨN ĐOÁN VÀ TƯ VẤN ĐIỀU TRỊ <br> CÁC BỆNH VỀ PHỔI
+        </h3>
+        <nb-card style="width: 100%; background: white; ">
+          <nb-card-header style="color:black;font-size: 20px;font-weight: 600;text-align: center;">Chẩn đoán chung bệnh về phổi</nb-card-header>
+          <nb-card-body>
+            <span style="display: block;color: black;font-size: 18px;padding: 10px 0px;font-weight: 500;">{{'common.title_chan_doan' | translate}}</span>
+            <form style="margin-top: 10px; margin-left: 10px;" [formGroup]="form">
+              <div *ngFor="let data of Data; let i=index">
+                <label class="container1"> {{data.name}}
+                  <input type="checkbox" [value]="data.id" (change)="onCheckboxChange($event)"/>
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <ngx-inline-message [message]="'common.table.item_suppliers_name'|translate"
+                                  [formName]="form.controls['checkArray']"></ngx-inline-message>
+            </form>
 
-        </nb-card-body>
-        <nb-card-footer class="text-right">
-          <button nbButton type="button" nbButton (click)="come()"> {{ 'common.come' | translate }} </button>
-          <button nbButton type="button" class="ml-2" status="primary" (click)="submitForm()"
-                  id="dialogCancelBtn">{{ 'common.cd' | translate }}</button>
-        </nb-card-footer>
-      </nb-card>
+          </nb-card-body>
+          <nb-card-footer class="text-right">
+            <button nbButton type="button" nbButton (click)="come()"> {{ 'common.come' | translate }} </button>
+            <button nbButton type="button" class="ml-2" status="primary" (click)="submitForm()"
+                    id="dialogCancelBtn">{{ 'common.cd' | translate }}</button>
+          </nb-card-footer>
+        </nb-card>
+      </div>
+      <div class="col-lg-4">
+        <div class="blog_right_sidebar">
+          <ngx-list-category-client></ngx-list-category-client>
+          <ngx-recent-post-client></ngx-recent-post-client>
+        </div>
+      </div>
     </div>
   </div>
 </section>

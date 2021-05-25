@@ -136,6 +136,7 @@
     "come": "Quay lại",
     "kt": "Kết thúc",
     "cd": "Chẩn đoán",
-    "format_date": "dd/MM/yyyy"
+    "format_date": "dd/MM/yyyy",
+    "title_chan_doan": "Hãy lựa chọn triệu chứng phù hợp với tình trạng hiện tại của bạn"
   }
 }
