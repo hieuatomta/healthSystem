@@ -76,7 +76,6 @@ export class SubclinicalComponent implements OnInit {
         }
       }
     }
-    console.log(this.arr);
   }
 
   constructor(private fb: FormBuilder,
@@ -100,7 +99,7 @@ export class SubclinicalComponent implements OnInit {
 
 
   submitForm() {
-    console.log(this.option);
+    console.log(this.arr);
 
     // try {
     //   const data = {

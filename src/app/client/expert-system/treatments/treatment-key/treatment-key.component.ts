@@ -16,6 +16,15 @@ export class TreatmentKeyComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe((params: Params) => {
       console.log(params);
       this.key = params['key'];
+      if (this.key === 'dieu-tri-viem-phoi-cong-dong') {
+        this.pdfSrc = 'http://localhost:4201/ltnc/assets/pdf/dieutri/dieu-tri-viem-phoi-cong-dong.pdf';
+      } else if (this.key === 'dieu-tri-ap-xe-phoi') {
+        this.pdfSrc = 'http://localhost:4201/ltnc/assets/pdf/dieutri/dieu-tri-ap-xe-phoi.pdf';
+      } else if (this.key === 'dieu-tri-gian-phe-quan') {
+        this.pdfSrc = 'http://localhost:4201/ltnc/assets/pdf/dieutri/dieu-tri-gian-phe-quan.pdf';
+      } else if (this.key === 'dieu-tri-hen-phe-quan') {
+        this.pdfSrc = 'http://localhost:4201/ltnc/assets/pdf/dieutri/dieu-tri-hen-phe-quan.pdf';
+      }
     });
   }
 
