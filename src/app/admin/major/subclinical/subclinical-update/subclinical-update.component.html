@@ -37,15 +37,15 @@
             <ngx-inline-message [message]="'common.table.item_general_signs_name'|translate"
                                 [formName]="inputSize.get('name')"></ngx-inline-message>
           </div>
-          <div class="col-lg-6 form-group">
-            <label class="label">
-              {{ 'common.table.item_general_signs_determined' | translate }} <span style="color: red">(*)</span>
-            </label>
-            <input class="custom-border" type="text" formControlName="determined" nbInput fullWidth trim="blur"
-                   [ngClass]="{'status-danger': this.inputSize.get('determined').touched && this.inputSize.get('determined').errors}">
-            <ngx-inline-message [message]="'common.table.item_general_signs_determined'|translate"
-                                [formName]="inputSize.get('determined')"></ngx-inline-message>
-          </div>
+<!--         z <div class="col-lg-6 form-group">-->
+<!--            <label class="label">-->
+<!--              {{ 'common.table.item_general_signs_determined' | translate }} <span style="color: red">(*)</span>-->
+<!--            </label>-->
+<!--            <input class="custom-border" type="text" formControlName="determined" nbInput fullWidth trim="blur"-->
+<!--                   [ngClass]="{'status-danger': this.inputSize.get('determined').touched && this.inputSize.get('determined').errors}">-->
+<!--            <ngx-inline-message [message]="'common.table.item_general_signs_determined'|translate"-->
+<!--                                [formName]="inputSize.get('determined')"></ngx-inline-message>-->
+<!--          </div>-->
 
           <div class="col-lg-6 form-group">
             <label class="label">
@@ -71,7 +71,6 @@
             <ngx-inline-message [message]="'common.table.item_link_status'|translate"
                                 [formName]="inputSize.get('likStatus')"></ngx-inline-message>
           </div>
-
         </div>
       </div>
     </form>

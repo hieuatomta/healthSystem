@@ -6,12 +6,14 @@ import {TestDiseaseService} from '../../../../@core/services/test-disease.servic
 import {TypeTestService} from '../../../../@core/services/type-test.service';
 
 @Component({
-  selector: 'ngx-map-module',
+  selector: 'ngx-map-module-cls',
   templateUrl: './map-popup.component.html',
   styleUrls: ['./map-popup.component.scss'],
   providers: [ScrollbarHelper, DimensionsHelper, ColumnChangesService],
 })
 export class MapPopupComponent implements OnInit {
+  lstRole1 = [];
+
   title: string;
   data: any;
   loading = false;
@@ -28,18 +30,11 @@ export class MapPopupComponent implements OnInit {
   };
   paramSearch = {code: null, status: 1};
   columns = [
-    {prop: 'selected', name: '', flexGrow: 0.3, headerCheckboxable: true, checkboxable: true},
-    {prop: 'index', name: 'common.table.item_number', flexGrow: 0.2, headerCheckboxable: false, checkboxable: false},
-    {prop: 'code', name: 'common.table.item_objects_code', flexGrow: 1, headerCheckboxable: false, checkboxable: false},
-    {prop: 'name', name: 'common.table.item_objects_name', flexGrow: 1, headerCheckboxable: false, checkboxable: false},
-    {
-      prop: 'updateTime',
-      name: 'common.table.item_update_time',
-      flexGrow: 1,
-      headerCheckboxable: false,
-      checkboxable: false
-    },
-    {prop: 'status', name: 'common.table.item_status', flexGrow: 1, headerCheckboxable: false, checkboxable: false}
+    {prop: 'index', name: 'common.table.item_number', flexGrow: 0.2},
+    {prop: 'code', name: 'common.table.item_objects_code', flexGrow: 1},
+    {prop: 'name', name: 'common.table.item_objects_name', flexGrow: 1},
+    {prop: 'updateTime', name: 'common.table.item_update_time', flexGrow: 1},
+    {name: 'common.table.item_action', prop: 'action_btn', flexGrow: 0.5}
   ];
 
   constructor(private ref: NbDialogRef<MapPopupComponent>,
@@ -64,7 +59,7 @@ export class MapPopupComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.typeTestService.query({typediseaseId: this.data.id}).subscribe(
+    this.typeTestService.query({typediseaseId: this.data?.id}).subscribe(
       res => {
         this.originalData = res.body.data.list;
         res.body.data.list.map(value => {

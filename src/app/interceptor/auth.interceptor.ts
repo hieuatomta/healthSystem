@@ -44,7 +44,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).do((event: any) => {
       if (event instanceof HttpResponse) {
         if (event.url.indexOf('/api/client/') === -1) {
-          if (event.url !== window.location.origin + '/assets/i18n/' + language + '.json') {
+          if (event.url !== window.location.origin + '/ltnc/assets/i18n/' + language + '.json') {
             localStorage.setItem('httpHeaders', event.headers.get('Authorization'));
           }
         }

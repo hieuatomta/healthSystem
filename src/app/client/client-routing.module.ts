@@ -68,11 +68,11 @@ const routes: Routes = [
         component: GeneralSignsComponent,
       },
       {
-        path: 'chan-doan/lam-san',
+        path: 'chan-doan/lam-sang',
         component: ClinicalComponent,
       },
       {
-        path: 'chan-doan/can-lam-san',
+        path: 'chan-doan/can-lam-sang',
         component: SubclinicalComponent,
       },
       {

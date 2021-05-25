@@ -84,7 +84,7 @@ export class ClinicalComponent implements OnInit {
         if (data !== null) {
 
         }
-        this.router.navigate(['/chan-doan/dau-hieu-nhan-biet']);
+        this.router.navigate(['/chan-doan/can-lam-sang'], { state: { id: this.typediseaseId } });
       }
     });
   };

@@ -59,7 +59,7 @@ export class RadioCheckBoxComponent implements OnInit {
           if (data !== null) {
 
           }
-          this.router.navigate(['/chan-doan/lam-san'],  { state: { id: res.body.data.list[0].typediseaseId } });
+          this.router.navigate(['/chan-doan/lam-sang'],  { state: { id: res.body.data.list[0].typediseaseId } });
         }
         console.log(res.body.data);
         //

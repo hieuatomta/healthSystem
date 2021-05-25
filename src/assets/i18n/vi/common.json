@@ -72,6 +72,7 @@
       "item_type_disease_name": "Tên bệnh",
       "item_type_disease": "Bệnh",
       "item_general_signs_determined": "Số lượng triệu chứng",
+      "item_subclinical_determined": "Xác định bệnh",
       "item_general_signs_name": "Chẩn đoán tình trạng",
       "item_test_disease_name": "Tên Xét nghiệm",
       "item_test_disease_code": "Mã Xét nghiệm",

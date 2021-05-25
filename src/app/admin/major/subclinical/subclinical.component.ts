@@ -76,10 +76,10 @@ export class SubclinicalComponent implements OnInit {
     {name: 'common.table.item_number', prop: 'index', flexGrow: 0.3},
     {name: 'common.table.item_type_disease', prop: 'NameType', flexGrow: 1.5},
     {name: 'common.table.item_general_signs_name', prop: 'name', flexGrow: 1.5},
-    {name: 'common.table.item_general_signs_determined', prop: 'determined', flexGrow: 1},
     {name: 'common.table.item_description', prop: 'description', flexGrow: 1.5},
     {name: 'common.table.item_status', prop: 'status', flexGrow: 1},
     {name: 'common.table.item_update_time', prop: 'updateTime', flexGrow: 1},
+    {name: 'common.table.item_subclinical_determined', prop: 'map_popup', flexGrow: 1},
     {name: 'common.table.item_action', prop: 'action_btn', flexGrow: 1}
   ];
 
@@ -157,7 +157,7 @@ export class SubclinicalComponent implements OnInit {
       updateTime: this.inputForm.get('updateTime').value,
       status: this.inputForm.get('status').value,
       typediseaseId: this.inputForm.get('typediseaseId').value,
-      type: 2
+      type: 3
     }).subscribe(
       (res) => {
         this.onSuccess(res.body.data, res.headers, pageToLoad);

@@ -42,12 +42,12 @@ export class SubclinicalUpdateComponent implements OnInit {
     this.inputSize = new FormGroup({
       id: new FormControl(this.data?.id, []),
       name: new FormControl(null, [Validators.required]),
-      determined: new FormControl(null, [Validators.required, Validators.pattern(/\-?\d*\.?\d{1,2}/)]),
+      determined: new FormControl(null, []),
       description: new FormControl(null, []),
       status: new FormControl(null, [Validators.required]),
       likStatus: new FormControl(null, [Validators.required]),
       typediseaseId: new FormControl(null, [Validators.required]),
-      type: new FormControl(2, [Validators.required])
+      type: new FormControl(3, [Validators.required])
     });
     this.inputSize.get('status').setValue(true);
     this.inputSize.get('likStatus').setValue(false);

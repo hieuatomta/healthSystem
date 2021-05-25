@@ -20,29 +20,34 @@ export class SubclinicalComponent implements OnInit {
   reformattedArray: any;
 
   ngOnInit(): void {
-    this.symptomsService.doSearchByClientSubclinical({typediseaseId: 3}).subscribe(res => {
-      this.options = res.body.data.list;
-      console.log(res), err => {
-        console.log(err);
-      };
-
-      this.reformattedArray = this.options.map(obj => {
-        const rObj = {
-          id: null,
-          symptomDTOList: null
+    if (this.typediseaseId === undefined || this.typediseaseId === null) {
+      this.router.navigate(['/chan-doan/dau-hieu-nhan-biet']);
+    } else {
+      this.symptomsService.doSearchByClientSubclinical({typediseaseId: this.typediseaseId}).subscribe(res => {
+        this.options = res.body.data.list;
+        console.log(res), err => {
+          console.log(err);
         };
-        rObj.id = obj.id;
-        rObj.symptomDTOList = obj.symptomDTOList.map(ob1 => {
-          const rObj1 = {
+
+        this.reformattedArray = this.options.map(obj => {
+          const rObj = {
             id: null,
+            symptomDTOList: null
           };
-          rObj1.id = ob1.id;
-          return rObj1;
+          rObj.id = obj.id;
+          rObj.symptomDTOList = obj.symptomDTOList.map(ob1 => {
+            const rObj1 = {
+              id: null,
+            };
+            rObj1.id = ob1.id;
+            return rObj1;
+          });
+          return rObj;
         });
-        return rObj;
+        console.log(this.reformattedArray);
       });
-      console.log(this.reformattedArray);
-    });
+
+    }
   }
 
   arr = [];
@@ -77,7 +82,7 @@ export class SubclinicalComponent implements OnInit {
       }
     }
   }
-
+  typediseaseId: any;
   constructor(private fb: FormBuilder,
               private router: Router,
               private dialogService: NbDialogService,
@@ -85,7 +90,11 @@ export class SubclinicalComponent implements OnInit {
               private translate: TranslateService,
               private activatedRoute: ActivatedRoute,
               private symptomsService: SymptomsService) {
-
+    try {
+      this.typediseaseId = this.router.getCurrentNavigation()?.extras.state.id;
+    } catch (e) {
+      this.typediseaseId = null;
+    }
     this.activatedRoute.params.subscribe((params: Params) => {
       console.log(params);
       this.key = params['key'];
