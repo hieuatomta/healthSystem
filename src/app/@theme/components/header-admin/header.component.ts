@@ -62,7 +62,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   currentLanguage = this.getLanguage();
 
   menuClick(e) {
-    console.log(e);
     if (e.menuId === 3) {
       localStorage.clear();
       this.router.navigate(['auths/login']);

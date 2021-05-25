@@ -9,7 +9,6 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const token = localStorage.getItem('httpHeaders');
-    console.log(token);
     if (token === undefined || token === null || token === '') {
       localStorage.clear();
       this.router.navigate(['/auths/login']);
