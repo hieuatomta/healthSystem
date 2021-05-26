@@ -40,6 +40,7 @@
     "table": {
       "item_number": "STT",
       "item_username": "Tên đăng nhập",
+      "item_name": "Họ và tên",
       "item_fullName": "Tên đầy đủ",
       "item_passwordHash": "Mật khẩu",
       "item_repassword": "Nhập lại mật khẩu",
@@ -83,6 +84,8 @@
       "item_color_name": "Tên màu",
       "item_color_image": "Tên ảnh",
       "item_objects_code": "Mã chức năng",
+      "item_amount": "Số lượng xét nghiệm",
+      "item_xn": "Xét nghiệm",
       "item_objects_name": "Tên chức năng",
       "item_objects_paren": "Chức năng cha",
       "item_objects_popup": "Map action",

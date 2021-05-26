@@ -4,6 +4,7 @@ import {SymptomsService} from '../../../../@core/services/symptoms.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NbDialogService, NbToastrService} from '@nebular/theme';
 import {TranslateService} from '@ngx-translate/core';
+import {TypeTestService} from '../../../../@core/services/type-test.service';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class SubclinicalComponent implements OnInit {
   reformattedArray: any;
 
   ngOnInit(): void {
+    // this.typediseaseId = 3;
     if (this.typediseaseId === undefined || this.typediseaseId === null) {
       this.router.navigate(['/chan-doan/dau-hieu-nhan-biet']);
     } else {
@@ -89,6 +91,7 @@ export class SubclinicalComponent implements OnInit {
               private toastr: NbToastrService,
               private translate: TranslateService,
               private activatedRoute: ActivatedRoute,
+              private typeTestService: TypeTestService,
               private symptomsService: SymptomsService) {
     try {
       this.typediseaseId = this.router.getCurrentNavigation()?.extras.state.id;
@@ -108,7 +111,24 @@ export class SubclinicalComponent implements OnInit {
 
 
   submitForm() {
-    console.log(this.arr);
+    const obj = {
+      listIdXn: this.arrId,
+      arr: this.arr,
+      amount: this.arrId?.length,
+      typediseaseId: this.typediseaseId
+    }
+    console.log(obj);
+
+    this.typeTestService.searchXdClient(obj).subscribe(
+      res => {
+        console.log(res);
+        // this.originalData = res.body.data.list;
+      },
+      (error) => {
+
+        // this.loading = false;
+      },
+    );
 
     // try {
     //   const data = {

@@ -6,28 +6,52 @@
     <nb-card-body>
       <div class="mb-4">
         <div class="row">
-          <div class="col-lg-4 form-group">
+          <div class="col-lg-2 form-group">
             <label class="label">
               Số lượng xét nghiệm
             </label>
-            <input (keyup.enter)="search()" nbInput fullWidth [(ngModel)]="paramSearch.code">
+            <input type="number" max="{{amount}}" min="0" nbInput fullWidth [(ngModel)]="paramSearch.amount1">
           </div>
           <div class="col-lg-4 form-group">
-<!--            [maxSelectedItems]="3"-->
             <label class="label">
               Xét nghiệm
             </label>
             <ng-select [clearAllText]="'common.clearAllText'"
                        placeholder="{{'common.placeHolder' |translate}}"
-                       notFoundText="{{'common.notFoundText' |translate}}"
-                       fullWidth formControlName="lstRole" [multiple]="true">
-              <ng-option *ngFor="let item of lstRole1" [value]="item.id">
-                <span title="{{item.name | translate }}" class="cut-text"> {{ item.name | translate }}</span>
+                       notFoundText="{{'common.notFoundText' |translate}}" [maxSelectedItems]="paramSearch.amount1"
+                       (change)="changeLeagueOwner($event)"
+                       fullWidth [(ngModel)]="paramSearch.lsId" [multiple]="true">
+              <ng-option *ngFor="let item of originalData" [value]="item.testdiseaseId">
+                <span title="{{item.nameTypeDisease | translate }}" class="cut-text"> {{ item.nameTypeDisease | translate }}</span>
               </ng-option>
             </ng-select>
           </div>
-          <div class="form-group col-lg-4 align-items-end d-flex">
-            <button nbButton  type="button" status="primary" (click)="search()">{{ 'common.add' | translate }}
+          <div class="col-lg-4 form-group">
+            <label class="label">
+              Triệu chứng
+            </label>
+<!--            <ng-select [clearAllText]="'common.clearAllText'"-->
+<!--                       placeholder="{{'common.placeHolder' |translate}}"-->
+<!--                       notFoundText="{{'common.notFoundText' |translate}}"-->
+<!--                       [groupBy]="groupingHelper"-->
+<!--                       fullWidth [(ngModel)]="paramSearch.lsXn" [multiple]="true">-->
+<!--              <ng-option *ngFor="let item of lsTt" [value]="item.id">-->
+<!--                <span title="{{item.name | translate }}" class="cut-text"> {{ item.name | translate }}</span>-->
+<!--              </ng-option>-->
+<!--            </ng-select>-->
+            <ng-select [items]="lsTt"
+                       bindLabel="name"
+                       bindValue="id"
+                       [groupBy]="groupingHelper"
+                       [multiple]="true"
+                       [(ngModel)]="paramSearch.lsXn">
+              <ng-template ng-optgroup-tmp let-item="item">
+                {{item.name || 'Unnamed group'}}
+              </ng-template>
+            </ng-select>
+          </div>
+          <div class="form-group col-lg-2 align-items-end d-flex">
+            <button nbButton  type="button" status="primary" (click)="submit()">{{ 'common.add' | translate }}
             </button>
           </div>
         </div>
@@ -36,8 +60,6 @@
                      [columnMode]="'flex'"
                      [rows]="rows"
                      [columns]="columns"
-                     [selected]="selectedUI"
-                     (select)="onSelect($event)"
                      rowHeight="auto"
                      [limit]="5"
                      [footerHeight]="50"
@@ -54,11 +76,11 @@
               <ng-container *ngIf="col.prop ==='index'" class="index-col">
                 {{ page.offset * page.limit + rowIndex + 1 }}
               </ng-container>
-              <ng-container *ngIf="col.prop === 'code'">
+              <ng-container *ngIf="col.prop === 'amount' || col.prop === 'nameXn'">
                 {{value}}
               </ng-container>
               <ng-container
-                *ngIf="col.prop !=='updateTime' && col.prop !=='description' && col.prop !=='status' && col.prop !=='code' ">
+                *ngIf="col.prop !=='amount' && col.prop !=='nameXn' && col.prop !=='status' && col.prop !=='code' ">
                 <span class="row-data-show" title="{{value}}">{{ value }}</span>
               </ng-container>
               <ng-container *ngIf="col.prop ==='description' " class="text-right">
@@ -70,7 +92,7 @@
               </ng-container>
               <ng-container *ngIf="col.prop ==='action_btn'" class="text-right">
                 <div>
-                  <button class="p-1" nbButton status="danger" ghost title="{{ 'common.delete' | translate }}"
+                  <button class="p-1" nbButton status="danger" ghost title="{{ 'common.delete' | translate }}" (click)="delete(row)"
                          >
                     <nb-icon icon="trash-2-outline" pack="eva" size="tiny"></nb-icon>
                   </button>

@@ -25,6 +25,14 @@ export class SymptomsService {
     });
   }
 
+  public doSearchGroup(req?: any): Observable<any> {
+    const options = createRequestOption(req);
+    return this.http.get<any[]>(`${environment.apiUrl}/symptoms-group`, {
+      params: options,
+      observe: 'response'
+    });
+  }
+
   public doSearchByClient(req?: any): Observable<any> {
     const options = createRequestOption(req);
     return this.http.get<any[]>(`${environment.apiUrl}/client/symptoms`, {
@@ -32,7 +40,8 @@ export class SymptomsService {
       observe: 'response'
     });
   }
-public doSearchByClientSubclinical(req?: any): Observable<any> {
+
+  public doSearchByClientSubclinical(req?: any): Observable<any> {
     const options = createRequestOption(req);
     return this.http.get<any[]>(`${environment.apiUrl}/client/status-diseases-subclinical`, {
       params: options,

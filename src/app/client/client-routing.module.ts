@@ -16,6 +16,7 @@ import {TreatmentComponent} from './expert-system/treatments/treatment/treatment
 import {TreatmentKeyComponent} from './expert-system/treatments/treatment-key/treatment-key.component';
 import {ClinicalComponent} from './expert-system/diagnostic/clinical/clinical.component';
 import {SubclinicalComponent} from './expert-system/diagnostic/subclinical/subclinical.component';
+import {EvaluateComponent} from './expert-system/evaluate/evaluate.component';
 
 
 const routes: Routes = [
@@ -80,6 +81,9 @@ const routes: Routes = [
         component: RadioCheckBoxComponent,
       },
       {
+        path: 'dang-gia',
+        component: EvaluateComponent,
+      }, {
         path: 'lien-he',
         component: ContactComponent,
       },

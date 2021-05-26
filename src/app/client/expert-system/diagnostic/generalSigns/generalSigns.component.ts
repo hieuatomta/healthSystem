@@ -90,7 +90,7 @@ export class GeneralSignsComponent implements OnInit {
     }).onClose.subscribe(res => {
       if (res) {
         console.log(res);
-        this.router.navigate(['/chan-doan']);
+        this.router.navigate(['/dang-gia']);
       }
     });
   }

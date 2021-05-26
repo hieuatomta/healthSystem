@@ -1,36 +1,36 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {SymptomsService} from '../../../../@core/services/symptoms.service';
 import {Router} from '@angular/router';
 import {NbDialogService, NbToastrService} from '@nebular/theme';
 import {TranslateService} from '@ngx-translate/core';
-import {StatusDiseaseService} from '../../../../@core/services/status-disease.service';
-import {ConfirmDialogComponent} from '../../../../shares/directives/confirm-dialog/confirm-dialog.component';
+import {SymptomsService} from '../../../@core/services/symptoms.service';
+import {StatusDiseaseService} from '../../../@core/services/status-disease.service';
+import {ConfirmDialogComponent} from '../../../shares/directives/confirm-dialog/confirm-dialog.component';
 
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'ngx-home-client',
-  styleUrls: ['./clinical.component.scss'],
-  templateUrl: './clinical.component.html',
+  styleUrls: ['./evaluate.component.scss'],
+  templateUrl: './evaluate.component.html',
 })
-export class ClinicalComponent implements OnInit {
+export class EvaluateComponent implements OnInit {
   form: FormGroup;
   Data: Array<any> = [];
-  typediseaseId: any;
-
+  option: any;
   ngOnInit(): void {
-    if (this.typediseaseId === undefined || this.typediseaseId === null) {
-      this.router.navigate(['/chan-doan/dau-hieu-nhan-biet']);
-    } else {
-      this.symptomsService.doSearchByClient({type: 2, status: 1, typediseaseId: this.typediseaseId}).subscribe(res => {
-        this.Data = res.body.data.list;
-        console.log(res), err => {
-          console.log(err);
-        };
-      });
-    }
+    this.symptomsService.doSearchByClient({type: 0, status: 1}).subscribe(res => {
+      this.Data = res.body.data.list;
+      console.log(res), err => {
+        console.log(err);
+      };
+    });
   }
+  options = [
+    {id: 1, name: 'Chất lượng kém'},
+    {id: 2, name: 'Chất lượng trung bình'},
+    {id: 3, name: 'Chất lượng tốt'}
+  ]
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -39,12 +39,6 @@ export class ClinicalComponent implements OnInit {
               private translate: TranslateService,
               private symptomsService: SymptomsService,
               private statusDiseaseService: StatusDiseaseService) {
-    try {
-      this.typediseaseId = this.router.getCurrentNavigation()?.extras.state.id;
-    } catch (e) {
-      this.typediseaseId = null;
-    }
-
     this.form = this.fb.group({
       checkArray: this.fb.array([], [Validators.required])
     });
@@ -80,11 +74,12 @@ export class ClinicalComponent implements OnInit {
         cancelTitle: this.translate.instant('common.title_ql'),
       },
     }).onClose.subscribe(res => {
+      console.log(res);
       if (res) {
         if (data !== null) {
 
         }
-        this.router.navigate(['/chan-doan/can-lam-sang'], { state: { id: this.typediseaseId } });
+        this.router.navigate(['/chan-doan/dau-hieu-nhan-biet']);
       }
     });
   };
@@ -100,17 +95,18 @@ export class ClinicalComponent implements OnInit {
     }).onClose.subscribe(res => {
       if (res) {
         console.log(res);
-        this.router.navigate(['/dang-gia']);
+        this.router.navigate(['/chan-doan']);
       }
     });
   }
+
   submitForm() {
     try {
       console.log(this.form.value.checkArray?.length);
       const data = {
         value: this.form.value.checkArray?.length,
-        type: 2,
-        typediseaseId: this.typediseaseId
+        type: 0,
+        typediseaseId: null
       };
       this.statusDiseaseService.queryStatus(data).subscribe((res) => {
         console.log(res.body.data);
@@ -120,7 +116,6 @@ export class ClinicalComponent implements OnInit {
           this.noNextLink(res.body.data.list);
         }
       }, (err) => {
-        console.log(err);
       });
     } catch (e) {
       this.toastr.danger('Có lỗi xảy ra trong quán trình chẩn đoán, vui lòng thử lại sau!', this.translate.instant('common.title_notification'));

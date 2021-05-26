@@ -4,6 +4,7 @@ import {NbDialogRef, NbToastrService} from '@nebular/theme';
 import {TranslateService} from '@ngx-translate/core';
 import {TestDiseaseService} from '../../../../@core/services/test-disease.service';
 import {TypeTestService} from '../../../../@core/services/type-test.service';
+import {SymptomsService} from '../../../../@core/services/symptoms.service';
 
 @Component({
   selector: 'ngx-map-module-cls',
@@ -28,12 +29,22 @@ export class MapPopupComponent implements OnInit {
     count: 0,
     offset: 0,
   };
-  paramSearch = {code: null, status: 1};
+  amount: any;
+  lsTt = [];
+  paramSearch = {
+    amount1: null,
+    amount: null,
+    typediseaseId: null,
+    lsId: null,
+    statusdiseaseId: null,
+    idXn: null,
+    listIdXn: null,
+    lsXn: null
+  };
   columns = [
     {prop: 'index', name: 'common.table.item_number', flexGrow: 0.2},
-    {prop: 'code', name: 'common.table.item_objects_code', flexGrow: 1},
-    {prop: 'name', name: 'common.table.item_objects_name', flexGrow: 1},
-    {prop: 'updateTime', name: 'common.table.item_update_time', flexGrow: 1},
+    {prop: 'amount', name: 'common.table.item_amount', flexGrow: 0.3},
+    {prop: 'nameXn', name: 'common.table.item_xn', flexGrow: 1},
     {name: 'common.table.item_action', prop: 'action_btn', flexGrow: 0.5}
   ];
 
@@ -41,38 +52,27 @@ export class MapPopupComponent implements OnInit {
               private toastr: NbToastrService,
               private translate: TranslateService,
               private testDiseaseService: TestDiseaseService,
-              private typeTestService: TypeTestService
+              private typeTestService: TypeTestService,
+              private symptomsService: SymptomsService
   ) {
   }
 
-  protected onSuccess(data: any | null): void {
-    this.rows = data.list || [];
-    this.selectedUI = [];
-    this.selected.map(value => {
-      this.rows.map((value1) => {
-        if (value === value1.id) {
-          this.selectedUI.push(value1);
-        }
-      });
-    });
-  }
-
   ngOnInit(): void {
+    console.log(this.data);
     this.loading = true;
-    this.typeTestService.query({typediseaseId: this.data?.id}).subscribe(
+    this.typeTestService.query({typediseaseId: this.data?.typediseaseId}).subscribe(
       res => {
         this.originalData = res.body.data.list;
-        res.body.data.list.map(value => {
-          this.selected.push(value.testdiseaseId);
-        });
+        this.amount = res.body.data.count;
+        this.paramSearch.amount1 = res.body.data.count;
       },
       (error) => {
         this.toAstrError();
         this.loading = false;
       },
-      () => this.search(),
+      () => this.loading = false,
     );
-
+    this.search();
   }
 
   toAstrError() {
@@ -80,80 +80,78 @@ export class MapPopupComponent implements OnInit {
       this.translate.instant('common.title_notification'));
   }
 
-  onSelect({selected}) {
-    this.selectedUI = [];
-    this.selectedUI.push(...selected);
-    this.rows.map((value) => {
-      this.selected.map((value1, index) => {
-        if (value.id === value1) {
-          this.selected.splice(index, index + 1);
-        }
-      });
+  delete(e) {
+    console.log(e);
+    this.typeTestService.deleteXd(e.type).subscribe(() => {
+      this.toastr.success(this.translate.instant('type_symptom.delete_success'),
+        this.translate.instant('common.title_notification'));
+      this.search();
+      this.isLoad = false;
+    }, (err) => {
+      this.toastr.success(err.message),
+        this.translate.instant('common.title_notification');
+      this.isLoad = false;
     });
-    selected.map(value => this.selected.push(value.id));
   }
 
   search() {
     this.loading = true;
-    this.testDiseaseService.doSearch().subscribe(res => {
-        this.allData = res.body.data.list;
-        this.onSuccess(res.body.data);
+    this.typeTestService.searchXd(this.data?.id).subscribe(
+      res => {
+        console.log(res);
+        this.rows = res.body.data.list;
+        // this.originalData = res.body.data.list;
       },
       (error) => {
+        this.toAstrError();
         this.loading = false;
       },
-      () => this.loading = false);
+      () => this.loading = false,
+    );
+  }
+  groupingHelper(item) {
+    return item.nameXn
+  }
+
+  changeLeagueOwner(e) {
+    const obj = {
+      typediseaseId: 3,
+      listIdXn: this.paramSearch.lsId
+    }
+    this.symptomsService.doSearchGroup(obj).subscribe(
+      res => {
+        console.log(res);
+        this.lsTt = res.body.data.list;
+        // this.originalData = res.body.data.list;
+      },
+      (error) => {
+        this.toAstrError();
+        this.loading = false;
+      },
+      () => this.loading = false,
+    );
+     console.log(e);
   }
 
   submit() {
+    this.paramSearch.statusdiseaseId = this.data?.id;
+    this.paramSearch.listIdXn = this.paramSearch.lsId;
+    this.paramSearch.amount = this.paramSearch.lsId?.length;
+    this.paramSearch.typediseaseId = this.data?.typediseaseId;
+    console.log(this.paramSearch);
     this.loading = true;
-    const listUncheck = [];
-    const listAdd = [];
-    if (this.allData?.length === this.selected?.length) {
-      this.originalData.map(value => {
-        listUncheck.push(value.testdiseaseId);
-      });
-      this.selected.map(value => {
-        listAdd.push(value);
-      });
-    } else {
-      this.originalData.map(value => {
-        let isUncheck = true;
-        this.selected.map((select, index) => {
-          if (value.testdiseaseId === select) {
-            this.selected.splice(index, index + 1);
-            isUncheck = false;
-          }
-        });
-        if (isUncheck) {
-          listUncheck.push(value.testdiseaseId);
-        }
-      });
-      this.selected.map(value => {
-        listAdd.push(value);
-      });
-    }
-    const data1 = {
-      typediseaseId: this.data.id,
-      listAdd: listAdd
-    };
-    const data2 = {
-      typediseaseId: this.data.id,
-      listUncheck: listUncheck
-    };
-    this.typeTestService.delete(data2).subscribe(
-      success => {
-        this.typeTestService.insert(data1).subscribe(
-          res => this.ref.close('success'),
-          error => {
-            this.toAstrError()
-            this.loading = false;
-          },
-        );
+    this.typeTestService.insertXd(this.paramSearch).subscribe(
+      res => {
+        console.log(res);
+        // this.originalData = res.body.data.list;
       },
-      error => {
-        this.toAstrError();
+      (error) => {
+        this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
         this.loading = false;
+      },
+      () => {
+        this.loading = false;
+        this.search();
       },
     );
   }
