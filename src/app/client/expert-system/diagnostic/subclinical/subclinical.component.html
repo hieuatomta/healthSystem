@@ -23,7 +23,7 @@
 
           </nb-card-body>
           <nb-card-footer class="text-right">
-            <button nbButton type="button" nbButton> {{ 'common.come' | translate }} </button>
+            <button nbButton type="button" (click)="come()" nbButton> {{ 'common.come' | translate }} </button>
             <button nbButton type="button" class="ml-2" status="primary" (click)="submitForm()"
                     id="dialogCancelBtn">{{ 'common.cd' | translate }}</button>
           </nb-card-footer>

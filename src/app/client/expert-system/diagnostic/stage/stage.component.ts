@@ -6,6 +6,7 @@ import {NbDialogService, NbToastrService} from '@nebular/theme';
 import {TranslateService} from '@ngx-translate/core';
 import {StatusDiseaseService} from '../../../../@core/services/status-disease.service';
 import {ConfirmDialogComponent} from '../../../../shares/directives/confirm-dialog/confirm-dialog.component';
+import {ConfirmDialogClientComponent} from '../../../../shares/directives/confirm-dialog-client/confirm-dialog-client.component';
 
 
 @Component({
@@ -21,16 +22,16 @@ export class StageComponent implements OnInit {
 
   ngOnInit(): void {
     this.typediseaseId = 3;
-    // if (this.typediseaseId === undefined || this.typediseaseId === null) {
-    //   this.router.navigate(['/chan-doan/dau-hieu-nhan-biet']);
-    // } else {
+    if (this.typediseaseId === undefined || this.typediseaseId === null) {
+      this.router.navigate(['/chan-doan/dau-hieu-chung']);
+    } else {
       this.symptomsService.doSearchByClient({type: 4, status: 1, typediseaseId: this.typediseaseId}).subscribe(res => {
         this.Data = res.body.data.list;
         console.log(res), err => {
           console.log(err);
         };
       });
-    // }
+    }
   }
 
   constructor(private fb: FormBuilder,
@@ -52,7 +53,7 @@ export class StageComponent implements OnInit {
   }
 
   come() {
-    this.router.navigate(['/chan-doan']);
+    this.router.navigate(['/chan-doan/can-lam-sang'], { state: { id: this.typediseaseId } });
   }
 
   onCheckboxChange(e) {
@@ -73,25 +74,25 @@ export class StageComponent implements OnInit {
   }
 
   nextLink(data) {
-    this.dialogService.open(ConfirmDialogComponent, {
+    this.dialogService.open(ConfirmDialogClientComponent, {
       context: {
         title: this.translate.instant('common.title_cd'),
         message: data.name,
-        okTitle: this.translate.instant('common.title_tt'),
+        okTitle: this.translate.instant('common.kt'),
         cancelTitle: this.translate.instant('common.title_ql'),
+        hideCancel1: false
       },
     }).onClose.subscribe(res => {
-      if (res) {
-        if (data !== null) {
-
-        }
-        this.router.navigate(['/chan-doan/can-lam-sang'], { state: { id: this.typediseaseId } });
+      if (res === 'confirm') {
+        this.router.navigate(['/chan-doan/dang-gia'], { state: { id: this.typediseaseId } });
+      } else if ( res === 'confirm1') {
+        this.router.navigate(['/chan-doan/dieu-tri'], { state: { id: this.typediseaseId } });
       }
     });
   };
 
   noNextLink(data) {
-    this.dialogService.open(ConfirmDialogComponent, {
+    this.dialogService.open(ConfirmDialogClientComponent, {
       context: {
         title: this.translate.instant('common.title_cd'),
         message: data.name,
@@ -110,7 +111,7 @@ export class StageComponent implements OnInit {
       console.log(this.form.value.checkArray?.length);
       const data = {
         value: this.form.value.checkArray?.length,
-        type: 2,
+        type: 4,
         typediseaseId: this.typediseaseId
       };
       this.statusDiseaseService.queryStatus(data).subscribe((res) => {

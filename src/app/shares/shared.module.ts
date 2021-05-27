@@ -16,11 +16,13 @@ import {ScrollbarHelper} from '@swimlane/ngx-datatable';
 import {ConfirmDialogComponent} from './directives/confirm-dialog/confirm-dialog.component';
 import {TreePickerComponent} from './directives/tree-picker/tree-picker.component';
 import {NgxResizeWatcherDirective} from './directives/ngx-resize-watcher.directive';
+import {ConfirmDialogClientComponent} from './directives/confirm-dialog-client/confirm-dialog-client.component';
 
 @NgModule({
   declarations: [
     InlineMessageComponent,
     ConfirmDialogComponent,
+    ConfirmDialogClientComponent,
     TreePickerComponent,
     NgxResizeWatcherDirective
   ],
@@ -40,6 +42,7 @@ import {NgxResizeWatcherDirective} from './directives/ngx-resize-watcher.directi
   exports: [
     InlineMessageComponent,
     ConfirmDialogComponent,
+    ConfirmDialogClientComponent,
     TreePickerComponent,
     NgxResizeWatcherDirective
   ],

@@ -46,7 +46,6 @@ export class LogsComponent implements OnInit {
     {name: 'common.table.item_description', prop: 'content', flexGrow: 1.5},
     {name: 'common.table.item_log_ip', prop: 'ip', flexGrow: 1},
     {name: 'common.table.item_name_client', prop: 'nameClient', flexGrow: 1},
-    {name: 'common.table.item_status', prop: 'status', flexGrow: 1},
     {name: 'common.table.item_impact_time', prop: 'impactTime', flexGrow: 1},
   ];
 

@@ -6,6 +6,7 @@ import {NbDialogService, NbToastrService} from '@nebular/theme';
 import {TranslateService} from '@ngx-translate/core';
 import {StatusDiseaseService} from '../../../../@core/services/status-disease.service';
 import {ConfirmDialogComponent} from '../../../../shares/directives/confirm-dialog/confirm-dialog.component';
+import {ConfirmDialogClientComponent} from '../../../../shares/directives/confirm-dialog-client/confirm-dialog-client.component';
 
 
 @Component({
@@ -61,7 +62,7 @@ export class GeneralSignsComponent implements OnInit {
   }
 
   nextLink(data) {
-    this.dialogService.open(ConfirmDialogComponent, {
+    this.dialogService.open(ConfirmDialogClientComponent, {
       context: {
         title: this.translate.instant('common.title_cd'),
         message: data.name,
@@ -80,13 +81,14 @@ export class GeneralSignsComponent implements OnInit {
   };
 
   noNextLink(data) {
-    this.dialogService.open(ConfirmDialogComponent, {
+    this.dialogService.open(ConfirmDialogClientComponent, {
       context: {
         title: this.translate.instant('common.title_cd'),
         message: data.name,
         okTitle: this.translate.instant('common.kt'),
         cancelTitle: this.translate.instant('common.title_ql')
       },
+      dialogClass: 'modal-full',
     }).onClose.subscribe(res => {
       if (res) {
         console.log(res);

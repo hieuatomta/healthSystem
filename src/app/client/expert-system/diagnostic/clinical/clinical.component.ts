@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {NbDialogService, NbToastrService} from '@nebular/theme';
 import {TranslateService} from '@ngx-translate/core';
 import {StatusDiseaseService} from '../../../../@core/services/status-disease.service';
-import {ConfirmDialogComponent} from '../../../../shares/directives/confirm-dialog/confirm-dialog.component';
+import {ConfirmDialogClientComponent} from '../../../../shares/directives/confirm-dialog-client/confirm-dialog-client.component';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class ClinicalComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.typediseaseId === undefined || this.typediseaseId === null) {
-      this.router.navigate(['/chan-doan/dau-hieu-nhan-biet']);
+      this.router.navigate(['/chan-doan/dau-hieu-chung']);
     } else {
       this.symptomsService.doSearchByClient({type: 2, status: 1, typediseaseId: this.typediseaseId}).subscribe(res => {
         this.Data = res.body.data.list;
@@ -51,7 +51,7 @@ export class ClinicalComponent implements OnInit {
   }
 
   come() {
-    this.router.navigate(['/chan-doan']);
+    this.router.navigate(['/chan-doan/dau-hieu-nhan-biet']);
   }
 
   onCheckboxChange(e) {
@@ -72,7 +72,7 @@ export class ClinicalComponent implements OnInit {
   }
 
   nextLink(data) {
-    this.dialogService.open(ConfirmDialogComponent, {
+    this.dialogService.open(ConfirmDialogClientComponent, {
       context: {
         title: this.translate.instant('common.title_cd'),
         message: data.name,
@@ -90,7 +90,7 @@ export class ClinicalComponent implements OnInit {
   };
 
   noNextLink(data) {
-    this.dialogService.open(ConfirmDialogComponent, {
+    this.dialogService.open(ConfirmDialogClientComponent, {
       context: {
         title: this.translate.instant('common.title_cd'),
         message: data.name,

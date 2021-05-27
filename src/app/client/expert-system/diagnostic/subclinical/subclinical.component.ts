@@ -5,6 +5,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NbDialogService, NbToastrService} from '@nebular/theme';
 import {TranslateService} from '@ngx-translate/core';
 import {TypeTestService} from '../../../../@core/services/type-test.service';
+import {ConfirmDialogClientComponent} from '../../../../shares/directives/confirm-dialog-client/confirm-dialog-client.component';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class SubclinicalComponent implements OnInit {
   ngOnInit(): void {
     // this.typediseaseId = 3;
     if (this.typediseaseId === undefined || this.typediseaseId === null) {
-      this.router.navigate(['/chan-doan/dau-hieu-nhan-biet']);
+      this.router.navigate(['/chan-doan/dau-hieu-chung']);
     } else {
       this.symptomsService.doSearchByClientSubclinical({typediseaseId: this.typediseaseId}).subscribe(res => {
         this.options = res.body.data.list;
@@ -84,7 +85,9 @@ export class SubclinicalComponent implements OnInit {
       }
     }
   }
+
   typediseaseId: any;
+
   constructor(private fb: FormBuilder,
               private router: Router,
               private dialogService: NbDialogService,
@@ -109,19 +112,66 @@ export class SubclinicalComponent implements OnInit {
     });
   }
 
+  nextLink(data) {
+    this.dialogService.open(ConfirmDialogClientComponent, {
+      context: {
+        title: this.translate.instant('common.title_cd'),
+        message: data.name,
+        okTitle: this.translate.instant('common.title_tt'),
+        cancelTitle: this.translate.instant('common.title_ql'),
+      },
+    }).onClose.subscribe(res => {
+      console.log(res);
+      if (res) {
+        if (data !== null) {
+
+        }
+        this.router.navigate(['/chan-doan/giai-doan']);
+      }
+    });
+  };
+
+  come() {
+    this.router.navigate(['/chan-doan/lam-sang'], { state: { id: this.typediseaseId } });
+  }
+
+  noNextLink(data) {
+    this.dialogService.open(ConfirmDialogClientComponent, {
+      context: {
+        title: this.translate.instant('common.title_cd'),
+        message: data.name,
+        okTitle: this.translate.instant('common.kt'),
+        cancelTitle: this.translate.instant('common.title_ql')
+      },
+      dialogClass: 'modal-full',
+    }).onClose.subscribe(res => {
+      if (res) {
+        console.log(res);
+        this.router.navigate(['/dang-gia']);
+      }
+    });
+  }
 
   submitForm() {
     const obj = {
       listIdXn: this.arrId,
       arr: this.arr,
       amount: this.arrId?.length,
-      typediseaseId: this.typediseaseId
-    }
+      typediseaseId: this.typediseaseId,
+      lsIdXn: this.arrId?.sort().toString(),
+      lsIdTt: this.arr?.sort().toString()
+    };
     console.log(obj);
 
     this.typeTestService.searchXdClient(obj).subscribe(
       res => {
         console.log(res);
+        const rs = res.body.data.list[0];
+        if (rs.likStatus === 1) {
+          this.nextLink(rs);
+        } else {
+          this.noNextLink(rs);
+        }
         // this.originalData = res.body.data.list;
       },
       (error) => {

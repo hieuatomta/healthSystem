@@ -45,6 +45,7 @@ export class MapPopupComponent implements OnInit {
     {prop: 'index', name: 'common.table.item_number', flexGrow: 0.2},
     {prop: 'amount', name: 'common.table.item_amount', flexGrow: 0.3},
     {prop: 'nameXn', name: 'common.table.item_xn', flexGrow: 1},
+    {prop: 'nameTT', name: 'common.table.item_xn', flexGrow: 1},
     {name: 'common.table.item_action', prop: 'action_btn', flexGrow: 0.5}
   ];
 

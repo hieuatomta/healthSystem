@@ -114,7 +114,7 @@ export class ColumnGridImportComponent implements OnInit, OnChanges {
   }
 
   confirmRemoveRow(row, index?) {
-    // // const ref = this.dialogService.open(ConfirmDialogComponent, {
+    // // const ref = this.dialogService.open(ConfirmDialogClientComponent, {
     // //   autoFocus: true,
     // //   context: {
     // //     message: `Xác nhận xóa?`
