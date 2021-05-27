@@ -45,6 +45,7 @@ import {TreatmentKeyComponent} from './expert-system/treatments/treatment-key/tr
 import {ClinicalComponent} from './expert-system/diagnostic/clinical/clinical.component';
 import {SubclinicalComponent} from './expert-system/diagnostic/subclinical/subclinical.component';
 import {EvaluateComponent} from './expert-system/evaluate/evaluate.component';
+import {StageComponent} from './expert-system/diagnostic/stage/stage.component';
 
 
 @NgModule({
@@ -86,7 +87,7 @@ import {EvaluateComponent} from './expert-system/evaluate/evaluate.component';
     ListCategoryComponent,
     RecentPostComponent,
     NewsLetterComponent, DiagnoseComponent, GeneralSignsComponent, RadioCheckBoxComponent, KnowledgeComponent,
-    KnowledgeKeyComponent, TreatmentComponent, TreatmentKeyComponent, ClinicalComponent, SubclinicalComponent, EvaluateComponent
+    KnowledgeKeyComponent, TreatmentComponent, TreatmentKeyComponent, ClinicalComponent, SubclinicalComponent, EvaluateComponent, StageComponent
   ],
   providers: [
     {
