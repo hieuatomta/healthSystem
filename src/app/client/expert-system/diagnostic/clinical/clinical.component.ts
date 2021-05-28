@@ -6,6 +6,7 @@ import {NbDialogService, NbToastrService} from '@nebular/theme';
 import {TranslateService} from '@ngx-translate/core';
 import {StatusDiseaseService} from '../../../../@core/services/status-disease.service';
 import {ConfirmDialogClientComponent} from '../../../../shares/directives/confirm-dialog-client/confirm-dialog-client.component';
+import {LogsEvaluateService} from '../../../../@core/services/logs-evaluate.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class ClinicalComponent implements OnInit {
   form: FormGroup;
   Data: Array<any> = [];
   typediseaseId: any;
+  usersClient: any;
 
   ngOnInit(): void {
     if (this.typediseaseId === undefined || this.typediseaseId === null) {
@@ -34,6 +36,7 @@ export class ClinicalComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private router: Router,
+              private logsEvaluateService: LogsEvaluateService,
               private dialogService: NbDialogService,
               private toastr: NbToastrService,
               private translate: TranslateService,
@@ -44,7 +47,10 @@ export class ClinicalComponent implements OnInit {
     } catch (e) {
       this.typediseaseId = null;
     }
-
+    this.usersClient = JSON.parse(localStorage.getItem('usersClient'));
+    if (  this.usersClient === null) {
+      this.router.navigate(['/chan-doan']);
+    }
     this.form = this.fb.group({
       checkArray: this.fb.array([], [Validators.required])
     });
@@ -99,8 +105,18 @@ export class ClinicalComponent implements OnInit {
       },
     }).onClose.subscribe(res => {
       if (res) {
-        console.log(res);
-        this.router.navigate(['/danh-gia']);
+        this.usersClient.updateTime = null;
+        this.usersClient.nameType = data.name;
+        this.logsEvaluateService.updateClient(this.usersClient).subscribe(
+          (value) => {
+            console.log(value);
+            localStorage.setItem('usersClient', JSON.stringify(value.body.data.list));
+            this.router.navigate(['/danh-gia']);
+          },
+          error => {
+            this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
+          },
+        );
       }
     });
   }

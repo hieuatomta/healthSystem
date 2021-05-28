@@ -10,15 +10,15 @@
           <nb-card-header style="color:black;font-size: 20px;font-weight: 600;text-align: center;">Cảm ơn bạn đã sử dụng hệ chuyên gia </nb-card-header>
           <nb-card-body>
             <span style="display: block;color: black;font-size: 18px;padding: 10px 0px;font-weight: 500;">Đánh giá</span>
-            <nb-radio-group style="padding-left: 20px; display: flex;" [(ngModel)]="option">
+            <nb-radio-group style="padding-left: 20px; display: flex;" [(ngModel)]="param.nameEvaluate">
               <nb-radio style="color: black !important; padding-right: 20px;"
                         *ngFor="let option of options"
-                        [value]="option.id">
+                        [value]="option.name">
                 {{ option.name }}
               </nb-radio>
             </nb-radio-group>
             <span style="display: block;color: black;font-size: 18px;padding: 10px 0px;font-weight: 500;margin-bottom: 10px;">Nhận xét</span>
-            <textarea style="background: white;color: black;" rows="7" nbInput fullWidth placeholder="Nhập nhận xét"></textarea>
+            <textarea style="background: white;color: black;" rows="7" [(ngModel)]="param.content" nbInput fullWidth placeholder="Nhập nhận xét"></textarea>
           </nb-card-body>
           <nb-card-footer class="text-right">
             <button nbButton type="button" class="ml-2" status="primary" (click)="submitForm()"

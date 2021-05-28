@@ -4,6 +4,7 @@ import {UsersService} from '../../../../@core/services/users.service';
 import {NbToastrService} from '@nebular/theme';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
+import {LogsEvaluateService} from '../../../../@core/services/logs-evaluate.service';
 
 
 @Component({
@@ -18,17 +19,20 @@ export class DiagnoseComponent implements OnInit, OnDestroy {
   inputForm: any;
   loading: any;
   ngOnInit(): void {
+    console.log("s")
+    localStorage.removeItem('usersClient');
     this.inputForm = new FormGroup({
-      name: new FormControl(null, [Validators.required]),
+      fullName: new FormControl(null, [Validators.required]),
       mail: new FormControl(null, []),
       phone: new FormControl(null, [Validators.required, Validators.pattern(/^\d{10}$/)]),
     });
   }
 
-  constructor(private userService: UsersService,
+  constructor(private logsEvaluateService: LogsEvaluateService,
               private translate: TranslateService,
               private router: Router,
               private toastr: NbToastrService) {
+    localStorage.removeItem('usersClient');
   }
 
   submit() {
@@ -36,10 +40,10 @@ export class DiagnoseComponent implements OnInit, OnDestroy {
       this.loading = true;
       const data = Object.assign({}, this.inputForm.value);
       console.log(data);
-        this.userService.insertClient(data).subscribe(
+        this.logsEvaluateService.insertClient(data).subscribe(
           (value) => {
             console.log(value);
-            localStorage.setItem('usersClient', data);
+            localStorage.setItem('usersClient', JSON.stringify(value.body.data.list));
             this.router.navigate(['/chan-doan/dau-hieu-chung'])
           },
           error => {

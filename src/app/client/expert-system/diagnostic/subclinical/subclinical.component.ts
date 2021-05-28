@@ -6,6 +6,7 @@ import {NbDialogService, NbToastrService} from '@nebular/theme';
 import {TranslateService} from '@ngx-translate/core';
 import {TypeTestService} from '../../../../@core/services/type-test.service';
 import {ConfirmDialogClientComponent} from '../../../../shares/directives/confirm-dialog-client/confirm-dialog-client.component';
+import {LogsEvaluateService} from '../../../../@core/services/logs-evaluate.service';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class SubclinicalComponent implements OnInit {
   option;
   list: any;
   reformattedArray: any;
+  usersClient: any;
 
   ngOnInit(): void {
     // this.typediseaseId = 3;
@@ -92,6 +94,7 @@ export class SubclinicalComponent implements OnInit {
               private router: Router,
               private dialogService: NbDialogService,
               private toastr: NbToastrService,
+              private logsEvaluateService: LogsEvaluateService,
               private translate: TranslateService,
               private activatedRoute: ActivatedRoute,
               private typeTestService: TypeTestService,
@@ -104,12 +107,11 @@ export class SubclinicalComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       console.log(params);
       this.key = params['key'];
-      // if (this.key?.trim() !== 'dau-hieu-nhan-biet') {
-      //   this.router.navigate(['/trang-chu']);
-      // } else if (this.key?.trim() === 'dau-hieu-chung') {
-      //   this.router.navigate(['/chan-doan/dau-hieu-chung']);
-      // }
     });
+    this.usersClient = JSON.parse(localStorage.getItem('usersClient'));
+    if (  this.usersClient === null) {
+      this.router.navigate(['/chan-doan']);
+    }
   }
 
   nextLink(data) {
@@ -146,8 +148,18 @@ export class SubclinicalComponent implements OnInit {
       dialogClass: 'modal-full',
     }).onClose.subscribe(res => {
       if (res) {
-        console.log(res);
-        this.router.navigate(['/danh-gia']);
+        this.usersClient.updateTime = null;
+        this.usersClient.nameType = data.name;
+        this.logsEvaluateService.updateClient(this.usersClient).subscribe(
+          (value) => {
+            console.log(value);
+            localStorage.setItem('usersClient', JSON.stringify(value.body.data.list));
+            this.router.navigate(['/danh-gia']);
+          },
+          error => {
+            this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
+          },
+        );
       }
     });
   }

@@ -14,10 +14,10 @@
                   <label class="label" style="color: black;">
                     {{ 'common.table.item_name' | translate }} <span style="color: red">(*)</span>
                   </label>
-                  <input style="background: white;color: black;" type="text" nbInput fullWidth formControlName="name"
+                  <input style="background: white;color: black;" type="text" nbInput fullWidth formControlName="fullName"
                          placeholder="Nhập Họ và tên">
                   <ngx-inline-message [message]="'common.table.item_name'|translate"
-                                      [formName]="inputForm.get('name')"></ngx-inline-message>
+                                      [formName]="inputForm.get('fullName')"></ngx-inline-message>
                 </div>
                 <div class="form-group">
                   <label class="label" style="color: black;">

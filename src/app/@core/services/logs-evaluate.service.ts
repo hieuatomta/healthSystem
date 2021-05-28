@@ -18,11 +18,15 @@ export class LogsEvaluateService {
       observe: 'response'
     });
   }
-  // public doSearch(req?: any, body?: any): Observable<any> {
-  //   const options = createRequestOption(req);
-  //   return this.http.post<any[]>(`${environment.apiUrl}/logs-evaluates/doSearch`, body, {
-  //     params: options,
-  //     observe: 'response'
-  //   });
-  // }
+  public insertClient(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/client/sys-log-evaluates`, data, {
+      observe: 'response'
+    });
+  }
+
+  public updateClient(data: any): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}/client/sys-log-evaluates`, data, {
+      observe: 'response'
+    });
+  }
 }

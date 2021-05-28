@@ -16,6 +16,7 @@ export class RadioCheckBoxComponent implements OnInit {
   key: any;
   options = [];
   option;
+  usersClient: any;
 
   ngOnInit(): void {
     this.symptomsService.doSearchByClient({type: 1, status: 1}).subscribe(res => {
@@ -43,6 +44,10 @@ export class RadioCheckBoxComponent implements OnInit {
         this.router.navigate(['/chan-doan/dau-hieu-chung']);
       }
     });
+    this.usersClient = JSON.parse(localStorage.getItem('usersClient'));
+    if (  this.usersClient === null) {
+      this.router.navigate(['/chan-doan']);
+    }
   }
 
   come() {

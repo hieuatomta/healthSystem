@@ -6,6 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {SymptomsService} from '../../../@core/services/symptoms.service';
 import {StatusDiseaseService} from '../../../@core/services/status-disease.service';
 import {ConfirmDialogComponent} from '../../../shares/directives/confirm-dialog/confirm-dialog.component';
+import {LogsEvaluateService} from '../../../@core/services/logs-evaluate.service';
 
 
 @Component({
@@ -18,6 +19,11 @@ export class EvaluateComponent implements OnInit {
   form: FormGroup;
   Data: Array<any> = [];
   option: any;
+
+  param = {
+    nameEvaluate: null,
+    content: null
+  }
   ngOnInit(): void {
     this.symptomsService.doSearchByClient({type: 0, status: 1}).subscribe(res => {
       this.Data = res.body.data.list;
@@ -31,14 +37,19 @@ export class EvaluateComponent implements OnInit {
     {id: 2, name: 'Chất lượng trung bình'},
     {id: 3, name: 'Chất lượng tốt'}
   ]
-
+  usersClient: any;
   constructor(private fb: FormBuilder,
               private router: Router,
               private dialogService: NbDialogService,
               private toastr: NbToastrService,
               private translate: TranslateService,
+              private logsEvaluateService: LogsEvaluateService,
               private symptomsService: SymptomsService,
               private statusDiseaseService: StatusDiseaseService) {
+    this.usersClient = JSON.parse(localStorage.getItem('usersClient'));
+    if (  this.usersClient === null) {
+      this.router.navigate(['/chan-doan']);
+    }
     this.form = this.fb.group({
       checkArray: this.fb.array([], [Validators.required])
     });
@@ -102,21 +113,27 @@ export class EvaluateComponent implements OnInit {
 
   submitForm() {
     try {
+      console.log(this.param);
       console.log(this.form.value.checkArray?.length);
       const data = {
         value: this.form.value.checkArray?.length,
         type: 0,
         typediseaseId: null
       };
-      this.statusDiseaseService.queryStatus(data).subscribe((res) => {
-        console.log(res.body.data);
-        if (res.body.data.list.likStatus === 1) {
-          this.nextLink(res.body.data.list);
-        } else {
-          this.noNextLink(res.body.data.list);
-        }
-      }, (err) => {
-      });
+      this.usersClient.updateTime = null;
+      this.usersClient.nameEvaluate = this.param.nameEvaluate;
+      this.usersClient.content = this.param.content;
+      this.logsEvaluateService.updateClient(this.usersClient).subscribe(
+        (value) => {
+          console.log(value);
+          this.toastr.success('Cảm ơn bạn đã đánh giá hệ chuyên gia', this.translate.instant('common.title_notification'));
+          this.router.navigate(['/trang-chu']);
+          localStorage.removeItem('usersClient');
+        },
+        error => {
+          this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
+        },
+      );
     } catch (e) {
       this.toastr.danger('Có lỗi xảy ra trong quán trình chẩn đoán, vui lòng thử lại sau!', this.translate.instant('common.title_notification'));
     }
