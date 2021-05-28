@@ -41,10 +41,9 @@ export class RecentPostComponent implements OnInit, OnDestroy {
   }
 
   nextRouter(e) {
-    console.log(e)
-    this.router.navigate(['/chi-tiet-tin-tuc/' + e.code],
-      { queryParams: { profile: JSON.stringify(e) }});
+    this.router.navigate(['/chi-tiet-tin-tuc/' + e.code], { queryParams: { profile: e.id }});
   }
+
 
   arr = [];
 

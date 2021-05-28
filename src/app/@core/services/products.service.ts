@@ -47,6 +47,11 @@ export class ProductsService {
       observe: 'response'
     });
   }
+  public doSearch2(id: any): Observable<any> {
+    return this.http.get<any[]>(`${environment.apiUrl}/client/news-by-id/${id}`, {
+      observe: 'response'
+    });
+  }
 
   public updateImg(data: any, file?: File): Observable<any> {
     const model: any = data;

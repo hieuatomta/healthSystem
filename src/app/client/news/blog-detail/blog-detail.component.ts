@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ProductsService} from '../../../@core/services/products.service';
-import {HttpHeaders} from '@angular/common/http';
+import {NbToastrService} from '@nebular/theme';
 
 declare var $: any;
 
@@ -14,48 +14,51 @@ declare var $: any;
 export class BlogDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
+
   key: any;
   key1: any;
   arr = [];
-data: any;
-body: any;
+  data: any;
+  id: any;
+  body: any;
+  bodyNews: any;
+
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
+              private toastr: NbToastrService,
               private productsService: ProductsService,
               private route: ActivatedRoute) {
     this.activatedRoute.params.subscribe((params: Params) => {
       console.log(params);
       this.key = params['key'];
-      console.log(this.key)
+      console.log(this.key);
     });
     this.route.queryParams.subscribe(
       params => {
-        this.data = JSON.parse(params['profile']);
+        this.data = params['profile'];
         console.log('Got param: ', this.data);
-        this.body = null
-        if ( this.data) {
-          this.body = '<p>' + this.data.bodyNews.replace(/(\r\n|\n|\r)/g, "</p> <p>");
-        }
+        this.productsService.doSearch2((this.data)).subscribe(res => {
+            console.log(res);
+            if (res.body.data.list?.length === 1) {
+              this.bodyNews = res.body.data.list[0];
+              this.body = null;
+              if (this.bodyNews) {
+                this.body = '<p>' + this.bodyNews.bodyNews.replace(/(\r\n|\n|\r)/g, '</p> <p>');
+              }
+            } else {
+              this.router.navigate(['trang-chu']);
+              this.toastr.danger('Không tìm thấy bài viết, vui lòng thử lại sau!', 'Thông báo');
+            }
 
+          },
+          (error) => {
+            this.router.navigate(['trang-chu']);
+            this.toastr.danger('Không tìm thấy bài viết, vui lòng thử lại sau!', 'Thông báo');
+          });
       }
-    )
-
-    // this.productsService.doSearch1({
-    //   page: 0,
-    //   page_size: 10,
-    //   code: this.key
-    // }).subscribe(res => {
-    //   console.log(res);
-    //     this.onSuccess(res.body.data, res.headers, 0);
-    //   },
-    //   (error) => {
-    //   });
+    );
   }
 
-
-  // onSuccess(data: any | null, headers: HttpHeaders, page: number): void {
-  //   this.arr = data.list;
-  // }
 
   ngOnInit(): void {
 

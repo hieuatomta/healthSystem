@@ -5,43 +5,18 @@
     <div class="row">
       <div class="col-lg-8 posts-list">
         <div class="single-post">
-          <h2>{{data.title}}
+          <h2>{{bodyNews.title}}
           </h2>
-          <ul class="blog-info-link">
-            <li><p><i class="fa fa-user"></i> {{data.usersName}}</p></li>
+          <ul style="padding-top: 20px;" class="blog-info-link">
+            <li><p><i class="fa fa-user"></i> {{bodyNews.usersName}}</p></li>
             <li style="display: contents;text-align: right;"><p><i
-              class="fa fa-date"></i> {{data.updateTime | date:'dd/MM/yyyy HH:mm:ss'}}</p></li>
+              class="fa fa-date"></i> {{bodyNews.updateTime | date:'dd/MM/yyyy HH:mm:ss'}}</p></li>
           </ul>
           <div class="feature-img">
-            <img class="img-fluid" [src]="data.imageLink" alt="">
+            <img class="img-fluid" [src]="bodyNews.imageLink" alt="">
           </div>
           <div class="blog_details">
-<!--            <p>-->
-<!--             {{data.bodyNews}}-->
-<!--            </p>-->
-<!--            <p>-->
-
-<!--             {{body}}-->
-<!--            </p>-->
             <div [innerHTML]="body"></div>
-
-<!--            <p>-->
-<!--              Dự án LIFT-TB (Leveraging Innovation for Faster Treatment of Tuberculosis) giai đoạn 2021-2023 với ngân sách của Cơ quan Hợp tác Quốc tế Hàn thông qua tổ chức của TB Alliance hỗ trợ triển khai thí điểm phác đồ BPaL tại bảy quốc gia trong đó có Việt Nam.-->
-<!--            </p>-->
-<!--            <p>-->
-<!--              Theo PGS, TS Nguyễn Viết Nhung, Giám đốc BV Phổi Trung ương, Chủ nhiệm Chương trình Chống lao Quốc gia : “Với phác đồ điều trị BPal, người mắc bệnh lao kháng thuốc sẽ được rút ngắn thời gian điều trị từ 18 tháng xuống chỉ còn sáu tháng. Hiệu quả điều trị đã được Tổ chức Y tế Thế giới khuyến cáo đạt kết quả tốt, tới 90%”.-->
-<!--            </p>-->
-<!--            <p>-->
-<!--              PGS Nhung cho biết thêm: “Việt Nam sẽ tiến hành nghiên cứu triển khai thí điểm theo dõi dọc sử dụng phác đồ điều trị BPaL. Mục tiêu chính của nghiên cứu là ước hiệu quả và mức độ an toàn của phác đồ BPaL trên bệnh nhân lao đa kháng thuốc và bệnh nhân không dung nạp thuốc hoặc thất bại trong điều trị lao đa kháng thuốc.”-->
-<!--            </p>-->
-<!--            <p>-->
-<!--              Trong nhiều năm, bệnh nhân lao đa kháng thuốc (MDR-TB) được điều trị theo phác đồ điều trị lao đa kháng thông thường do Tổ chức Y tế Thế giới (WHO) khuyến nghị, thường là có giai đoạn điều trị tấn công kéo dài 8 tháng và tổng thời gian điều trị kép dài 20 tháng. Từ  tháng 8 năm 2018 theo “Thông báo nhanh” (rapid communication) của WHO, những bệnh nhân lao kháng rifamcipin (RR-TB) hoặc đa kháng thuốc (MDR-TB) không có tiền sử sử dụng thuốc lao hàng hai và không kháng với nhóm FQs hoặc được coi là rất khó có khả năng kháng với FQ, có thể được điều trị bằng phác đồ ngắn hạn hơn ( STR) gồm thuốc tiêm hàng hai (tốt nhất là dùng thuốc uống hoàn toàn) thay cho phác đồ dài hạn hiện hành.-->
-<!--            </p>-->
-<!--            <p>-->
-<!--              Việt Nam là một trong những nước có gánh nặng bệnh lao và lao kháng thuốc cao. Phác đồ điều trị lao kháng thuốc kéo dài từ 18-20 tháng. Với mục tiêu triển khai áp dụng phác đồ điều trị ngắn hơn, Việt Nam tiến hành nghiên cứu triển khai phác đồ BPaL. Nghiên cứu được thực hiện từ kết quả điều trị với 567 bệnh nhân trong thời gian 3 năm tại Hà Nội, TP Hồ Chí Minh, Cần Thơ làm cơ sở cho việc triển khai mở rộng. Đây là thử nghiệm lâm sàng giai đoạn 3 không có đối chứng với số lượng hơn 500 bệnh nhân, sẽ cung cấp bằng chứng cho việc quyết định triển khai mở rộng.            </p>-->
-<!--            <p>-->
-<!--              Thông qua nghiên cứu này, năng lực của Chương trình Chống lao Quốc gia được tăng cường trong việc triển khai thực hiện phác đồ BpaL. Kết quả của nghiên cứu sẽ được sử dụng để hỗ trợ việc triển khai mở rộng phác đồ trên quy mô toàn quốc.-->
-<!--            </p>-->
           </div>
         </div>
       </div>

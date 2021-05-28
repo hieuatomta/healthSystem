@@ -51,9 +51,7 @@ export class BlogComponent implements OnInit, OnDestroy {
   arrCategories = [];
 
   nextRouter(e) {
-    console.log(e)
-    this.router.navigate(['/chi-tiet-tin-tuc/' + e.code],
-      { queryParams: { profile: JSON.stringify(e) }});
+    this.router.navigate(['/chi-tiet-tin-tuc/' + e.code], { queryParams: { profile: e.id }});
   }
 
   onSuccess(data: any | null, headers: HttpHeaders, page: number): void {
