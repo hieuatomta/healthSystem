@@ -61,6 +61,21 @@ const routes: Routes = [{
         .then(m => m.TypeDiseaseModule),
     },
     {
+      path: 'stage',
+      loadChildren: () => import('./major/stage/stage.module')
+        .then(m => m.StageModule),
+    },
+    {
+      path: 'treatments',
+      loadChildren: () => import('./expert-system/streatments/streatments.module')
+        .then(m => m.StreatmentsModule),
+    },
+    {
+      path: 'knowledges',
+      loadChildren: () => import('./expert-system/sknowledges/sknowledges.module')
+        .then(m => m.SknowledgesModule),
+    },
+    {
       path: 'general-signs',
       loadChildren: () => import('./major/general-signs/general-signs.module')
         .then(m => m.GeneralSignsModule),

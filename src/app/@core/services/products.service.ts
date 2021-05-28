@@ -48,14 +48,27 @@ export class ProductsService {
     });
   }
 
+  public updateImg(data: any, file?: File): Observable<any> {
+    const model: any = data;
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    formData.append('model', JSON.stringify(model));
+    return this.http.put<any>(`${environment.apiUrl}/news-img`, formData, {
+      observe: 'response'
+    });
+  }
   public update(data: any): Observable<any> {
     return this.http.put<any>(`${environment.apiUrl}/news`, data, {
       observe: 'response'
     });
   }
 
-  public insert(data: any): Observable<any> {
-    return this.http.post <any>(`${environment.apiUrl}/news`, data, {
+  public insert(data: any,  file?: File): Observable<any> {
+    const model: any = data;
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    formData.append('model', JSON.stringify(model));
+    return this.http.post <any>(`${environment.apiUrl}/news`, formData, {
       observe: 'response'
     });
   }

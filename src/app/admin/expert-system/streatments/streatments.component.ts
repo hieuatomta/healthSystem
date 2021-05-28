@@ -1,30 +1,22 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {HttpHeaders} from '@angular/common/http';
-import {ToastrService} from '../../../@core/mock/toastr-service';
-import {TranslateService} from '@ngx-translate/core';
 import {NbDialogService, NbToastrService} from '@nebular/theme';
-import {UsersService} from '../../../@core/services/users.service';
+import {ToastrService} from '../../../@core/mock/toastr-service';
 import {FormControl, FormGroup} from '@angular/forms';
+import {TranslateService} from '@ngx-translate/core';
+import {UsersService} from '../../../@core/services/users.service';
+import {HttpHeaders} from '@angular/common/http';
 import {ConfirmDialogComponent} from '../../../shares/directives/confirm-dialog/confirm-dialog.component';
-import {ProductsService} from '../../../@core/services/products.service';
-import {NewsUpdateComponent} from './news-update/news-update.component';
-import {MapPopupComponent} from './map-popup/map-popup.component';
-import {MapImageProductComponent} from './map-image-product/map-image-product.component';
-
-class RequestOptions {
-  constructor(param: { headers: Headers }) {
-
-  }
-
-}
+import {SizeService} from '../../../@core/services/size.service';
+import {StreatmentsUpdateComponent} from './streatments-update/streatments-update.component';
+import {CategoriesService} from '../../../@core/services/categories.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  selector: 'ngx-image-management',
-  styleUrls: ['./news-management.component.scss'],
-  templateUrl: './news-management.component.html',
+  selector: 'ngx-users',
+  styleUrls: ['./streatments.component.scss'],
+  templateUrl: './streatments.component.html',
 })
-export class NewsManagementComponent implements OnInit {
+export class StreatmentsComponent implements OnInit {
   ngOnInit(): void {
     this.search(0);
   }
@@ -34,15 +26,14 @@ export class NewsManagementComponent implements OnInit {
     private translate: TranslateService,
     private toastrService: NbToastrService,
     private userService: UsersService,
-    private productsService: ProductsService,
+    private categoriesService: CategoriesService,
     private dialogService: NbDialogService) {
   }
 
   isLoad: boolean;
   listStatus = [
-    {name: 'common.state.0', code: 0},
-    {name: 'common.state.1', code: 1},
-    {name: 'common.state.2', code: 2},
+    {name: 'common.status.1', code: 1},
+    {name: 'common.status.0', code: 0}
   ];
   rows: Object[];
   page = {
@@ -52,13 +43,11 @@ export class NewsManagementComponent implements OnInit {
   };
   columns = [
     {name: 'common.table.item_number', prop: 'index', flexGrow: 0.3},
-    {name: 'common.table.item_news_code', prop: 'code', flexGrow: 1},
-    {name: 'common.table.item_news_name', prop: 'title', flexGrow: 1.5},
-    {name: 'common.table.item_news_paren_object', prop: 'categoryName', flexGrow: 1},
+    {name: 'common.table.item_category_code', prop: 'code', flexGrow: 1},
+    {name: 'common.table.item_category_name', prop: 'name', flexGrow: 1.5},
+    {name: 'common.table.item_description', prop: 'description', flexGrow: 1.5},
     {name: 'common.table.item_status', prop: 'status', flexGrow: 1},
-    {name: 'common.table.item_reasonForRefusal', prop: 'reasonForRefusal', flexGrow: 1},
     {name: 'common.table.item_update_time', prop: 'updateTime', flexGrow: 1},
-    {name: 'common.table.item_image', prop: 'imageLink', flexGrow: 0.6},
     {name: 'common.table.item_action', prop: 'action_btn', flexGrow: 1}
   ];
 
@@ -77,11 +66,11 @@ export class NewsManagementComponent implements OnInit {
   editUsers(data) {
     let title;
     if (data == null) {
-      title = this.translate.instant('news.title_add');
+      title = this.translate.instant('category.title_add');
     } else {
-      title = this.translate.instant('news.title_edit');
+      title = this.translate.instant('category.title_edit');
     }
-    this.dialogService.open(NewsUpdateComponent, {
+    this.dialogService.open(StreatmentsUpdateComponent, {
       context: {
         title: title,
         data: data,
@@ -91,10 +80,10 @@ export class NewsManagementComponent implements OnInit {
       value => {
         if (value) {
           if (data == null) {
-            this.toastrService.success(this.translate.instant('news.content_add_success'),
+            this.toastrService.success(this.translate.instant('category.content_add_success'),
               this.translate.instant('common.title_notification'));
           } else {
-            this.toastrService.success(this.translate.instant('news.content_edit_success'),
+            this.toastrService.success(this.translate.instant('category.content_edit_success'),
               this.translate.instant('common.title_notification'));
           }
           this.search(0);
@@ -102,7 +91,6 @@ export class NewsManagementComponent implements OnInit {
       }
     );
   }
-
   protected onSuccess(data: any | null, headers: HttpHeaders, page: number): void {
     this.page.count = data.count;
     this.page.offset = page || 0;
@@ -112,7 +100,7 @@ export class NewsManagementComponent implements OnInit {
   search(pageToLoad: number) {
     this.isLoad = true;
     this.page.offset = pageToLoad;
-    this.productsService.doSearch({
+    this.categoriesService.doSearch({
       page: this.page.offset,
       page_size: this.page.limit,
       name: this.inputForm.get("name").value,
@@ -121,7 +109,6 @@ export class NewsManagementComponent implements OnInit {
       status: this.inputForm.get("status").value,
     }).subscribe(
       (res) => {
-        console.log(res);
         this.onSuccess(res.body.data, res.headers, pageToLoad);
       },
       (error) => {
@@ -132,18 +119,17 @@ export class NewsManagementComponent implements OnInit {
   }
 
 
-
   deleteUsers(data) {
     this.dialogService.open(ConfirmDialogComponent, {
       context: {
         title: this.translate.instant('common.title_notification'),
-        message: this.translate.instant('news.title_delete') + ' ' + data.name
+        message: this.translate.instant('category.title_delete') + ' ' + data.name
       },
     }).onClose.subscribe(res => {
       if (res) {
         this.isLoad = true;
-        this.productsService.delete(data.id).subscribe(() => {
-          this.toastrService.success(this.translate.instant('news.delete_success'),
+        this.categoriesService.delete(data.id).subscribe(() => {
+          this.toastrService.success(this.translate.instant('category.delete_success'),
             this.translate.instant('common.title_notification'));
           this.search(0);
           this.isLoad = false;
@@ -154,33 +140,6 @@ export class NewsManagementComponent implements OnInit {
         });
       }
     });
-  }
 
-  openMapModule(data) {
-    const openMap = this.dialogService.open(MapPopupComponent, {
-      context: {
-        title: this.translate.instant('common.table.item_size_color'),
-        data: data,
-      }
-    });
-    openMap.onClose.subscribe(value => {
-        this.search(0);
-        // this.toastr.success(this.translate.instant('common.content_map_action_success'),
-          this.translate.instant('objects.title_notification');
-    });
-  }
-
-  openMapModuleImage(data) {
-    const openMap = this.dialogService.open(MapImageProductComponent, {
-      context: {
-        title: this.translate.instant('common.table.item_image'),
-        data: data,
-      }
-    });
-    openMap.onClose.subscribe(value => {
-      this.search(0);
-      // this.toastr.success(this.translate.instant('common.content_map_action_success'),
-      this.translate.instant('objects.title_notification');
-    });
   }
 }

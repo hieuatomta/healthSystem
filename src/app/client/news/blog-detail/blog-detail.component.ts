@@ -17,7 +17,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   key: any;
   key1: any;
   arr = [];
-
+data: any;
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private productsService: ProductsService,
@@ -25,16 +25,22 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe((params: Params) => {
       console.log(params);
       this.key = params['key'];
-      this.key1 = params['key1'];
       console.log(this.key)
-      console.log(this.key1)
     });
+    this.route.queryParams.subscribe(
+      params => {
+        this.data = JSON.parse(params['profile']);
+        console.log('Got param: ', this.data);
+
+      }
+    )
 
     this.productsService.doSearch1({
       page: 0,
       page_size: 10,
       code: this.key
     }).subscribe(res => {
+      console.log(res);
         this.onSuccess(res.body.data, res.headers, 0);
       },
       (error) => {

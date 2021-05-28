@@ -12,6 +12,7 @@ import {HttpHeaders} from '@angular/common/http';
 import {CategoriesService} from '../../../../@core/services/categories.service';
 import {Observable} from 'rxjs';
 import {UploadFileService} from '../../../../@core/services/uploadFileService.service';
+import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -57,6 +58,7 @@ export class NewsUpdateComponent implements OnInit {
     public ref: NbDialogRef<NewsUpdateComponent>,
     private categoriesService: CategoriesService,
     private colorService: ColorService,
+    private sanitizer: DomSanitizer,
     private productsService: ProductsService,
     private uploadService: UploadFileService,
   ) {
@@ -98,13 +100,14 @@ export class NewsUpdateComponent implements OnInit {
       status: new FormControl(this.data?.status, []),
       numberOfViewer: new FormControl(this.data?.numberOfViewer, []),
       highlights: new FormControl(this.data?.highlights, []),
+      imageLink: new FormControl(this.data?.imageLink, []),
       categoryId: new FormControl(null, [Validators.required]),
     });
     if (this.data) {
       this.inputProduct.patchValue(this.data);
     }
+    this.value = this.inputProduct.get('imageLink').value;
   };
-
   parentIdChange($event) {
     this.inputProduct.get('objectsId').setValue($event);
   }
@@ -115,7 +118,7 @@ export class NewsUpdateComponent implements OnInit {
       this.loading = true;
       if (this.data == null) {
         console.log(this.inputProduct.value);
-        this.productsService.insert(this.inputProduct.value).subscribe(
+        this.productsService.insert(this.inputProduct.value, this.selectedFiles.item(0)).subscribe(
           (value) => this.ref.close(value),
           (error) => {
             this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
@@ -124,14 +127,27 @@ export class NewsUpdateComponent implements OnInit {
           () => this.loading = false
         );
       } else {
-        this.productsService.update(this.inputProduct.value).subscribe(
-          (value) => this.ref.close(value),
-          (error) => {
-            this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
-            this.loading = false;
-          },
-          () => this.loading = false,
-        );
+        // this.inputProduct.get('bodyNews').setValue(this.inputProduct.get('bodyNews').value?.toString().replace(/(\r\n|\n|\r)/g, '<br />'));
+        console.log(this.selectedFiles);
+        if (this.selectedFiles === null || this.selectedFiles === undefined) {
+          this.productsService.update(this.inputProduct.value).subscribe(
+            (value) => this.ref.close(value),
+            (error) => {
+              this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
+              this.loading = false;
+            },
+            () => this.loading = false,
+          );
+        } else {
+          this.productsService.updateImg(this.inputProduct.value, this.selectedFiles?.item(0)).subscribe(
+            (value) => this.ref.close(value),
+            (error) => {
+              this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
+              this.loading = false;
+            },
+            () => this.loading = false,
+          );
+        }
       }
     } else {
     }
@@ -164,10 +180,13 @@ export class NewsUpdateComponent implements OnInit {
         this.loading = false;
       });
   };
-
+  value: string | SafeUrl = null;
   selectFile(event) {
     if (event !== null) {
       this.selectedFiles = event.target.files;
+      this.value = this.sanitizer.bypassSecurityTrustUrl(
+        window.URL.createObjectURL(event.target.files[0])
+      );
     } else {
       this.canUpdate = true;
       this.selectedFiles = null;

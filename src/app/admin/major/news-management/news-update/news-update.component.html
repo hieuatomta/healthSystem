@@ -12,23 +12,45 @@
     <form [formGroup]="inputProduct">
       <div class="mb-4">
         <div class="row">
-                    <div class="col-lg-6 form-group">
-                      <label class="label">
-                        {{ 'common.table.item_news_category' | translate }} <span style="color: red">(*)</span>
-                      </label>
-                      <ng-select [clearAllText]="'common.clearAllText'"
-                                 placeholder="{{'common.placeHolder' |translate}}"
-                                 notFoundText="{{'common.notFoundText' |translate}}"
-                                 fullWidth formControlName="categoryId">
-                        <ng-option *ngFor="let item of lstRole1" [value]="item.id">
-                          <span title="{{item.name | translate }}" class="cut-text"> {{ item.name | translate }}</span>
-                        </ng-option>
-                      </ng-select>
-                      <!--            <nb-toggle style="display: block !important;" fullWidth formControlName="status"></nb-toggle>-->
-                      <ngx-inline-message [message]="'common.table.item_news_category'|translate"
-                                          [formName]="inputProduct.get('categoryId')"></ngx-inline-message>
-                    </div>
           <div class="col-lg-6 form-group">
+            <label class="label">
+              {{ 'common.table.item_news_category' | translate }} <span style="color: red">(*)</span>
+            </label>
+            <ng-select [clearAllText]="'common.clearAllText'"
+                       placeholder="{{'common.placeHolder' |translate}}"
+                       notFoundText="{{'common.notFoundText' |translate}}"
+                       fullWidth formControlName="categoryId">
+              <ng-option *ngFor="let item of lstRole1" [value]="item.id">
+                <span title="{{item.name | translate }}" class="cut-text"> {{ item.name | translate }}</span>
+              </ng-option>
+            </ng-select>
+            <!--            <nb-toggle style="display: block !important;" fullWidth formControlName="status"></nb-toggle>-->
+            <ngx-inline-message [message]="'common.table.item_news_category'|translate"
+                                [formName]="inputProduct.get('categoryId')"></ngx-inline-message>
+          </div>
+          <div class="col-lg-6 form-group">
+            <label class="label">
+              {{ 'common.table.item_image_link' | translate }} <span style="color: red">(*)</span>
+            </label>
+            <label class="btn btn-default">
+              <input type="file" accept="*" (change)="selectFile($event)" multiple/>
+            </label>
+            <div style="width: 300px;height: 200px;">
+            <img style="width: 100%; height: 100%"
+                 [src]="value"
+                 />
+            </div>
+<!--            <button class="btn btn-success" [disabled]="canUpdate" (click)="upload()">-->
+<!--              Upload-->
+<!--            </button>-->
+
+<!--            <input class="custom-border" type="text" formControlName="image_link" nbInput fullWidth trim="blur"-->
+<!--                   [ngClass]="{'status-danger': this.inputProduct.get('image_link').touched && this.inputProduct.get('image_link').errors}">-->
+<!--            <ngx-inline-message [message]="'common.table.item_image_link'|translate"-->
+<!--                                [formName]="inputProduct.get('image_link')"></ngx-inline-message>-->
+          </div>
+
+          <div class="col-lg-12 form-group">
             <label class="label">
               {{ 'common.table.item_news_title' | translate }} <span style="color: red">(*)</span>
             </label>
@@ -42,7 +64,7 @@
             <label class="label">
               {{ 'common.table.item_news_body_child' | translate }} <span style="color: red">(*)</span>
             </label>
-            <textarea  nbInput fullWidth formControlName="bodyChild"></textarea>
+            <textarea nbInput fullWidth formControlName="bodyChild"></textarea>
             <ngx-inline-message [message]="'common.table.item_news_body_child'|translate"
                                 [formName]="inputProduct.get('bodyChild')"></ngx-inline-message>
           </div>

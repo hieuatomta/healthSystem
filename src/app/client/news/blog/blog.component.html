@@ -25,12 +25,12 @@
           <div *ngFor="let key of arr" class="">
             <article class="blog_item">
               <div class="blog_item_img">
-                <img class="card-img rounded-0" src="./assets/images/news/Phac-do-dieu-tri-BPaL---Giai-phap-moi-trong-dieu-t-170420216024.jpeg" alt="">
+                <img class="card-img rounded-0" [src]="key.imageLink" alt="">
               </div>
 
               <div class="blog_details">
-                <a class="d-inline-block" routerLink="/chi-tiet-tin-tuc/{{key.code}}">
-                  <h2>{{key.title}}</h2>
+                <a class="d-inline-block" (click)="nextRouter(key)" >
+                  <h2 style="cursor: pointer;">{{key.title}}</h2>
                 </a>
                 <p>{{key.bodyChild}}</p>
                 <ul class="blog-info-link">
