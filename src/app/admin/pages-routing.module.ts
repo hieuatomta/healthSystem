@@ -137,6 +137,11 @@ const routes: Routes = [{
         .then(m => m.LogsModule),
     },
     {
+      path: 'logs-evaluates',
+      loadChildren: () => import('./expert-system/logs-evaluates/logs-evaluates.module')
+        .then(m => m.LogsEvaluatesModule),
+    },
+    {
       path: 'layout',
       loadChildren: () => import('./demo/layout/layout.module')
         .then(m => m.LayoutModule),

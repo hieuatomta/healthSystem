@@ -68,6 +68,9 @@
   "logs": {
     "title": "Theo dõi lịch sử tác động"
   },
+  "logs-evaluates": {
+    "title": "Theo dõi lịch sử tác động hệ chuyên gia"
+  },
   "role_object": {
     "map_popup_success": "Sửa thành công"
   }

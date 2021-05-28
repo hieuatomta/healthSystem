@@ -84,7 +84,7 @@ export class StageComponent implements OnInit {
       },
     }).onClose.subscribe(res => {
       if (res === 'confirm') {
-        this.router.navigate(['/chan-doan/dang-gia'], { state: { id: this.typediseaseId } });
+        this.router.navigate(['/chan-doan/danh-gia'], { state: { id: this.typediseaseId } });
       } else if ( res === 'confirm1') {
         this.router.navigate(['/chan-doan/dieu-tri'], { state: { id: this.typediseaseId } });
       }
@@ -102,7 +102,7 @@ export class StageComponent implements OnInit {
     }).onClose.subscribe(res => {
       if (res) {
         console.log(res);
-        this.router.navigate(['/dang-gia']);
+        this.router.navigate(['/danh-gia']);
       }
     });
   }

@@ -92,7 +92,7 @@ export class GeneralSignsComponent implements OnInit {
     }).onClose.subscribe(res => {
       if (res) {
         console.log(res);
-        this.router.navigate(['/dang-gia']);
+        this.router.navigate(['/danh-gia']);
       }
     });
   }

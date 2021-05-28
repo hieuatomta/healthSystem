@@ -7,13 +7,13 @@ import {createRequestOption} from '../../shares/utils/request-util';
 @Injectable({
   providedIn: 'root'
 })
-export class LogsService {
+export class LogsEvaluateService {
   constructor(private http: HttpClient) {
   }
 
   public doSearch(req?: any): Observable<any> {
     const options = createRequestOption(req);
-    return this.http.get<any[]>(`${environment.apiUrl}/sys-logs`, {
+    return this.http.get<any[]>(`${environment.apiUrl}/sys-log-evaluates`, {
       params: options,
       observe: 'response'
     });

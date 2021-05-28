@@ -91,7 +91,7 @@ const routes: Routes = [
         component: RadioCheckBoxComponent,
       },
       {
-        path: 'dang-gia',
+        path: 'danh-gia',
         component: EvaluateComponent,
       }, {
         path: 'lien-he',

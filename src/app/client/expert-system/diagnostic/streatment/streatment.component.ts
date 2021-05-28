@@ -22,6 +22,6 @@ export class StreatmentComponent implements OnInit, OnDestroy {
   }
 
   kt() {
-    this.router.navigate(['/dang-gia']);
+    this.router.navigate(['/danh-gia']);
   }
 }
