@@ -7,16 +7,24 @@
         <div class="single-post">
           <h2>{{data.title}}
           </h2>
-          <ul class="blog-info-link mt-3 mb-4">
-            <li><a href="#"><i class="fa fa-user"></i>{{data.usersName}}</a></li>
+          <ul class="blog-info-link">
+            <li><p><i class="fa fa-user"></i> {{data.usersName}}</p></li>
+            <li style="display: contents;text-align: right;"><p><i
+              class="fa fa-date"></i> {{data.updateTime | date:'dd/MM/yyyy HH:mm:ss'}}</p></li>
           </ul>
           <div class="feature-img">
             <img class="img-fluid" [src]="data.imageLink" alt="">
           </div>
           <div class="blog_details">
-            <p>
-             {{data.bodyNews}}
-            </p>
+<!--            <p>-->
+<!--             {{data.bodyNews}}-->
+<!--            </p>-->
+<!--            <p>-->
+
+<!--             {{body}}-->
+<!--            </p>-->
+            <div [innerHTML]="body"></div>
+
 <!--            <p>-->
 <!--              Dự án LIFT-TB (Leveraging Innovation for Faster Treatment of Tuberculosis) giai đoạn 2021-2023 với ngân sách của Cơ quan Hợp tác Quốc tế Hàn thông qua tổ chức của TB Alliance hỗ trợ triển khai thí điểm phác đồ BPaL tại bảy quốc gia trong đó có Việt Nam.-->
 <!--            </p>-->

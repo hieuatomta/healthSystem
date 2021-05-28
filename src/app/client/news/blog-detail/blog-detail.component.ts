@@ -18,6 +18,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   key1: any;
   arr = [];
 data: any;
+body: any;
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private productsService: ProductsService,
@@ -31,26 +32,30 @@ data: any;
       params => {
         this.data = JSON.parse(params['profile']);
         console.log('Got param: ', this.data);
+        this.body = null
+        if ( this.data) {
+          this.body = '<p>' + this.data.bodyNews.replace(/(\r\n|\n|\r)/g, "</p> <p>");
+        }
 
       }
     )
 
-    this.productsService.doSearch1({
-      page: 0,
-      page_size: 10,
-      code: this.key
-    }).subscribe(res => {
-      console.log(res);
-        this.onSuccess(res.body.data, res.headers, 0);
-      },
-      (error) => {
-      });
+    // this.productsService.doSearch1({
+    //   page: 0,
+    //   page_size: 10,
+    //   code: this.key
+    // }).subscribe(res => {
+    //   console.log(res);
+    //     this.onSuccess(res.body.data, res.headers, 0);
+    //   },
+    //   (error) => {
+    //   });
   }
 
 
-  onSuccess(data: any | null, headers: HttpHeaders, page: number): void {
-    this.arr = data.list;
-  }
+  // onSuccess(data: any | null, headers: HttpHeaders, page: number): void {
+  //   this.arr = data.list;
+  // }
 
   ngOnInit(): void {
 
