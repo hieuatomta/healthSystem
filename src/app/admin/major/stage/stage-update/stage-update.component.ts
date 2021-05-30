@@ -38,19 +38,19 @@ export class StageUpdateComponent implements OnInit {
       name: new FormControl(null, [Validators.required]),
       determined: new FormControl(null, [Validators.required, Validators.pattern(/\-?\d*\.?\d{1,2}/)]),
       description: new FormControl(null, []),
-      isCheck: new FormControl(1, []),
+      // isCheck: new FormControl(1, []),
       status: new FormControl(null, [Validators.required]),
       likStatus: new FormControl(null, [Validators.required]),
       typediseaseId: new FormControl(null, [Validators.required]),
       type: new FormControl(4, [Validators.required])
     });
     console.log(this.data);
-    if (this.data?.determined === "-1") {
-      this.inputSize.get('isCheck').setValue(0);
-      this.isHide = false;
-    } else {
-      this.inputSize.get('isCheck').setValue(1);
-    }
+    // if (this.data?.determined === "-1") {
+    //   this.inputSize.get('isCheck').setValue(0);
+    //   this.isHide = false;
+    // } else {
+    //   this.inputSize.get('isCheck').setValue(1);
+    // }
     this.typeDiseaseService.query().subscribe(
       (res) => {
         console.log(res);

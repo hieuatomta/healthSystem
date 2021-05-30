@@ -56,8 +56,11 @@ export class RadioCheckBoxComponent implements OnInit {
 
   submitForm() {
     console.log(this.option);
-
     try {
+      if (this.option === undefined || this.option === null) {
+        this.toastr.danger('Vui lòng chọn triệu chứng để chẩn đoán bệnh!', this.translate.instant('common.title_notification'));
+        return;
+      }
       const data = {
         id: this.option,
         type: 1

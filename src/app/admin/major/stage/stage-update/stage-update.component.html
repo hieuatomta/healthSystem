@@ -36,23 +36,23 @@
             <ngx-inline-message [message]="'common.table.item_general_signs_name'|translate"
                                 [formName]="inputSize.get('name')"></ngx-inline-message>
           </div>
-          <div class="col-lg-6 form-group">
-            <label class="label">
-              Chẩn đoán <span style="color: red">(*)</span>
-            </label>
-            <ng-select fullWidth appendTo="body"
-                       placeholder="{{'common.placeHolder' |translate}}"
-                       notFoundText="{{'common.notFoundText' |translate}}"
-                       clearAllText="{{'common.clearAllText' |translate}}"
-                       (change)="changeLeagueOwner($event)"
-                       formControlName="isCheck">
-              <ng-option *ngFor="let item of listCd" [value]="item.code"> {{ item.name | translate }}
-              </ng-option>
-            </ng-select>
-            <ngx-inline-message [message]="'common.table.item_type_disease'|translate"
-                                [formName]="inputSize.get('typediseaseId')"></ngx-inline-message>
-          </div>
-          <div *ngIf="isHide" class="col-lg-6 form-group">
+<!--          <div class="col-lg-6 form-group">-->
+<!--            <label class="label">-->
+<!--              Chẩn đoán <span style="color: red">(*)</span>-->
+<!--            </label>-->
+<!--            <ng-select fullWidth appendTo="body"-->
+<!--                       placeholder="{{'common.placeHolder' |translate}}"-->
+<!--                       notFoundText="{{'common.notFoundText' |translate}}"-->
+<!--                       clearAllText="{{'common.clearAllText' |translate}}"-->
+<!--                       (change)="changeLeagueOwner($event)"-->
+<!--                       formControlName="isCheck">-->
+<!--              <ng-option *ngFor="let item of listCd" [value]="item.code"> {{ item.name | translate }}-->
+<!--              </ng-option>-->
+<!--            </ng-select>-->
+<!--            <ngx-inline-message [message]="'common.table.item_type_disease'|translate"-->
+<!--                                [formName]="inputSize.get('typediseaseId')"></ngx-inline-message>-->
+<!--          </div>-->
+          <div  class="col-lg-6 form-group">
             <label class="label">
               {{ 'common.table.item_general_signs_determined' | translate }} <span style="color: red">(*)</span>
             </label>

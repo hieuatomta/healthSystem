@@ -233,6 +233,10 @@ export class SubclinicalComponent implements OnInit {
   }
 
   submitForm() {
+    if ( this.arr?.length === 0) {
+      this.toastr.danger('Vui lòng chọn triệu chứng để chẩn đoán bệnh!', this.translate.instant('common.title_notification'));
+      return;
+    }
     const obj = {
       listIdXn: this.arrId,
       arr: this.arr,
