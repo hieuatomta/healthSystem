@@ -26,7 +26,7 @@ export class ClinicalComponent implements OnInit {
       this.router.navigate(['/chan-doan/dau-hieu-chung']);
     } else {
       this.symptomsService.doSearchByClient({type: 2, status: 1, typediseaseId: this.typediseaseId}).subscribe(res => {
-        this.Data = res.body.data.list;
+        this.Data = res.body;
         console.log(res), err => {
           console.log(err);
         };

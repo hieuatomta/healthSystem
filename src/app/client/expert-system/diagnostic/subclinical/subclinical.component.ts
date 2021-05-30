@@ -145,7 +145,7 @@ export class SubclinicalComponent implements OnInit {
         if (data !== null) {
 
         }
-        this.router.navigate(['/chan-doan/giai-doan']);
+        this.router.navigate(['/chan-doan/giai-doan'], {state: {id: this.typediseaseId}});
       }
     });
   };
@@ -160,28 +160,74 @@ export class SubclinicalComponent implements OnInit {
         title: this.translate.instant('common.title_cd'),
         message: data.name,
         okTitle: this.translate.instant('common.kt'),
-        cancelTitle: this.translate.instant('common.title_ql')
+        cancelTitle: this.translate.instant('common.title_ql'),
+        hideCancel1: false
       },
-      dialogClass: 'modal-full',
     }).onClose.subscribe(res => {
       if (res) {
-        console.log(data);
-        this.usersClient.updateTime = null;
-        this.usersClient.nameType = data.name;
-        this.logsEvaluateService.updateClient(this.usersClient).subscribe(
-          (value) => {
-            console.log(value);
-            localStorage.setItem('usersClient', JSON.stringify(value.body.data.list));
-            if (data.isExLink) {
-              this.router.navigate(['/chan-doan/dieu-tri/' + data.isExLink ]);
-            } else {
-              this.router.navigate(['/danh-gia' ]);
-            }
-          },
-          error => {
-            this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
-          },
-        );
+        if (res === 'confirm') {
+          this.usersClient.updateTime = null;
+          this.usersClient.nameType = data.name;
+          this.logsEvaluateService.updateClient(this.usersClient).subscribe(
+            (value) => {
+              localStorage.setItem('usersClient', JSON.stringify(value.body.data.list));
+              this.router.navigate(['/danh-gia'], {state: {id: this.typediseaseId}});
+            },
+            error => {
+              this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
+            },
+          );
+        } else if (res === 'confirm1') {
+          console.log(data);
+          this.usersClient.updateTime = null;
+          this.usersClient.nameType = data.name;
+          this.logsEvaluateService.updateClient(this.usersClient).subscribe(
+            (value) => {
+              localStorage.setItem('usersClient', JSON.stringify(value.body.data.list));
+              if (data.isExLink) {
+                this.router.navigate(['/chan-doan/dieu-tri/' + data.isExLink]);
+              } else {
+                this.router.navigate(['/danh-gia']);
+              }
+            },
+            error => {
+              this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
+            },
+          );
+        }
+      }
+    });
+  }
+
+  noNextLink1(data) {
+    this.dialogService.open(ConfirmDialogClientComponent, {
+      context: {
+        title: this.translate.instant('common.title_cd'),
+        message: data.name,
+        okTitle: this.translate.instant('common.kt'),
+        cancelTitle: this.translate.instant('common.title_ql'),
+      },
+    }).onClose.subscribe(res => {
+      if (res) {
+        if (res === 'confirm') {
+          console.log(data);
+          this.usersClient.updateTime = null;
+          this.usersClient.nameType = data.name;
+          this.logsEvaluateService.updateClient(this.usersClient).subscribe(
+            (value) => {
+              localStorage.setItem('usersClient', JSON.stringify(value.body.data.list));
+              if (data.isExLink) {
+                this.router.navigate(['/chan-doan/dieu-tri/' + data.isExLink]);
+              } else {
+                this.router.navigate(['/danh-gia']);
+              }
+            },
+            error => {
+              this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
+            },
+          );
+          this.router.navigate(['/danh-gia'], {state: {id: this.typediseaseId}});
+        }
       }
     });
   }
@@ -201,11 +247,26 @@ export class SubclinicalComponent implements OnInit {
       res => {
         console.log(res);
         const rs = res.body.data.list[0];
-        if (rs.likStatus === 1) {
-          this.nextLink(rs);
+        if (this.typediseaseId === 6 || this.typediseaseId === 3) {
+          if (rs.likStatus === 1) {
+            this.nextLink(rs);
+          } else {
+            this.noNextLink1(rs);
+          }
         } else {
-          this.noNextLink(rs);
+          // this.noNextLink1(rs);
+
+          if (rs.likStatus === 1) {
+            this.noNextLink(rs);
+          } else {
+            this.noNextLink1(rs);
+          }
         }
+        // if (rs.likStatus === 1) {
+        //   this.nextLink(rs);
+        // } else {
+        //   this.noNextLink(rs);
+        // }
         // this.originalData = res.body.data.list;
       },
       (error) => {

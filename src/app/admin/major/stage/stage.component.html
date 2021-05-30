@@ -75,7 +75,7 @@
                   {{ page.offset * page.limit + rowIndex + 1 }}
                 </ng-container>
                 <ng-container
-                  *ngIf="col.prop ==='determined' || col.prop ==='name' || col.prop ==='description'"
+                  *ngIf="col.prop ==='name' || col.prop ==='description'"
                   class="text-right">
                   <span class="row-data-show"
                         title="{{value}}">{{value.length > 50 ? value.substring(0, 50).concat('...') : value}}</span>
@@ -85,6 +85,12 @@
                 </ng-container>
                 <ng-container *ngIf="col.prop ==='status'">
                   {{  'common.status.' + value | translate }}
+                </ng-container>
+                <ng-container *ngIf="col.prop ==='determined' && value == -1">
+                  {{  'common.determined.' + value | translate }}
+                </ng-container>
+                <ng-container *ngIf="col.prop ==='determined' && value != -1">
+                  {{   value  }}
                 </ng-container>
                 <ng-container *ngIf="col.prop === 'map_popup'">
                   <button class="p-1" nbButton ghost status="info" (click)="openMapModule(row)">

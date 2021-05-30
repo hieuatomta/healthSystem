@@ -15,19 +15,16 @@ p {
   color: black !important;
 }
 
-.container1 {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  color: black;
+.text {
+  color: black !important;
 }
+
+
+.line {
+  display: block;
+  margin: 10px 20px;
+}
+
 
 /* Hide the browser's default checkbox */
 .container1 input {

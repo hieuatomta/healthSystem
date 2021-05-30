@@ -1,5 +1,8 @@
 {
   "common": {
+    "determined": {
+      "-1": "Tần suất"
+    },
     "header": {
       "title": "Hệ thống thông tin y tế",
       "menu": {
@@ -26,6 +29,10 @@
         "0": "Nhẹ",
       "1": "Trung Bình",
       "2": "Nặng"
+    },
+    "typeCD": {
+      "0": "Tần suất",
+      "1": "Số lượng triệu chứng"
     },
     "type": {
       "0": "Admin",

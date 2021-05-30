@@ -26,7 +26,7 @@ export class EvaluateComponent implements OnInit {
   }
   ngOnInit(): void {
     this.symptomsService.doSearchByClient({type: 0, status: 1}).subscribe(res => {
-      this.Data = res.body.data.list;
+      this.Data = res.body;
       console.log(res), err => {
         console.log(err);
       };

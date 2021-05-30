@@ -9,7 +9,21 @@
           <nb-card-header style="color:black;font-size: 20px;font-weight: 600;text-align: center;">ĐÁNH GIÁ MỨC ĐỘ NẶNG</nb-card-header>
           <nb-card-body>
             <span style="display: block;color: black;font-size: 18px;padding: 10px 0px;font-weight: 500;">{{'common.title_chan_doan' | translate}}</span>
-            <form style="margin-top: 10px; margin-left: 10px;" [formGroup]="form">
+            <div class="" *ngIf="this.typediseaseId ===6">
+              <span class="line" style="color: black;font-size: 20px; font-weight: 500; display: block;" *ngFor="let status of Data"> {{status.name}}
+                <nb-radio-group style="       padding-left: 30px; display: block; text-align: initial; margin-top: 10px;"
+                                [name]="status.name">
+                <nb-radio style="color: black;"
+                          *ngFor="let option of status.frequencyList"
+                          (valueChange)="onChange($event)"
+                          [value]="option.id">
+                  {{ option.name }}
+                </nb-radio>
+
+              </nb-radio-group>
+              </span>
+            </div>
+            <form  *ngIf="this.typediseaseId !==6"style="margin-top: 10px; margin-left: 10px;" [formGroup]="form">
               <div *ngFor="let data of Data; let i=index">
                 <label class="container1"> {{data.name}}
                   <input type="checkbox" [value]="data.id" (change)="onCheckboxChange($event)"/>

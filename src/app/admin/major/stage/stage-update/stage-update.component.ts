@@ -20,6 +20,10 @@ export class StageUpdateComponent implements OnInit {
     {name: 'common.status.1', code: 1},
     {name: 'common.status.0', code: 0}
   ];
+  listCd = [
+    {name: 'common.typeCD.1', code: 1},
+    {name: 'common.typeCD.0', code: 0}
+  ];
   inputSize: any;
   itemRoles: any;
   loading = false;
@@ -28,16 +32,25 @@ export class StageUpdateComponent implements OnInit {
   listType = [];
 
   ngOnInit(): void {
+
     this.inputSize = new FormGroup({
       id: new FormControl(this.data?.id, []),
       name: new FormControl(null, [Validators.required]),
       determined: new FormControl(null, [Validators.required, Validators.pattern(/\-?\d*\.?\d{1,2}/)]),
       description: new FormControl(null, []),
+      isCheck: new FormControl(1, []),
       status: new FormControl(null, [Validators.required]),
       likStatus: new FormControl(null, [Validators.required]),
       typediseaseId: new FormControl(null, [Validators.required]),
       type: new FormControl(4, [Validators.required])
     });
+    console.log(this.data);
+    if (this.data?.determined === "-1") {
+      this.inputSize.get('isCheck').setValue(0);
+      this.isHide = false;
+    } else {
+      this.inputSize.get('isCheck').setValue(1);
+    }
     this.typeDiseaseService.query().subscribe(
       (res) => {
         console.log(res);
@@ -61,7 +74,18 @@ export class StageUpdateComponent implements OnInit {
     };
   };
 
+  isHide = true;
 
+  changeLeagueOwner(e) {
+    console.log(e);
+    if (e === 1) {
+      // this.inputSize.get('determined').setValue(null);
+      this.isHide = true;
+    } else if (e === 0) {
+      this.inputSize.get('determined').setValue(-1);
+      this.isHide = false;
+    }
+  }
   constructor(
     private toastr1: ToastrService,
     private toastr: NbToastrService,
