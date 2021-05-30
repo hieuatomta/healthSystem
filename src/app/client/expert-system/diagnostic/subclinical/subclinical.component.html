@@ -3,11 +3,14 @@
     <div class="row">
       <div class="col-lg-8 mb-5 mb-lg-0">
         <h3 class="mtext-111 cl2 p-b-16" style="text-align: center; margin-bottom: 30px;">
-          HỆ CHUYÊN GIA HỖ TRỢ CHẨN ĐOÁN MỘT SỐ  <br> BỆNH VỀ PHỔI
+          HỆ CHUYÊN GIA HỖ TRỢ CHẨN ĐOÁN MỘT SỐ <br> BỆNH VỀ PHỔI
         </h3>
         <nb-card style="width: 100%; background: white; ">
-          <nb-card-header style="color:black;font-size: 20px;font-weight: 600;text-align: center;">CHẨN ĐOÁN CẬN LÂM SÀNG</nb-card-header>
+          <nb-card-header style="color:black;font-size: 20px;font-weight: 600;text-align: center;">CHẨN ĐOÁN CẬN LÂM
+            SÀNG
+          </nb-card-header>
           <nb-card-body>
+            <div class="" *ngIf="this.typediseaseId !==5">
           <span style="color: black;font-size: 18px; font-weight: 500;" *ngFor="let status of options"> {{status.name}}
             <nb-radio-group style="display: block; margin-left: 30px; margin-top: 10px; margin-bottom: 10px;"
                             [name]="status.name">
@@ -19,7 +22,31 @@
             </nb-radio>
 
           </nb-radio-group>
-          </span>
+          </span></div>
+            <div *ngIf="this.typediseaseId ===5">
+              <div class="" style="display: flex">
+                <span style="font-weight: 600;color: black;padding-top: 16px;">Bạn vui lòng chọn một trong các xét nghiệm sau: </span>
+                <nb-radio-group [name]="1" style="display: flex; margin-left: 30px; margin-top: 10px; margin-bottom: 10px;">
+                  <nb-radio style="color: black;"
+                            *ngFor="let option of options"
+                            [checked]="option.checked"
+                            (valueChange)="onChange1($event)"
+                            [value]="option.id">
+                    {{ option.name }}
+                  </nb-radio>
+                </nb-radio-group>
+              </div>
+              <div class="">
+                <nb-radio-group [name]="2" style="display: block; margin-left: 30px; margin-top: 10px; margin-bottom: 10px;">
+                  <nb-radio style="color: black;"
+                            *ngFor="let option1 of lsView"
+                            (valueChange)="onChange($event)"
+                            [value]="option1.id">
+                    {{ option1.name }}
+                  </nb-radio>
+                </nb-radio-group>
+              </div>
+            </div>
 
           </nb-card-body>
           <nb-card-footer class="text-right">

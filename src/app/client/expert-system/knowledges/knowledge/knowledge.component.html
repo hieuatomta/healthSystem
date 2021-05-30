@@ -5,15 +5,18 @@
       <h3 class="mtext-111 cl2 p-b-16" style="text-align: center; margin-bottom: 30px; margin-top: 30px;">
         Tri thức về bệnh phổi
       </h3>
-      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/tri-thuc/tri-thuc-chung-ve-benh-phoi">1. Tri thức chung về bệnh phổi</a></p>
+      <div class="" *ngFor="let key of arr; index as i">
+        <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/tri-thuc/{{key.code}}">{{i +1}}. {{key.name}}</a></p>
+      </div>
+<!--      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/tri-thuc/tri-thuc-chung-ve-benh-phoi">1. Tri thức chung về bệnh phổi</a></p>-->
 
-      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/tri-thuc/tri-thuc-viem-phoi-cong-dong">2. Tri thức viêm phổi cộng đồng</a></p>
+<!--      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/tri-thuc/tri-thuc-viem-phoi-cong-dong">2. Tri thức viêm phổi cộng đồng</a></p>-->
 
-      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/tri-thuc/tri-thuc-ap-xe-phoi">3. Tri thức áp xe phổi</a></p>
+<!--      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/tri-thuc/tri-thuc-ap-xe-phoi">3. Tri thức áp xe phổi</a></p>-->
 
-      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/tri-thuc/tri-thuc-gian-phe-quan">4. Tri thức giãn phế quản</a></p>
+<!--      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/tri-thuc/tri-thuc-gian-phe-quan">4. Tri thức giãn phế quản</a></p>-->
 
-      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/tri-thuc/tri-thuc-hen-phe-quan">5. Tri thức hen phế quản</a></p>
+<!--      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/tri-thuc/tri-thuc-hen-phe-quan">5. Tri thức hen phế quản</a></p>-->
     </div>
   </div>
 </section>

@@ -87,7 +87,7 @@
                   {{ page.offset * page.limit + rowIndex + 1 }}
                 </ng-container>
                 <ng-container
-                  *ngIf="col.prop ==='fullName' || col.prop ==='mail' || col.prop ==='phone' || col.prop ==='nameEvaluate' || col.prop ==='content'"
+                  *ngIf="col.prop ==='fullName' || col.prop ==='mail' || col.prop ==='phone' || col.prop ==='nameEvaluate'|| col.prop ==='nameType' || col.prop ==='content'"
                   class="text-right">
                   <span class="row-data-show"
                         title="{{value}}">{{value.length > 50 ? value.substring(0, 50).concat('...') : value}}</span>

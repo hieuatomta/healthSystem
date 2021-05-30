@@ -26,31 +26,32 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {SharedModule} from '../../../shares/shared.module';
 import {SknowledgesComponent} from './sknowledges.component';
+import {PdfViewerModule} from 'ng2-pdf-viewer';
 
 
 @NgModule({
-  imports: [
-    ThemeModule,
-    SizesRoutingModule,
-    NbInputModule,
-    NbCardModule,
-    NbButtonModule,
-    NbActionsModule,
-    NbUserModule,
-    NbCheckboxModule,
-    NbRadioModule,
-    NbDatepickerModule,
-    NbSelectModule,
-    NbIconModule,
-    ngFormsModule,
-    Ng2SmartTableModule,
-    NbFormFieldModule,
-    TranslateModule,
-    NgSelectModule, SharedModule,
-    ReactiveFormsModule,
-    NgxDatatableModule,
-    NbSpinnerModule, NbToggleModule,
-  ],
+    imports: [
+        ThemeModule,
+        SizesRoutingModule,
+        NbInputModule,
+        NbCardModule,
+        NbButtonModule,
+        NbActionsModule,
+        NbUserModule,
+        NbCheckboxModule,
+        NbRadioModule,
+        NbDatepickerModule,
+        NbSelectModule,
+        NbIconModule,
+        ngFormsModule,
+        Ng2SmartTableModule,
+        NbFormFieldModule,
+        TranslateModule,
+        NgSelectModule, SharedModule,
+        ReactiveFormsModule,
+        NgxDatatableModule,
+        NbSpinnerModule, NbToggleModule, PdfViewerModule,
+    ],
   entryComponents: [
     SknowledgesUpdateComponent
   ],

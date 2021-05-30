@@ -9,6 +9,7 @@ import {ConfirmDialogComponent} from '../../../shares/directives/confirm-dialog/
 import {SizeService} from '../../../@core/services/size.service';
 import {SknowledgesUpdateComponent} from './sknowledges-update/sknowledges-update.component';
 import {CategoriesService} from '../../../@core/services/categories.service';
+import {ExpertSystemService} from '../../../@core/services/expert-system.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -26,7 +27,7 @@ export class SknowledgesComponent implements OnInit {
     private translate: TranslateService,
     private toastrService: NbToastrService,
     private userService: UsersService,
-    private categoriesService: CategoriesService,
+    private expertSystemService: ExpertSystemService,
     private dialogService: NbDialogService) {
   }
 
@@ -43,11 +44,11 @@ export class SknowledgesComponent implements OnInit {
   };
   columns = [
     {name: 'common.table.item_number', prop: 'index', flexGrow: 0.3},
-    {name: 'common.table.item_category_code', prop: 'code', flexGrow: 1},
-    {name: 'common.table.item_category_name', prop: 'name', flexGrow: 1.5},
-    {name: 'common.table.item_description', prop: 'description', flexGrow: 1.5},
+    {name: 'common.table.item_code', prop: 'code', flexGrow: 1},
+    {name: 'common.table.item_name_ex', prop: 'name', flexGrow: 1.5},
     {name: 'common.table.item_status', prop: 'status', flexGrow: 1},
     {name: 'common.table.item_update_time', prop: 'updateTime', flexGrow: 1},
+    {name: 'common.table.item_image', prop: 'isLink', flexGrow: 1},
     {name: 'common.table.item_action', prop: 'action_btn', flexGrow: 1}
   ];
 
@@ -66,9 +67,9 @@ export class SknowledgesComponent implements OnInit {
   editUsers(data) {
     let title;
     if (data == null) {
-      title = this.translate.instant('category.title_add');
+      title = this.translate.instant('knowledges.title_add');
     } else {
-      title = this.translate.instant('category.title_edit');
+      title = this.translate.instant('knowledges.title_edit');
     }
     this.dialogService.open(SknowledgesUpdateComponent, {
       context: {
@@ -80,10 +81,10 @@ export class SknowledgesComponent implements OnInit {
       value => {
         if (value) {
           if (data == null) {
-            this.toastrService.success(this.translate.instant('category.content_add_success'),
+            this.toastrService.success(this.translate.instant('knowledges.content_add_success'),
               this.translate.instant('common.title_notification'));
           } else {
-            this.toastrService.success(this.translate.instant('category.content_edit_success'),
+            this.toastrService.success(this.translate.instant('knowledges.content_edit_success'),
               this.translate.instant('common.title_notification'));
           }
           this.search(0);
@@ -100,7 +101,7 @@ export class SknowledgesComponent implements OnInit {
   search(pageToLoad: number) {
     this.isLoad = true;
     this.page.offset = pageToLoad;
-    this.categoriesService.doSearch({
+    this.expertSystemService.doSearch({
       page: this.page.offset,
       page_size: this.page.limit,
       name: this.inputForm.get("name").value,
@@ -109,6 +110,7 @@ export class SknowledgesComponent implements OnInit {
       status: this.inputForm.get("status").value,
     }).subscribe(
       (res) => {
+        console.log(res);
         this.onSuccess(res.body.data, res.headers, pageToLoad);
       },
       (error) => {
@@ -123,13 +125,13 @@ export class SknowledgesComponent implements OnInit {
     this.dialogService.open(ConfirmDialogComponent, {
       context: {
         title: this.translate.instant('common.title_notification'),
-        message: this.translate.instant('category.title_delete') + ' ' + data.name
+        message: this.translate.instant('knowledges.title_delete') + ' ' + data.name
       },
     }).onClose.subscribe(res => {
       if (res) {
         this.isLoad = true;
-        this.categoriesService.delete(data.id).subscribe(() => {
-          this.toastrService.success(this.translate.instant('category.delete_success'),
+        this.expertSystemService.delete(data.id).subscribe(() => {
+          this.toastrService.success(this.translate.instant('knowledges.delete_success'),
             this.translate.instant('common.title_notification'));
           this.search(0);
           this.isLoad = false;

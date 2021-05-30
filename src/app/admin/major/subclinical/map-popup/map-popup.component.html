@@ -1,7 +1,7 @@
 <div class="map-module-dialog" nbSpinnerSize="giant" nbSpinnerStatus="primary" [nbSpinner]="loading" >
   <nb-card>
     <nb-card-header>
-      {{ title }}<span class="font-weight-bold text-danger">Xác định bệnh cận lâm sàng</span>
+      {{ title }}<span class="font-weight-bold text-danger"></span>
     </nb-card-header>
     <nb-card-body>
       <div class="mb-4">
@@ -30,21 +30,12 @@
             <label class="label">
               Triệu chứng
             </label>
-<!--            <ng-select [clearAllText]="'common.clearAllText'"-->
-<!--                       placeholder="{{'common.placeHolder' |translate}}"-->
-<!--                       notFoundText="{{'common.notFoundText' |translate}}"-->
-<!--                       [groupBy]="groupingHelper"-->
-<!--                       fullWidth [(ngModel)]="paramSearch.lsXn" [multiple]="true">-->
-<!--              <ng-option *ngFor="let item of lsTt" [value]="item.id">-->
-<!--                <span title="{{item.name | translate }}" class="cut-text"> {{ item.name | translate }}</span>-->
-<!--              </ng-option>-->
-<!--            </ng-select>-->
             <ng-select [items]="lsTt"
                        bindLabel="name"
                        bindValue="id"
                        [groupBy]="groupingHelper"
                        [multiple]="true"
-                       [(ngModel)]="paramSearch.lsXn">
+                       [(ngModel)]="paramSearch.listIdTt">
               <ng-template ng-optgroup-tmp let-item="item">
                 {{item.name || 'Unnamed group'}}
               </ng-template>

@@ -5,13 +5,16 @@
       <h3 class="mtext-111 cl2 p-b-16" style="text-align: center; margin-bottom: 30px; margin-top: 30px;">
         Điều trị về bệnh phổi
       </h3>
-      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/dieu-tri/dieu-tri-viem-phoi-cong-dong">1. Điều trị viêm phổi cộng đồng</a></p>
+      <div class="" *ngFor="let key of arr; index as i">
+        <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/dieu-tri/{{key.code}}">{{i +1}}. {{key.name}}</a></p>
+      </div>
+<!--      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/dieu-tri/dieu-tri-viem-phoi-cong-dong">1. Điều trị viêm phổi cộng đồng</a></p>-->
 
-      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/dieu-tri/dieu-tri-ap-xe-phoi">2. Điều trị áp xe phổi</a></p>
+<!--      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/dieu-tri/dieu-tri-ap-xe-phoi">2. Điều trị áp xe phổi</a></p>-->
 
-      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/dieu-tri/dieu-tri-gian-phe-quan">3. Điều trị giãn phế quản</a></p>
+<!--      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/dieu-tri/dieu-tri-gian-phe-quan">3. Điều trị giãn phế quản</a></p>-->
 
-      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/dieu-tri/dieu-tri-hen-phe-quan">4. Điều trị hen phế quản</a></p>
+<!--      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/dieu-tri/dieu-tri-hen-phe-quan">4. Điều trị hen phế quản</a></p>-->
     </div>
   </div>
 </section>

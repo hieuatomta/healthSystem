@@ -44,6 +44,17 @@
     "delete_success": "Xóa Chủ đề thành công",
     "title_map_popup": "Chủ đề"
   },
+  "knowledges": {
+    "title": "Quản lý điều trị và tri thức",
+    "title_add": "Thêm mới điều trị và tri thức",
+    "title_edit": "Sửa điều trị và tri thức",
+    "title_delete": "Xác nhận xóa điều trị và tri thức",
+    "content_add_success": "Thêm điều trị và tri thức thành công",
+    "content_edit_success": "Sửa điều trị và tri thức thành công",
+    "message_delete": "Bạn có chắc muốn xóa điều trị và tri thức",
+    "delete_success": "Xóa điều trị và tri thức thành công",
+    "title_map_popup": "điều trị và tri thức"
+  },
   "type_disease": {
     "title": "Quản lý bệnh",
     "title_add": "Thêm mới bệnh",

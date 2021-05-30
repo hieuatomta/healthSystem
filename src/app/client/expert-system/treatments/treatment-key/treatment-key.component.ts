@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
+import {ExpertSystemService} from '../../../../@core/services/expert-system.service';
 
 
 @Component({
@@ -12,20 +13,32 @@ export class TreatmentKeyComponent implements OnInit, OnDestroy {
   pdfSrc = 'http://localhost:4201/ltnc/assets/pdf/bvptw.pdf';
   key: any;
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private expertSystemService: ExpertSystemService) {
     this.activatedRoute.params.subscribe((params: Params) => {
       console.log(params);
       this.key = params['key'];
-      if (this.key === 'dieu-tri-viem-phoi-cong-dong') {
-        this.pdfSrc = 'http://localhost:4201/ltnc/assets/pdf/dieutri/dieu-tri-viem-phoi-cong-dong.pdf';
-      } else if (this.key === 'dieu-tri-ap-xe-phoi') {
-        this.pdfSrc = 'http://localhost:4201/ltnc/assets/pdf/dieutri/dieu-tri-ap-xe-phoi.pdf';
-      } else if (this.key === 'dieu-tri-gian-phe-quan') {
-        this.pdfSrc = 'http://localhost:4201/ltnc/assets/pdf/dieutri/dieu-tri-gian-phe-quan.pdf';
-      } else if (this.key === 'dieu-tri-hen-phe-quan') {
-        this.pdfSrc = 'http://localhost:4201/ltnc/assets/pdf/dieutri/dieu-tri-hen-phe-quan.pdf';
-      }
+      this.expertSystemService.doSearch1({
+        status: 1,
+        type: 0,
+        code:  this.key
+      }).subscribe(
+        (res) => {
+          const data = res.body.data.list;
+          if (data?.length === 1) {
+            this.pdfSrc = 'http://localhost:4201/ltnc' + data[0].isLink;
+          }
+          console.log(res);
+        },
+        (error) => {
+          // this.isLoad = false;
+        },
+      );
     });
+  }
+
+  search() {
+
   }
 
   ngOnInit(): void {

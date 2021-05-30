@@ -31,20 +31,6 @@ export class SubclinicalComponent implements OnInit {
       },
       () => this.isLoad = false,
     );
-    // this.symptomsService.doSearch({
-    //   type: 2,
-    //   status: 1,
-    // }).subscribe(
-    //   (res) => {
-    //     const result = res.body.data.list.map(({ name }) => name)
-    //     this.symptoms = result.join(' - ');
-    //     this.isLoad = false;
-    //   },
-    //   (error) => {
-    //     this.isLoad = false;
-    //   },
-    //   () => this.isLoad = false,
-    // );
     this.search(0);
   }
 
@@ -95,7 +81,7 @@ export class SubclinicalComponent implements OnInit {
   openMapModule(data) {
     const openMap = this.dialogService.open(MapPopupComponent, {
       context: {
-        title: this.translate.instant('common.table.item_test'),
+        title: 'Xác định bệnh cận lâm sàng',
         data: data,
       }
     });

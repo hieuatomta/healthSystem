@@ -18,6 +18,10 @@
       "0": "Bị khóa",
       "1": "Hoạt động"
     },
+    "typeDT": {
+      "0": "Điều trị",
+      "1": "Tri thức"
+    },
     "type": {
       "0": "Admin",
       "1": "Client"
@@ -48,6 +52,8 @@
       "item_name_evaluate": "Đánh giá",
       "item_content": "Nội dung đánh giá",
       "item_name_type": "Bệnh",
+      "item_code": "Mã",
+      "item_name_ex": "Tên điều trị và tri thức",
       "item_email": "Email",
       "item_dateOfBirth": "Ngày sinh",
       "item_role": "Quyền người dùng",

@@ -39,7 +39,7 @@ export class MapPopupComponent implements OnInit {
     statusdiseaseId: null,
     idXn: null,
     listIdXn: null,
-    lsXn: null
+    listIdTt: null
   };
   columns = [
     {prop: 'index', name: 'common.table.item_number', flexGrow: 0.2},
@@ -116,7 +116,7 @@ export class MapPopupComponent implements OnInit {
 
   changeLeagueOwner(e) {
     const obj = {
-      typediseaseId: 3,
+      typediseaseId: this.data?.typediseaseId,
       listIdXn: this.paramSearch.lsId
     }
     this.symptomsService.doSearchGroup(obj).subscribe(
@@ -144,6 +144,7 @@ export class MapPopupComponent implements OnInit {
     this.typeTestService.insertXd(this.paramSearch).subscribe(
       res => {
         console.log(res);
+        this.toastr.success('Thêm mới xác định bệnh thành công', this.translate.instant('common.title_notification'))
         // this.originalData = res.body.data.list;
       },
       (error) => {

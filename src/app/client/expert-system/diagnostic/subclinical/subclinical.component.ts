@@ -24,15 +24,16 @@ export class SubclinicalComponent implements OnInit {
   usersClient: any;
 
   ngOnInit(): void {
-    // this.typediseaseId = 3;
+    // this.typediseaseId = 5;
     if (this.typediseaseId === undefined || this.typediseaseId === null) {
       this.router.navigate(['/chan-doan/dau-hieu-chung']);
     } else {
       this.symptomsService.doSearchByClientSubclinical({typediseaseId: this.typediseaseId}).subscribe(res => {
         this.options = res.body.data.list;
-        console.log(res), err => {
-          console.log(err);
-        };
+        if (this.typediseaseId === 5 &&    this.options?.length > 0) {
+          this.options[0].checked = true;
+          this.lsView = this.options[0].symptomDTOList;
+        }
 
         this.reformattedArray = this.options.map(obj => {
           const rObj = {
@@ -49,7 +50,8 @@ export class SubclinicalComponent implements OnInit {
           });
           return rObj;
         });
-        console.log(this.reformattedArray);
+      }, err => {
+        console.log(err);
       });
 
     }
@@ -64,6 +66,20 @@ export class SubclinicalComponent implements OnInit {
       arr.splice(index, 1);
     }
     return arr;
+  }
+
+  lsView: any;
+
+  onChange1(e) {
+    console.log(e);
+    console.log(this.options);
+    for (let i = 0; i < this.options?.length; i++) {
+      if (this.options[i].id === e) {
+        this.lsView = this.options[i].symptomDTOList;
+      }
+    }
+    this.arr = [];
+    this.arrId = [];
   }
 
   onChange(e) {
@@ -101,6 +117,7 @@ export class SubclinicalComponent implements OnInit {
               private symptomsService: SymptomsService) {
     try {
       this.typediseaseId = this.router.getCurrentNavigation()?.extras.state.id;
+      console.log(this.typediseaseId);
     } catch (e) {
       this.typediseaseId = null;
     }
@@ -109,7 +126,7 @@ export class SubclinicalComponent implements OnInit {
       this.key = params['key'];
     });
     this.usersClient = JSON.parse(localStorage.getItem('usersClient'));
-    if (  this.usersClient === null) {
+    if (this.usersClient === null) {
       this.router.navigate(['/chan-doan']);
     }
   }
@@ -134,7 +151,7 @@ export class SubclinicalComponent implements OnInit {
   };
 
   come() {
-    this.router.navigate(['/chan-doan/lam-sang'], { state: { id: this.typediseaseId } });
+    this.router.navigate(['/chan-doan/lam-sang'], {state: {id: this.typediseaseId}});
   }
 
   noNextLink(data) {

@@ -2,10 +2,10 @@
   <div class="col-lg-12">
     <nb-card>
       <nb-card-header class="d-flex">
-        <label>{{ 'category.title' | translate }}</label>
+        <label>{{ 'knowledges.title' | translate }}</label>
         <button nbButton status="primary" size="tiny" class="ml-auto" (click)="editUsers(null)">
           <nb-icon icon="plus" pack="eva"></nb-icon>
-          {{ 'category.title_add' | translate }}
+          {{ 'knowledges.title_add' | translate }}
         </button>
       </nb-card-header>
       <nb-card-body>
@@ -14,13 +14,13 @@
             <div class="row">
               <div class="col-lg-4 form-group">
                 <label class="label">
-                  {{ 'common.table.item_category_code' | translate }}
+                  {{ 'common.table.item_code' | translate }}
                 </label>
                 <input (keyup.enter)="search(0)" nbInput fullWidth formControlName="code">
               </div>
               <div class="col-lg-4 form-group">
                 <label class="label">
-                  {{ 'common.table.item_category_name' | translate }}
+                  {{ 'common.table.item_name_ex' | translate }}
                 </label>
                 <input (keyup.enter)="search(0)" nbInput fullWidth formControlName="name">
               </div>
@@ -75,6 +75,14 @@
                 </ng-container>
                 <ng-container *ngIf="col.prop ==='updateTime'">
                   {{ value | date:'dd/MM/yyyy HH:mm:ss'}}
+                </ng-container>
+                <ng-container *ngIf="col.prop ==='isLink'">
+                  <pdf-viewer [src]="'http://localhost:4201/ltnc/'+ value" [page]="1" [show-all]="false"
+                              [render-text]="true" [autoresize]="true" [original-size]="false"
+
+                              style="display: block;"
+                  ></pdf-viewer>
+                  <!--                  {{  'common.status.' + value | translate }}-->
                 </ng-container>
                 <ng-container *ngIf="col.prop ==='status'">
                   {{  'common.status.' + value | translate }}

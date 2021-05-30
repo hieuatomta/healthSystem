@@ -13,7 +13,7 @@ export class StreatmentComponent implements OnInit, OnDestroy {
   }
 
   pdfSrc = 'assets/pdf/bvptw.pdf';
-
+  usersClient: any;
   constructor(private router: Router) {
   }
 
@@ -22,6 +22,18 @@ export class StreatmentComponent implements OnInit, OnDestroy {
   }
 
   kt() {
+    // nho ghi lai data du lieu benh nhan bi benh vao database
+    // this.usersClient.nameType = data.name;
+    // this.logsEvaluateService.updateClient(this.usersClient).subscribe(
+    //   (value) => {
+    //     console.log(value);
+    //     localStorage.setItem('usersClient', JSON.stringify(value.body.data.list));
+    //     this.router.navigate(['/danh-gia']);
+    //   },
+    //   error => {
+    //     this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
+    //   },
+    // );
     this.router.navigate(['/danh-gia']);
   }
 }
