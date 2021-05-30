@@ -12,7 +12,21 @@
     <form [formGroup]="inputSize">
       <div class="mb-4">
         <div class="row">
-
+          <div class="col-lg-6 form-group">
+            <label class="label">
+              {{ 'common.table.item_type_disease' | translate }} <span style="color: red">(*)</span>
+            </label>
+            <ng-select fullWidth appendTo="body"
+                       placeholder="{{'common.placeHolder' |translate}}"
+                       notFoundText="{{'common.notFoundText' |translate}}"
+                       clearAllText="{{'common.clearAllText' |translate}}"
+                       formControlName="typediseaseId">
+              <ng-option *ngFor="let item of listType" [value]="item.id"> {{ item.name | translate }}
+              </ng-option>
+            </ng-select>
+            <ngx-inline-message [message]="'common.table.item_type_disease'|translate"
+                                [formName]="inputSize.get('typediseaseId')"></ngx-inline-message>
+          </div>
           <div class="col-lg-6 form-group">
             <label class="label">
               {{ 'common.table.item_general_signs_name' | translate }} <span style="color: red">(*)</span>

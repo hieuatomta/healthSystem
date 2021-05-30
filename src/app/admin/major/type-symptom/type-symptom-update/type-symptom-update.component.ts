@@ -37,6 +37,7 @@ export class TypeSymptomUpdateComponent implements OnInit {
       type: new FormControl(null, [Validators.required]),
       typediseaseId: new FormControl(null, []),
       testdiseaseId: new FormControl(null, []),
+      lsFrequency: new FormControl(null, []),
       status: new FormControl(null, [Validators.required])
     });
     this.inputSize.get('status').setValue(true);

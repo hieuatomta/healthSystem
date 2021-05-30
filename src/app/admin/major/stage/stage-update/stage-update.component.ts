@@ -25,6 +25,7 @@ export class StageUpdateComponent implements OnInit {
   loading = false;
   title: string;
   data: any;
+  listType = [];
 
   ngOnInit(): void {
     this.inputSize = new FormGroup({
@@ -34,8 +35,20 @@ export class StageUpdateComponent implements OnInit {
       description: new FormControl(null, []),
       status: new FormControl(null, [Validators.required]),
       likStatus: new FormControl(null, [Validators.required]),
-      type: new FormControl(0, [Validators.required])
+      typediseaseId: new FormControl(null, [Validators.required]),
+      type: new FormControl(4, [Validators.required])
     });
+    this.typeDiseaseService.query().subscribe(
+      (res) => {
+        console.log(res);
+        this.listType = res.body.data.list;
+        this.loading = false;
+      },
+      (error) => {
+        this.loading = false;
+      },
+      () => this.loading = false,
+    );
     this.inputSize.get('status').setValue(true);
     this.inputSize.get('likStatus').setValue(false);
     console.log(this.data);

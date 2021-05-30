@@ -1,0 +1,79 @@
+<div class="map-module-dialog" nbSpinnerSize="giant" nbSpinnerStatus="primary" [nbSpinner]="loading" >
+  <nb-card>
+    <nb-card-header>
+      {{ title }}<span class="font-weight-bold text-danger"></span>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="mb-4">
+        <div class="row">
+          <div class="col-lg-4 form-group">
+            <label class="label">
+              Mức độ
+            </label>
+            <ng-select [clearAllText]="'common.clearAllText'"
+                       placeholder="{{'common.placeHolder' |translate}}"
+                       notFoundText="{{'common.notFoundText' |translate}}"
+                       fullWidth [(ngModel)]="paramSearch.type">
+              <ng-option *ngFor="let item of listType" [value]="item.code">
+                <span title="{{item.name | translate }}" class="cut-text"> {{ item.name | translate }}</span>
+              </ng-option>
+            </ng-select>
+          </div>
+          <div class="col-lg-4 form-group">
+            <label class="label">
+              Tên
+            </label>
+            <input class="custom-border" [(ngModel)]="paramSearch.name" type="text" nbInput fullWidth trim="blur">
+          </div>
+          <div class="form-group col-lg-2 align-items-end d-flex">
+            <button nbButton  type="button" status="primary" (click)="submit()">{{ 'common.add' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <ngx-datatable ngxResizeWatcher class="material"
+                     [columnMode]="'flex'"
+                     [rows]="rows"
+                     [columns]="columns"
+                     rowHeight="auto"
+                     [limit]="5"
+                     [footerHeight]="50"
+                     [headerHeight]="50"
+                     [messages]="{ emptyMessage: 'common.notFoundText' | translate, totalMessage: 'common.totalMessage' | translate, selectedMessage: 'common.selectedMessage' | translate }">
+        <ng-container *ngFor="let col of columns">
+          <ngx-datatable-column prop="{{col.prop}}" name="{{col.name}}" [flexGrow]="col.flexGrow">
+            <ng-template let-column="column" ngx-datatable-header-template>
+              {{ column.name | translate }}
+            </ng-template>
+            <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-rowIndex='rowIndex'>
+              <ng-container *ngIf="col.prop ==='index'" class="index-col">
+                {{ page.offset * page.limit + rowIndex + 1 }}
+              </ng-container>
+              <ng-container *ngIf="col.prop === 'name'">
+                {{value}}
+              </ng-container>
+              <ng-container *ngIf="col.prop ==='updateTime'">
+                {{value | date:'dd/MM/yyyy HH:mm:ss'}}
+              </ng-container>
+              <ng-container *ngIf="col.prop ==='type'">
+                {{  'common.typeTS.' + value | translate }}
+              </ng-container>
+              <ng-container *ngIf="col.prop ==='status'">
+                {{  'common.status.' + value | translate }}
+              </ng-container>
+
+              <ng-container *ngIf="col.prop ==='action_btn'" class="text-right">
+                <div>
+                  <button class="p-1" nbButton status="danger" ghost title="{{ 'common.delete' | translate }}" (click)="delete(row)"
+                  >
+                    <nb-icon icon="trash-2-outline" pack="eva" size="tiny"></nb-icon>
+                  </button>
+                </div>
+              </ng-container>
+            </ng-template>
+          </ngx-datatable-column>
+        </ng-container>
+      </ngx-datatable>
+    </nb-card-body>
+  </nb-card>
+</div>

@@ -2,20 +2,19 @@
   <div class="col-lg-12">
     <nb-card>
       <nb-card-header class="d-flex">
-        <label>{{ 'general_signs.title' | translate }}</label>
+        <label>{{ 'stage.title' | translate }}</label>
         <button nbButton status="primary" size="tiny" class="ml-auto" (click)="editUsers(null)">
           <nb-icon icon="plus" pack="eva"></nb-icon>
-          {{ 'general_signs.title_add' | translate }}
+          {{ 'stage.title_add' | translate }}
         </button>
       </nb-card-header>
       <nb-card-body>
-        <h3>Triệu chứng: {{symptoms}}</h3>
         <form [formGroup]="inputForm">
           <div class="mb-4">
             <div class="row">
 <!--              <div class="col-lg-4 form-group">-->
 <!--                <label class="label">-->
-<!--                  {{ 'common.table.item_general_signs_code' | translate }}-->
+<!--                  {{ 'common.table.item_stage_code' | translate }}-->
 <!--                </label>-->
 <!--                <ng-select fullWidth appendTo="body"-->
 <!--                           placeholder="{{'common.placeHolder' |translate}}"-->

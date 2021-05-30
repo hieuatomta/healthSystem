@@ -89,6 +89,11 @@
                 </ng-container> <ng-container *ngIf="col.prop ==='type'">
                   {{  'common.typeSymptom.' + value | translate }}
                 </ng-container>
+                <ng-container *ngIf="col.prop === 'imageLink'">
+                  <button class="p-1" nbButton ghost status="info" (click)="openMapModuleImage(row)">
+                    <nb-icon icon="link-outline" pack="eva" size="tiny"></nb-icon>
+                  </button>
+                </ng-container>
                 <ng-container *ngIf="col.prop ==='action_btn'" class="text-right">
                   <div>
                     <button class="p-1" nbButton status="primary" ghost title="{{ 'common.copy' | translate}}"

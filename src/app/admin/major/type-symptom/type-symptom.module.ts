@@ -27,6 +27,7 @@ import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {SharedModule} from '../../../shares/shared.module';
 import {TypeSymptomComponent} from './type-symptom.component';
 import {MapPopupComponent} from '../type-disease/map-popup/map-popup.component';
+import { MapTsComponent } from './map-ts/map-ts.component';
 
 
 @NgModule({
@@ -55,7 +56,7 @@ import {MapPopupComponent} from '../type-disease/map-popup/map-popup.component';
   entryComponents: [
     TypeSymptomUpdateComponent
   ],
-  declarations: [TypeSymptomComponent, TypeSymptomUpdateComponent],
+  declarations: [TypeSymptomComponent, TypeSymptomUpdateComponent, MapTsComponent],
 })
 export class TypeSymptomModule {
 }

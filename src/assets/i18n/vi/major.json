@@ -77,6 +77,17 @@
     "delete_success": "Xóa dấu hiệu chung thành công",
     "title_map_popup": "bệnhề"
   },
+  "stage": {
+    "title": "Quản lý bệnh theo giai đoạn",
+    "title_add": "Thêm mới bệnh theo giai đoạn",
+    "title_edit": "Sửa bệnh theo giai đoạn",
+    "title_delete": "Xác nhận xóa bệnh theo giai đoạn",
+    "content_add_success": "Thêm bệnh theo giai đoạn thành công",
+    "content_edit_success": "Sửa bệnh theo giai đoạn thành công",
+    "message_delete": "Bạn có chắc muốn xóa bệnh theo giai đoạn",
+    "delete_success": "Xóa bệnh theo giai đoạn thành công",
+    "title_map_popup": "bệnh theo giai đoạn"
+  },
   "clinical": {
     "title": "Quản lý bệnh lâm sàn",
     "title_add": "Thêm mới bệnh lâm sàn",

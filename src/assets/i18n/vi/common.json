@@ -22,6 +22,11 @@
       "0": "Điều trị",
       "1": "Tri thức"
     },
+    "typeTS": {
+        "0": "Nhẹ",
+      "1": "Trung Bình",
+      "2": "Nặng"
+    },
     "type": {
       "0": "Admin",
       "1": "Client"

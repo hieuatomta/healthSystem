@@ -6,11 +6,10 @@ import {TranslateService} from '@ngx-translate/core';
 import {UsersService} from '../../../@core/services/users.service';
 import {HttpHeaders} from '@angular/common/http';
 import {ConfirmDialogComponent} from '../../../shares/directives/confirm-dialog/confirm-dialog.component';
-import {SizeService} from '../../../@core/services/size.service';
 import {TypeSymptomUpdateComponent} from './type-symptom-update/type-symptom-update.component';
-import {CategoriesService} from '../../../@core/services/categories.service';
-import {TypeDiseaseService} from '../../../@core/services/type-disease.service';
 import {SymptomsService} from '../../../@core/services/symptoms.service';
+import {MapImageProductComponent} from '../news-management/map-image-product/map-image-product.component';
+import { MapTsComponent } from './map-ts/map-ts.component';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -58,6 +57,7 @@ export class TypeSymptomComponent implements OnInit {
     {name: 'common.table.item_type_symptom_type', prop: 'type', flexGrow: 1},
     {name: 'common.table.item_status', prop: 'status', flexGrow: 1},
     {name: 'common.table.item_update_time', prop: 'updateTime', flexGrow: 1},
+    {name: 'Map tần suất', prop: 'imageLink', flexGrow: 0.5},
     {name: 'common.table.item_action', prop: 'action_btn', flexGrow: 1}
   ];
 
@@ -67,6 +67,20 @@ export class TypeSymptomComponent implements OnInit {
     updateTime: new FormControl(null, []),
     status: new FormControl(null, [])
   });
+
+  openMapModuleImage(data) {
+    const openMap = this.dialogService.open(MapTsComponent, {
+      context: {
+        title: 'Map tần suất',
+        data: data,
+      }
+    });
+    openMap.onClose.subscribe(value => {
+      this.search(0);
+      // this.toastr.success(this.translate.instant('common.content_map_action_success'),
+      this.translate.instant('objects.title_notification');
+    });
+  }
 
   pageCallback(pageInfo: { count?: number, pageSize?: number, limit?: number, offset?: number }) {
     this.page.offset = pageInfo.offset;
@@ -101,6 +115,7 @@ export class TypeSymptomComponent implements OnInit {
       }
     );
   }
+
   copy(data) {
     data.id = null;
     // data.name = null;
@@ -132,10 +147,11 @@ export class TypeSymptomComponent implements OnInit {
       }
     );
   }
+
   protected onSuccess(data: any | null, headers: HttpHeaders, page: number): void {
     this.page.count = data.count;
     this.page.offset = page || 0;
-    console.log(data.list)
+    console.log(data.list);
     this.rows = data.list || [];
   }
 
@@ -145,10 +161,10 @@ export class TypeSymptomComponent implements OnInit {
     this.typeDiseaseService.doSearch({
       page: this.page.offset,
       page_size: this.page.limit,
-      name: this.inputForm.get("name").value,
-      type: this.inputForm.get("type").value,
-      updateTime: this.inputForm.get("updateTime").value,
-      status: this.inputForm.get("status").value,
+      name: this.inputForm.get('name').value,
+      type: this.inputForm.get('type').value,
+      updateTime: this.inputForm.get('updateTime').value,
+      status: this.inputForm.get('status').value,
     }).subscribe(
       (res) => {
         this.onSuccess(res.body.data, res.headers, pageToLoad);

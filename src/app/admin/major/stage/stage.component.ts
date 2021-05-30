@@ -23,7 +23,7 @@ import {StatusDiseaseService} from '../../../@core/services/status-disease.servi
 export class StageComponent implements OnInit {
   ngOnInit(): void {
     this.symptomsService.doSearch({
-      type: 0,
+      type: 4,
       status: 1,
     }).subscribe(
       (res) => {
@@ -101,9 +101,9 @@ export class StageComponent implements OnInit {
   editUsers(data) {
     let title;
     if (data == null) {
-      title = this.translate.instant('general_signs.title_add');
+      title = this.translate.instant('stage.title_add');
     } else {
-      title = this.translate.instant('general_signs.title_edit');
+      title = this.translate.instant('stage.title_edit');
     }
     this.dialogService.open(StageUpdateComponent, {
       context: {
@@ -115,10 +115,10 @@ export class StageComponent implements OnInit {
       value => {
         if (value) {
           if (data == null) {
-            this.toastrService.success(this.translate.instant('general_signs.content_add_success'),
+            this.toastrService.success(this.translate.instant('stage.content_add_success'),
               this.translate.instant('common.title_notification'));
           } else {
-            this.toastrService.success(this.translate.instant('general_signs.content_edit_success'),
+            this.toastrService.success(this.translate.instant('stage.content_edit_success'),
               this.translate.instant('common.title_notification'));
           }
           this.search(0);
@@ -141,7 +141,7 @@ export class StageComponent implements OnInit {
       name: this.inputForm.get("name").value,
       code: this.inputForm.get("code").value,
       updateTime: this.inputForm.get("updateTime").value,
-      type: 0,
+      type: 4,
       status: this.inputForm.get("status").value,
     }).subscribe(
       (res) => {
@@ -159,13 +159,13 @@ export class StageComponent implements OnInit {
     this.dialogService.open(ConfirmDialogComponent, {
       context: {
         title: this.translate.instant('common.title_notification'),
-        message: this.translate.instant('general_signs.title_delete') + ' ' + data.name
+        message: this.translate.instant('stage.title_delete') + ' ' + data.name
       },
     }).onClose.subscribe(res => {
       if (res) {
         this.isLoad = true;
         this.statusDiseaseService.delete(data.id).subscribe(() => {
-          this.toastrService.success(this.translate.instant('general_signs.delete_success'),
+          this.toastrService.success(this.translate.instant('stage.delete_success'),
             this.translate.instant('common.title_notification'));
           this.search(0);
           this.isLoad = false;
