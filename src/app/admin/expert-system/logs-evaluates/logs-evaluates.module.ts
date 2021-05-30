@@ -25,6 +25,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {SharedModule} from '../../../shares/shared.module';
 import {LogsEvaluatesComponent} from './logs-evaluates.component';
+import { ExcelService } from './excel.service';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import {LogsEvaluatesComponent} from './logs-evaluates.component';
   entryComponents: [
   ],
   declarations: [LogsEvaluatesComponent],
+  providers: [ExcelService],
 })
 export class LogsEvaluatesModule {
 }

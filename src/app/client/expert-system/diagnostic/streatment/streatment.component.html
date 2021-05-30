@@ -1,38 +1,15 @@
 <!-- Content page -->
 <section style="height: 100%;" class="bg0 p-t-75 p-b-120">
   <div style="min-height: 600px; padding-top: 50px;" class="container">
+    <div class="row">
+      <button style="display: block;margin-right: 10%;margin-left: auto;" nbButton type="button" status="success" (click)="kt()" nbButton> {{ 'common.kt' | translate }} </button>
+    </div>
     <div class="row" style="display: contents;">
-      <h3 class="mtext-111 cl2 p-b-16" style="text-align: center; margin-bottom: 30px; margin-top: 30px;">
-        Điều trị về bệnh viêm phổi trong cộng đồng mức độ nhẹ
-      </h3>
-      <p style="font-weight: bold; padding-bottom: 10px;">Đơn thuốc 1: Người nhỏ hơn 65 tuổi và không có bệnh đồng mắc</p>
-      <li style="color: black; padding-left: 15px; padding-bottom: 10px;">
-        Amoxicilin dạng viên uống Hoặc Clarithromycin  dạng viên uống
-      </li>
-
-      <p style="font-weight: bold; padding-bottom: 10px;">Đơn thuốc 2: Người lớn hơn 65 tuổi và có bệnh đồng mắc</p>
-      <li style="color: black; padding-left: 15px; padding-bottom: 10px;">
-        Amoxicilin-Acid clavulanat kết hợp với 1 thuốc nhóm Macrolid (Clindamycin hoặc Azithromycin).
-      </li>
-      <li style="color: black; padding-left: 15px; padding-bottom: 10px;">
-        Hoặc Cephalosporin thế hệ 2: Cefuroxim kết hợp với 1 thuốc nhóm Macrolid (Clindamycin hoặc Azithromycin).
-      </li>
-      <p style="font-weight: bold; padding-bottom: 10px;">Chú ý:</p>
-      <li style="color: black; padding-left: 15px; padding-bottom: 10px;">
-        <span style="font-weight: bold">Nghỉ ngơi nhiều:</span> Không nên quay trở lại học hoặc làm việc cho đến khi nhiệt độ cơ thể trở lại bình thường và bạn ngừng ho ra chất nhầy.
-      </li>
-      <li style="color: black; padding-left: 15px; padding-bottom: 10px;">
-        <span style="font-weight: bold">Giữ nước:</span> Uống nhiều nước, đặc biệt là nước lọc để giúp làm lỏng chất nhầy trong phổi.
-      </li>
-      <li style="color: black; padding-left: 15px; padding-bottom: 10px;">
-        <span style="font-weight: bold">Dùng thuốc theo quy định:</span> Tuân thủ nghiêm túc toàn bộ quá trình điều trị do bác sĩ kê. Nếu ngừng dùng thuốc quá sớm, vi khuẩn trong phổi có thể tiếp tục nhân lên và khiến viêm phổi tái phát.
-      </li>
-      <li style="color: black; padding-left: 15px; padding-bottom: 10px; font-weight: bold">
-       Nên đến bệnh viện khám lại nếu sau 2 ngày điều trị bệnh không thuyên giảm hoặc có dấu hiệu nặng lên
-      </li>
-      <div class="row">
-        <button style="display: block;margin-right: 10%;margin-left: auto;" nbButton type="button" status="success" (click)="kt()" nbButton> {{ 'common.kt' | translate }} </button>
-      </div>
+      <pdf-viewer [src]="pdfSrc"
+                  [render-text]="true"
+                  style="display: block;"
+      ></pdf-viewer>
     </div>
   </div>
+
 </section>

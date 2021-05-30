@@ -3,6 +3,8 @@
     <nb-card>
       <nb-card-header class="d-flex">
         <label>{{ 'logs-evaluates.title' | translate }}</label>
+        <button nbButton status="primary" size="tiny" class="ml-auto" (click)="exportAsCSV()">Xuất File
+        </button>
       </nb-card-header>
       <nb-card-body>
         <form [formGroup]="inputForm">
@@ -64,7 +66,7 @@
             </div>
           </div>
         </form>
-        <ngx-datatable ngxResizeWatcher class="material"
+        <ngx-datatable #dataTable ngxResizeWatcher class="material"
                        [columnMode]="'flex'"
                        [rows]="rows"
                        [columns]="columns"

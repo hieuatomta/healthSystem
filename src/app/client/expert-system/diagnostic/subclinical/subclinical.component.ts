@@ -165,13 +165,18 @@ export class SubclinicalComponent implements OnInit {
       dialogClass: 'modal-full',
     }).onClose.subscribe(res => {
       if (res) {
+        console.log(data);
         this.usersClient.updateTime = null;
         this.usersClient.nameType = data.name;
         this.logsEvaluateService.updateClient(this.usersClient).subscribe(
           (value) => {
             console.log(value);
             localStorage.setItem('usersClient', JSON.stringify(value.body.data.list));
-            this.router.navigate(['/danh-gia']);
+            if (data.isExLink) {
+              this.router.navigate(['/chan-doan/dieu-tri/' + data.isExLink ]);
+            } else {
+              this.router.navigate(['/danh-gia' ]);
+            }
           },
           error => {
             this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));

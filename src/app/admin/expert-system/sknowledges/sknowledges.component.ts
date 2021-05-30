@@ -36,6 +36,10 @@ export class SknowledgesComponent implements OnInit {
     {name: 'common.status.1', code: 1},
     {name: 'common.status.0', code: 0}
   ];
+  listType = [
+    {name: 'common.typeDT.1', code: 1},
+    {name: 'common.typeDT.0', code: 0}
+  ];
   rows: Object[];
   page = {
     limit: 5,
@@ -56,6 +60,7 @@ export class SknowledgesComponent implements OnInit {
     name: new FormControl(null, []),
     code: new FormControl(null, []),
     updateTime: new FormControl(null, []),
+    type: new FormControl(null, []),
     status: new FormControl(null, [])
   });
 
@@ -106,6 +111,7 @@ export class SknowledgesComponent implements OnInit {
       page_size: this.page.limit,
       name: this.inputForm.get("name").value,
       code: this.inputForm.get("code").value,
+      type: this.inputForm.get("type").value,
       updateTime: this.inputForm.get("updateTime").value,
       status: this.inputForm.get("status").value,
     }).subscribe(

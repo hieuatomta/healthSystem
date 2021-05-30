@@ -71,6 +71,21 @@
             <ngx-inline-message [message]="'common.table.item_link_status'|translate"
                                 [formName]="inputSize.get('likStatus')"></ngx-inline-message>
           </div>
+          <div class="col-lg-6 form-group">
+            <label class="label">
+              Điều trị
+            </label>
+            <ng-select fullWidth appendTo="body"
+                       placeholder="{{'common.placeHolder' |translate}}"
+                       notFoundText="{{'common.notFoundText' |translate}}"
+                       clearAllText="{{'common.clearAllText' |translate}}"
+                       formControlName="isEx">
+              <ng-option *ngFor="let item of arr1" [value]="item.id"> {{ item.name | translate }}
+              </ng-option>
+            </ng-select>
+            <ngx-inline-message [message]="'common.table.item_type_disease'|translate"
+                                [formName]="inputSize.get('typediseaseId')"></ngx-inline-message>
+          </div>
         </div>
       </div>
     </form>

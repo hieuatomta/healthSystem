@@ -71,7 +71,7 @@ const routes: Routes = [
         component: GeneralSignsComponent,
       },
       {
-        path: 'chan-doan/dieu-tri',
+        path: 'chan-doan/dieu-tri/:key',
         component: StreatmentComponent,
       },
       {

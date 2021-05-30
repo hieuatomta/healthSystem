@@ -92,13 +92,17 @@ export class StageComponent implements OnInit {
       if (res === 'confirm') {
         this.router.navigate(['/chan-doan/danh-gia'], { state: { id: this.typediseaseId } });
       } else if ( res === 'confirm1') {
+        console.log(data);
         this.usersClient.updateTime = null;
         this.usersClient.nameType = data.name;
         this.logsEvaluateService.updateClient(this.usersClient).subscribe(
           (value) => {
-            console.log(value);
             localStorage.setItem('usersClient', JSON.stringify(value.body.data.list));
-            this.router.navigate(['/chan-doan/dieu-tri'], { state: { id: this.typediseaseId } });
+            if (data.isExLink) {
+              this.router.navigate(['/chan-doan/dieu-tri/' + data.isExLink ]);
+            } else {
+              this.router.navigate(['/danh-gia' ]);
+            }
           },
           error => {
             this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));

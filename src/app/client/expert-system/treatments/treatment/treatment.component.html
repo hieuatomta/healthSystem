@@ -6,7 +6,15 @@
         Điều trị về bệnh phổi
       </h3>
       <div class="" *ngFor="let key of arr; index as i">
-        <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/dieu-tri/{{key.code}}">{{i +1}}. {{key.name}}</a></p>
+        <p>
+          <a style="color: black !important;font-size: 23px;margin-bottom: 15px; display: block;" routerLink="/dieu-tri/{{key.code}}">{{i +1}}. {{key.text}}</a>
+        </p>
+        <div style="    margin-left: 30px;" class="" *ngIf="key.children?.length > 0">
+          <p style="padding-bottom: 5px;" *ngFor="let key1 of key.children; index as j">
+            <a style="color: black !important;font-size: 20px;margin-bottom: 15px; display: block;" routerLink="/dieu-tri/{{key1.code}}">{{i +1}}.{{j +1}}. {{key1.text}}</a>
+          </p>
+        </div>
+
       </div>
 <!--      <p><a style="color: black !important;font-size: 25px;margin-bottom: 15px; display: block;" routerLink="/dieu-tri/dieu-tri-viem-phoi-cong-dong">1. Điều trị viêm phổi cộng đồng</a></p>-->
 

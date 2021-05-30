@@ -14,6 +14,19 @@
             <div class="row">
               <div class="col-lg-4 form-group">
                 <label class="label">
+                  Kiểu
+                </label>
+                <ng-select fullWidth appendTo="body"
+                           placeholder="{{'common.placeHolder' |translate}}"
+                           notFoundText="{{'common.notFoundText' |translate}}"
+                           clearAllText="{{'common.clearAllText' |translate}}"
+                           formControlName="type">
+                  <ng-option *ngFor="let item of listType" [value]="item.code"> {{ item.name | translate }}
+                  </ng-option>
+                </ng-select>
+              </div>
+              <div class="col-lg-4 form-group">
+                <label class="label">
                   {{ 'common.table.item_code' | translate }}
                 </label>
                 <input (keyup.enter)="search(0)" nbInput fullWidth formControlName="code">

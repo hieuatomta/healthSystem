@@ -7,6 +7,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {CategoriesService} from '../../../../@core/services/categories.service';
 import {TypeDiseaseService} from '../../../../@core/services/type-disease.service';
 import {StatusDiseaseService} from '../../../../@core/services/status-disease.service';
+import {ExpertSystemService} from '../../../../@core/services/expert-system.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -39,11 +40,13 @@ export class SubclinicalUpdateComponent implements OnInit {
       },
       () => this.loading = false,
     );
+    this.search1();
     this.inputSize = new FormGroup({
       id: new FormControl(this.data?.id, []),
       name: new FormControl(null, [Validators.required]),
       determined: new FormControl(null, []),
       description: new FormControl(null, []),
+      isEx: new FormControl(null, []),
       status: new FormControl(null, [Validators.required]),
       likStatus: new FormControl(null, [Validators.required]),
       typediseaseId: new FormControl(null, [Validators.required]),
@@ -61,11 +64,28 @@ export class SubclinicalUpdateComponent implements OnInit {
     };
   };
 
+  arr1 = [];
+  search1() {
+    this.expertSystemService.doSearch1({
+      status: 1,
+      type: 0
+    }).subscribe(
+      (res) => {
+        this.arr1 = res.body.data.list;
+        console.log(res);
+        // this.onSuccess(res.body.data, res.headers, pageToLoad);
+      },
+      (error) => {
+        // this.isLoad = false;
+      },
+    );
+  }
 
   constructor(
     private toastr1: ToastrService,
     private toastr: NbToastrService,
     private translate: TranslateService,
+    private expertSystemService: ExpertSystemService,
     public ref: NbDialogRef<SubclinicalUpdateComponent>,
     private typeDiseaseService: TypeDiseaseService,
     private statusDiseaseService: StatusDiseaseService,

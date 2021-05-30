@@ -11,6 +11,7 @@ import {TypeDiseaseService} from '../../../@core/services/type-disease.service';
 import {MapPopupComponent} from './map-popup/map-popup.component';
 import {SymptomsService} from '../../../@core/services/symptoms.service';
 import {StatusDiseaseService} from '../../../@core/services/status-disease.service';
+import {ExpertSystemService} from '../../../@core/services/expert-system.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -42,6 +43,7 @@ export class SubclinicalComponent implements OnInit {
     private statusDiseaseService: StatusDiseaseService,
     private symptomsService: SymptomsService,
     private typeDiseaseService: TypeDiseaseService,
+    private expertSystemService: ExpertSystemService,
     private dialogService: NbDialogService) {
   }
 
@@ -77,6 +79,7 @@ export class SubclinicalComponent implements OnInit {
     typediseaseId: new FormControl(null, []),
     likStatus: new FormControl(null, [])
   });
+
 
   openMapModule(data) {
     const openMap = this.dialogService.open(MapPopupComponent, {

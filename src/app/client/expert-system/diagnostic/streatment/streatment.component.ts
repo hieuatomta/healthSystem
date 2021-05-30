@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ExpertSystemService} from '../../../../@core/services/expert-system.service';
 
 
 @Component({
@@ -9,31 +10,51 @@ import {Router} from '@angular/router';
   templateUrl: './streatment.component.html',
 })
 export class StreatmentComponent implements OnInit, OnDestroy {
-  ngOnDestroy(): void {
+  pdfSrc = 'http://localhost:4201/ltnc/assets/pdf/bvptw.pdf';
+  key: any;
+  usersClient: any;
+
+  constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private expertSystemService: ExpertSystemService) {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      console.log(params);
+      this.key = params['key'];
+      this.expertSystemService.doSearch1({
+        status: 1,
+        type: 0,
+        code: this.key
+      }).subscribe(
+        (res) => {
+          const data = res.body.data.list;
+          if (data?.length === 1) {
+            this.pdfSrc = 'http://localhost:4201/ltnc' + data[0].isLink;
+          }
+          console.log(res);
+        },
+        (error) => {
+          // this.isLoad = false;
+        },
+      );
+    });
+    this.usersClient = JSON.parse(localStorage.getItem('usersClient'));
+    if (this.usersClient === null) {
+      this.router.navigate(['/chan-doan']);
+    }
   }
 
-  pdfSrc = 'assets/pdf/bvptw.pdf';
-  usersClient: any;
-  constructor(private router: Router) {
+  search() {
+
   }
 
   ngOnInit(): void {
     // pdfSrc =
   }
 
+  ngOnDestroy(): void {
+  }
+
   kt() {
-    // nho ghi lai data du lieu benh nhan bi benh vao database
-    // this.usersClient.nameType = data.name;
-    // this.logsEvaluateService.updateClient(this.usersClient).subscribe(
-    //   (value) => {
-    //     console.log(value);
-    //     localStorage.setItem('usersClient', JSON.stringify(value.body.data.list));
-    //     this.router.navigate(['/danh-gia']);
-    //   },
-    //   error => {
-    //     this.toastr.danger(error.error.message, this.translate.instant('common.title_notification'));
-    //   },
-    // );
     this.router.navigate(['/danh-gia']);
   }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {NbDialogService, NbToastrService} from '@nebular/theme';
 import {ToastrService} from '../../../@core/mock/toastr-service';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -9,6 +9,8 @@ import {ConfirmDialogComponent} from '../../../shares/directives/confirm-dialog/
 import {SizeService} from '../../../@core/services/size.service';
 import {LogsService} from '../../../@core/services/logs.service';
 import {LogsEvaluateService} from '../../../@core/services/logs-evaluate.service';
+import {DatatableComponent} from '@swimlane/ngx-datatable';
+import {ExcelService} from './excel.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -26,6 +28,7 @@ export class LogsEvaluatesComponent implements OnInit {
     private translate: TranslateService,
     private toastrService: NbToastrService,
     private userService: UsersService,
+    private excelService: ExcelService,
     private logsService: LogsEvaluateService) {
   }
 
@@ -60,6 +63,24 @@ export class LogsEvaluatesComponent implements OnInit {
     content: new FormControl(null, []),
     updateTime: new FormControl(null, [])
   });
+
+  @ViewChild('dataTable') public dataTable: DatatableComponent;
+  // excelHeaders: string[] = [this.translate.instant('common.table.item_suppliers_code'), 'Age', 'Email', 'Contact Number', 'Location'];
+  // templateToExcel: string[][] = [this.excelHeaders, ['1', '2', '3', '1', '2', '3'], ['1', '2', '3', '1', '2', '3'], ['1', '2', '3', '1', '2', '3']];
+  exportAsCSV() {
+    // const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.templateToExcel);
+    // const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    // XLSX.writeFile(wb, 'san-phan-ban-chay' + '.xlsx');
+    // if (this.rows?.length > 0) {
+    //   for (let i = 0; i < this.rows?.length; i++) {
+    //     const arr = [];
+    //     console.log(Object.values(this.rows[i]));
+    //     // arr.push(this.rows.)
+    //   }
+    // }
+    this.excelService.exportAsExcelFile(this.rows, 'danh_sach_lich_su_he_chuyen_gia');
+  }
 
   pageCallback(pageInfo: { count?: number, pageSize?: number, limit?: number, offset?: number }) {
     this.page.offset = pageInfo.offset;
