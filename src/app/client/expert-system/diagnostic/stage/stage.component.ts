@@ -203,10 +203,10 @@ export class StageComponent implements OnInit {
           return;
         }
       } else {
-        if ( this.form.value.checkArray?.length === 0) {
-          this.toastr.danger('Vui lòng chọn triệu chứng để chẩn đoán bệnh!', this.translate.instant('common.title_notification'));
-          return;
-        }
+        // if ( this.form.value.checkArray?.length === 0) {
+        //   this.toastr.danger('Vui lòng chọn triệu chứng để chẩn đoán bệnh!', this.translate.instant('common.title_notification'));
+        //   return;
+        // }
         this.typeGd = 0;
       }
       const data = {
